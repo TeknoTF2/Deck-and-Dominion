@@ -336,6 +336,6 @@ app.get('*', (_req, res) => {
   res.sendFile(path.join(clientBuild, 'index.html'));
 });
 
-server.listen(PORT, () => {
+server.listen(Number(PORT), '0.0.0.0', () => {
   console.log(`Deck & Dominion server running on port ${PORT}`);
 });

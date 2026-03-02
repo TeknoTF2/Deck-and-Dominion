@@ -9,11 +9,12 @@ This guide walks you through setting up a Deck & Dominion server so you and your
 1. [What You'll Need](#1-what-youll-need)
 2. [Option A: Run on Your Own Computer (Simplest)](#2-option-a-run-on-your-own-computer-simplest)
 3. [Option B: Run on a Cloud Server (Recommended for Reliable Online Play)](#3-option-b-run-on-a-cloud-server-recommended-for-reliable-online-play)
-4. [Building and Starting the Game Server](#4-building-and-starting-the-game-server)
-5. [Letting Friends Connect](#5-letting-friends-connect)
-6. [Keeping the Server Running (Cloud Only)](#6-keeping-the-server-running-cloud-only)
-7. [Adding a Domain Name and HTTPS (Optional)](#7-adding-a-domain-name-and-https-optional)
-8. [Troubleshooting](#8-troubleshooting)
+4. [Option C: Deploy with Docker (Containerized)](#4-option-c-deploy-with-docker-containerized)
+5. [Building and Starting the Game Server](#5-building-and-starting-the-game-server)
+6. [Letting Friends Connect](#6-letting-friends-connect)
+7. [Keeping the Server Running (Cloud Only)](#7-keeping-the-server-running-cloud-only)
+8. [Adding a Domain Name and HTTPS (Optional)](#8-adding-a-domain-name-and-https-optional)
+9. [Troubleshooting](#9-troubleshooting)
 
 ---
 
@@ -232,7 +233,79 @@ Press `Ctrl+C` to stop the server for now — the next section will show you how
 
 ---
 
-## 4. Building and Starting the Game Server
+## 4. Option C: Deploy with Docker (Containerized)
+
+Docker packages the entire game — code, dependencies, and runtime — into a single container. This avoids "works on my machine" issues and makes deployment consistent everywhere.
+
+### What You'll Need
+
+- **Docker** installed on your computer or server
+  - Download from https://docs.docker.com/get-docker/
+  - On Linux you can install via: `curl -fsSL https://get.docker.com | sh`
+
+### Step 1: Build the Docker Image
+
+From the `Deck-and-Dominion` folder, run:
+
+```bash
+docker build -t deck-and-dominion .
+```
+
+This will:
+- Install all dependencies
+- Compile the TypeScript code
+- Bundle the web interface
+- Seed the card database
+- Package everything into a container image
+
+It may take a few minutes the first time.
+
+### Step 2: Run the Container
+
+```bash
+docker run -d -p 3000:3000 --name dd-server deck-and-dominion
+```
+
+What the flags mean:
+- `-d` — Run in the background (detached)
+- `-p 3000:3000` — Map port 3000 on your machine to port 3000 in the container
+- `--name dd-server` — Give the container a friendly name
+
+### Step 3: Open the Game
+
+Go to `http://localhost:3000` in your browser. The game should be running.
+
+### Useful Docker Commands
+
+```bash
+docker ps                    # See running containers
+docker logs dd-server        # View server logs
+docker stop dd-server        # Stop the server
+docker start dd-server       # Start it again
+docker rm dd-server          # Remove the container
+```
+
+### Persisting Card Art (Optional)
+
+Card art uploaded through the web UI is stored inside the container. To keep it across container restarts, mount a volume:
+
+```bash
+docker run -d -p 3000:3000 \
+  -v $(pwd)/card-art:/app/card-art \
+  --name dd-server deck-and-dominion
+```
+
+### Deploying Docker to a Cloud Server
+
+Most cloud providers support Docker out of the box:
+
+1. **Railway / Render**: Automatically detect the `Dockerfile` — just push your code and they'll build and deploy it
+2. **DigitalOcean**: Create a Droplet, install Docker, then run the commands above
+3. **Any VPS**: SSH in, install Docker, clone the repo, and run `docker build` + `docker run`
+
+---
+
+## 5. Building and Starting the Game Server
 
 Here's a summary of all the commands, in order:
 
@@ -268,7 +341,7 @@ PORT=8080 npm start
 
 ---
 
-## 5. Letting Friends Connect
+## 6. Letting Friends Connect
 
 Once your server is running, players connect by opening a web browser and going to your server's address.
 
@@ -294,7 +367,7 @@ Once your server is running, players connect by opening a web browser and going 
 
 ---
 
-## 6. Keeping the Server Running (Cloud Only)
+## 7. Keeping the Server Running (Cloud Only)
 
 If you just run `npm start` on a cloud server and close your terminal, the server will stop. Here's how to keep it running permanently.
 
@@ -343,7 +416,7 @@ screen -r game
 
 ---
 
-## 7. Adding a Domain Name and HTTPS (Optional)
+## 8. Adding a Domain Name and HTTPS (Optional)
 
 Instead of sharing an IP address like `http://143.198.45.123:3000`, you can use a proper domain name like `https://deckdominion.example.com`. This also adds encryption (HTTPS) so connections are secure.
 
@@ -423,7 +496,7 @@ Your game is now available at `https://yourdomain.com`.
 
 ---
 
-## 8. Troubleshooting
+## 9. Troubleshooting
 
 ### "npm install" fails
 
@@ -434,6 +507,13 @@ Your game is now available at `https://yourdomain.com`.
 
 - Check that `npm install` completed successfully first
 - Make sure you're in the `Deck-and-Dominion` root folder (not inside `server/` or `client/`)
+- **Important**: Always use `npm run build` from the root — this builds packages in the correct order (shared, then server, then client). Building the server or client individually will fail because they depend on the shared package being built first
+
+### Docker build fails with "Cannot find module" errors
+
+- Make sure you're using the included `Dockerfile` which handles the build order correctly
+- If you see `npm warn config production` — the Dockerfile already handles this by doing a full install in the build stage and only pruning for production in the final stage
+- Run `docker build --no-cache -t deck-and-dominion .` to force a clean rebuild
 
 ### Server starts but friends can't connect
 
