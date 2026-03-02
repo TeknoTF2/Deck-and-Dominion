@@ -20,6 +20,7 @@ interface GameStore {
   gameState: GameState | null;
   selectedCard: string | null;
   selectedTarget: string | null;
+  gameOverResult: { winner: 'party' | 'dm'; message: string } | null;
 
   // Chat
   chatMessages: ChatMessage[];
@@ -50,6 +51,7 @@ interface GameStore {
   selectTarget: (targetId: string | null) => void;
   setView: (view: GameStore['currentView']) => void;
   loadCards: () => Promise<void>;
+  clearGameOver: () => void;
 }
 
 export const useGameStore = create<GameStore>((set, get) => ({
@@ -62,6 +64,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   gameState: null,
   selectedCard: null,
   selectedTarget: null,
+  gameOverResult: null,
   chatMessages: [],
   allCards: [],
   cardsLoaded: false,
@@ -90,13 +93,16 @@ export const useGameStore = create<GameStore>((set, get) => ({
       set({ gameState, currentView: 'game' });
     });
 
+    socket.on(SocketEvent.GameOver, (result: { winner: 'party' | 'dm'; message: string }) => {
+      set({ gameOverResult: result });
+    });
+
     socket.on(SocketEvent.ChatUpdate, (msg: ChatMessage) => {
       set(state => ({ chatMessages: [...state.chatMessages, msg] }));
     });
 
     socket.on(SocketEvent.Error, ({ message }: { message: string }) => {
       console.error('Server error:', message);
-      // Could add a toast notification here
     });
 
     set({ socket });
@@ -193,6 +199,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   selectCard: (cardId) => set({ selectedCard: cardId }),
   selectTarget: (targetId) => set({ selectedTarget: targetId }),
   setView: (view) => set({ currentView: view }),
+  clearGameOver: () => set({ gameOverResult: null, gameState: null, currentView: 'lobby' }),
 
   loadCards: async () => {
     try {

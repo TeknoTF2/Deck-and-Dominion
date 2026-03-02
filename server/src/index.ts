@@ -11,7 +11,7 @@ import cardsRouter from './routes/cards';
 import cardArtRouter from './routes/cardArt';
 import decksRouter from './routes/decks';
 import {
-  SocketEvent, GameAction, DMAction, CardClass, CardDefinition,
+  SocketEvent, GameAction, DMAction, CardClass, CardDefinition, GameState,
 } from '@deck-and-dominion/shared';
 
 const app = express();
@@ -50,6 +50,33 @@ app.get('/api/health', (_req, res) => {
 const lobbyManager = new LobbyManager();
 const activeGames: Map<string, GameEngine> = new Map();
 const playerToLobby: Map<string, string> = new Map();
+const disconnectedPlayers: Map<string, { lobbyId: string; playerName: string; timeout: ReturnType<typeof setTimeout> }> = new Map();
+
+// Helper: broadcast game state to all players in a lobby and check for game over
+function broadcastGameState(lobbyId: string, engine: GameEngine) {
+  const lobby = lobbyManager.getLobby(lobbyId);
+  if (!lobby) return;
+
+  const state = engine.getState();
+
+  for (const gp of lobby.players.filter(p => !p.isDM)) {
+    const playerSocket = io.sockets.sockets.get(gp.id);
+    if (playerSocket) {
+      playerSocket.emit(SocketEvent.GameStateUpdate, engine.getPlayerView(gp.id));
+    }
+  }
+  if (lobby.dmId) {
+    const dmSocket = io.sockets.sockets.get(lobby.dmId);
+    if (dmSocket) {
+      dmSocket.emit(SocketEvent.GameStateUpdate, engine.getDMView());
+    }
+  }
+
+  // Check for game over
+  if (state.gameOver) {
+    io.to(lobbyId).emit(SocketEvent.GameOver, state.gameOver);
+  }
+}
 
 // --- Socket.IO ---
 io.on('connection', (socket) => {
@@ -171,21 +198,7 @@ io.on('connection', (socket) => {
     const engine = new GameEngine(playerIds, playerNames, playerClasses, playerDecks, dmDeck, dmHP || 40);
     activeGames.set(lobbyId, engine);
 
-    // Send game state to each player
-    for (const gp of gamePlayers) {
-      const playerSocket = io.sockets.sockets.get(gp.id);
-      if (playerSocket) {
-        playerSocket.emit(SocketEvent.GameStateUpdate, engine.getPlayerView(gp.id));
-      }
-    }
-
-    // Send DM view to DM
-    if (lobby.dmId) {
-      const dmSocket = io.sockets.sockets.get(lobby.dmId);
-      if (dmSocket) {
-        dmSocket.emit(SocketEvent.GameStateUpdate, engine.getDMView());
-      }
-    }
+    broadcastGameState(lobbyId, engine);
   });
 
   socket.on(SocketEvent.GameAction, (action: GameAction) => {
@@ -198,22 +211,7 @@ io.on('connection', (socket) => {
     const result = engine.processAction({ ...action, playerId });
 
     if (result.success) {
-      // Broadcast updated state
-      const lobby = lobbyManager.getLobby(lobbyId);
-      if (lobby) {
-        for (const gp of lobby.players.filter(p => !p.isDM)) {
-          const playerSocket = io.sockets.sockets.get(gp.id);
-          if (playerSocket) {
-            playerSocket.emit(SocketEvent.GameStateUpdate, engine.getPlayerView(gp.id));
-          }
-        }
-        if (lobby.dmId) {
-          const dmSocket = io.sockets.sockets.get(lobby.dmId);
-          if (dmSocket) {
-            dmSocket.emit(SocketEvent.GameStateUpdate, engine.getDMView());
-          }
-        }
-      }
+      broadcastGameState(lobbyId, engine);
     } else {
       socket.emit(SocketEvent.Error, { message: result.message });
     }
@@ -232,20 +230,19 @@ io.on('connection', (socket) => {
     const engine = activeGames.get(lobbyId);
     if (!engine) return;
 
+    // Handle dm_give_card with DB lookup
+    if (action.type === 'dm_give_card') {
+      const cardDef = getCardById(action.cardDefinitionId);
+      if (!cardDef) {
+        socket.emit(SocketEvent.Error, { message: `Card not found: ${action.cardDefinitionId}` });
+        return;
+      }
+    }
+
     const result = engine.processDMAction(action);
 
     if (result.success) {
-      // Broadcast updated state
-      for (const gp of lobby.players.filter(p => !p.isDM)) {
-        const playerSocket = io.sockets.sockets.get(gp.id);
-        if (playerSocket) {
-          playerSocket.emit(SocketEvent.GameStateUpdate, engine.getPlayerView(gp.id));
-        }
-      }
-      const dmSocket = io.sockets.sockets.get(lobby.dmId!);
-      if (dmSocket) {
-        dmSocket.emit(SocketEvent.GameStateUpdate, engine.getDMView());
-      }
+      broadcastGameState(lobbyId, engine);
     } else {
       socket.emit(SocketEvent.Error, { message: result.message });
     }
@@ -276,13 +273,55 @@ io.on('connection', (socket) => {
     }
   });
 
+  // Reconnect support
+  socket.on('reconnect_attempt', ({ name, lobbyCode }: { name: string; lobbyCode: string }) => {
+    // Try to find the lobby and rejoin
+    const lobby = lobbyManager.getLobbyByCode(lobbyCode);
+    if (lobby) {
+      playerName = name;
+      playerToLobby.set(playerId, lobby.id);
+      socket.join(lobby.id);
+
+      const engine = activeGames.get(lobby.id);
+      if (engine) {
+        socket.emit(SocketEvent.GameStateUpdate, engine.getPlayerView(playerId));
+      } else {
+        socket.emit(SocketEvent.LobbyUpdate, lobby);
+      }
+    } else {
+      socket.emit(SocketEvent.Error, { message: 'Lobby not found for reconnection' });
+    }
+  });
+
   socket.on('disconnect', () => {
     const lobbyId = playerToLobby.get(playerId);
     if (lobbyId) {
-      const lobby = lobbyManager.leaveLobby(lobbyId, playerId);
-      playerToLobby.delete(playerId);
-      if (lobby) {
-        io.to(lobbyId).emit(SocketEvent.LobbyUpdate, lobby);
+      const engine = activeGames.get(lobbyId);
+      if (engine) {
+        // Game is active: hold player slot for 60 seconds
+        const timeout = setTimeout(() => {
+          disconnectedPlayers.delete(playerId);
+          const lobby = lobbyManager.leaveLobby(lobbyId, playerId);
+          playerToLobby.delete(playerId);
+          if (lobby) {
+            io.to(lobbyId).emit(SocketEvent.LobbyUpdate, lobby);
+          }
+        }, 60000);
+
+        disconnectedPlayers.set(playerId, { lobbyId, playerName, timeout });
+        io.to(lobbyId).emit(SocketEvent.ChatUpdate, {
+          playerId: 'system',
+          playerName: 'System',
+          message: `${playerName} disconnected. Waiting 60 seconds for reconnection...`,
+          timestamp: Date.now(),
+        });
+      } else {
+        // No active game, leave immediately
+        const lobby = lobbyManager.leaveLobby(lobbyId, playerId);
+        playerToLobby.delete(playerId);
+        if (lobby) {
+          io.to(lobbyId).emit(SocketEvent.LobbyUpdate, lobby);
+        }
       }
     }
   });

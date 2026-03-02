@@ -22,6 +22,7 @@ export enum CardType {
   Trap = 'Trap',
   Consumable = 'Consumable',
   Token = 'Token',
+  Reaction = 'Reaction',
 }
 
 export enum Rarity {
@@ -41,7 +42,6 @@ export enum Keyword {
   Taunt = 'Taunt',
   Persistent = 'Persistent',
   Tower = 'Tower',
-  Flying = 'Flying',
   Shield = 'Shield',
   Reaction = 'Reaction',
 }
@@ -142,6 +142,7 @@ export interface GameState {
   dmState: DMState;
   combatLog: LogEntry[];
   activeEffects: ActiveEffect[];
+  gameOver?: { winner: 'party' | 'dm'; message: string };
 }
 
 export interface ManaPool {
@@ -170,6 +171,7 @@ export interface DMState {
   hand: CardInstance[];
   deck: CardInstance[];
   encounterDeck?: CardInstance[];
+  landsPlayed: number;
 }
 
 // --- Card Instance (in-game) ---
@@ -188,6 +190,7 @@ export interface CardInstance {
   debuffs: Debuff[];
   tapped: boolean;
   canAttack: boolean;
+  attacksRemaining: number;
   summonedThisTurn: boolean;
   poisonStacks: PoisonStack[];
   ownerId: string;
@@ -267,13 +270,21 @@ export interface PassTurnAction {
   nextPlayerId?: string;
 }
 
+export interface DrawOrKeepAction {
+  type: 'draw_or_keep';
+  playerId: string;
+  choice: 'draw' | 'keep';
+  discardInstanceId?: string; // required if choice is 'draw' and hand is full
+}
+
 export type GameAction =
   | PlayCardAction
   | AttackAction
   | DeclareReactionAction
   | MulliganAction
   | EndPhaseAction
-  | PassTurnAction;
+  | PassTurnAction
+  | DrawOrKeepAction;
 
 // --- DM Actions ---
 
