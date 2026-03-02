@@ -126,28 +126,33 @@ export class LobbyManager {
     return lobby;
   }
 
-  canStart(lobbyId: string): boolean {
+  canStart(lobbyId: string): { ok: boolean; reason?: string } {
     const lobby = this.lobbies.get(lobbyId);
-    if (!lobby) return false;
-
-    // Need at least 2 players (1 player + 1 DM)
-    if (lobby.players.length < 2) return false;
+    if (!lobby) return { ok: false, reason: 'Lobby not found' };
 
     // Need a DM
-    if (!lobby.dmId) return false;
+    if (!lobby.dmId) return { ok: false, reason: 'No Dungeon Master selected' };
 
     // All non-DM players must be ready with class and deck
     const gamePlayers = lobby.players.filter(p => !p.isDM);
-    return gamePlayers.every(p => p.ready && p.cardClass && p.deckId);
+    for (const p of gamePlayers) {
+      if (!p.cardClass) return { ok: false, reason: `${p.name} has not selected a class` };
+      if (!p.deckId) return { ok: false, reason: `${p.name} has not selected a deck` };
+      if (!p.ready) return { ok: false, reason: `${p.name} is not ready` };
+    }
+
+    return { ok: true };
   }
 
-  startGame(lobbyId: string): LobbyState | null {
+  startGame(lobbyId: string): { lobby: LobbyState | null; reason?: string } {
     const lobby = this.lobbies.get(lobbyId);
-    if (!lobby) return null;
-    if (!this.canStart(lobbyId)) return null;
+    if (!lobby) return { lobby: null, reason: 'Lobby not found' };
+
+    const check = this.canStart(lobbyId);
+    if (!check.ok) return { lobby: null, reason: check.reason };
 
     lobby.status = 'in_game';
-    return lobby;
+    return { lobby };
   }
 
   getLobby(lobbyId: string): LobbyState | undefined {
