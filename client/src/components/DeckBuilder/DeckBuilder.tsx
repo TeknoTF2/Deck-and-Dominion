@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useGameStore } from '../../store/gameStore';
 import CardView from '../Card/CardView';
 import CardDetailModal from '../Card/CardDetailModal';
 import { CardDefinition, CardClass, CardType, Rarity, DECK_MIN_SIZE, DECK_MAX_SIZE, MAX_CARD_COPIES } from '@deck-and-dominion/shared';
 
+const CLASS_ARCHETYPES: Record<string, string[]> = {
+  Commander: ['Marshal', 'Tactician', 'Warden'],
+  DPS: ['Swarm', 'Big', 'Undead'],
+  Wizard: ['Enchanter', 'Illusionist', 'Abjurer'],
+  Sorcerer: ['Necromancer', 'Dark Ritualist', 'Hexer'],
+  Crafter: ['Blacksmith', 'Farmer', 'Alchemist'],
+};
+
 export default function DeckBuilder() {
   const { allCards, setView, cardsLoaded, loadCards } = useGameStore();
   const [selectedClass, setSelectedClass] = useState<CardClass>(CardClass.Commander);
+  const [selectedArchetype, setSelectedArchetype] = useState<string>('Marshal');
   const [filterRarity, setFilterRarity] = useState<string>('all');
   const [filterType, setFilterType] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -17,6 +26,8 @@ export default function DeckBuilder() {
   useEffect(() => {
     if (!cardsLoaded) loadCards();
   }, []);
+
+  const archetypes = CLASS_ARCHETYPES[selectedClass] || [];
 
   const classCards = allCards.filter(c => c.cardClass === selectedClass || c.cardClass === CardClass.Neutral);
 
@@ -30,19 +41,36 @@ export default function DeckBuilder() {
 
   const deckCardDefs = deckCards.map(id => allCards.find(c => c.id === id)).filter((c): c is CardDefinition => !!c);
 
-  const addToDeck = (cardId: string) => {
-    if (deckCards.length >= DECK_MAX_SIZE) return;
-    // Enforce per-card copy limits (Starter rarity and Land type exempt)
+  const canAddToDeck = (cardId: string): boolean => {
+    if (deckCards.length >= DECK_MAX_SIZE) return false;
     const card = allCards.find(c => c.id === cardId);
     if (card && card.rarity !== Rarity.Starter && card.cardType !== CardType.Land) {
       const currentCopies = deckCards.filter(id => id === cardId).length;
-      if (currentCopies >= MAX_CARD_COPIES) return;
+      if (currentCopies >= MAX_CARD_COPIES) return false;
     }
+    return true;
+  };
+
+  const addToDeck = (cardId: string) => {
+    if (!canAddToDeck(cardId)) return;
     setDeckCards([...deckCards, cardId]);
   };
 
   const removeFromDeck = (index: number) => {
     setDeckCards(deckCards.filter((_, i) => i !== index));
+  };
+
+  const loadStarterDeck = () => {
+    // Starter deck = Shared staple cards + selected archetype's starter cards
+    const starterCards = allCards
+      .filter(c =>
+        c.rarity === Rarity.Starter &&
+        (c.cardClass === selectedClass || c.cardClass === CardClass.Neutral) &&
+        (c.archetype === 'Shared' || c.archetype === selectedArchetype)
+      )
+      .map(c => c.id);
+    setDeckCards(starterCards);
+    setDeckName(`${selectedClass} ${selectedArchetype} Starter`);
   };
 
   const manaCurve = deckCardDefs.reduce((acc, c) => {
@@ -52,6 +80,8 @@ export default function DeckBuilder() {
   }, {} as Record<number, number>);
 
   const maxCurve = Math.max(...Object.values(manaCurve), 1);
+
+  const copyCount = (cardId: string) => deckCards.filter(id => id === cardId).length;
 
   const saveDeck = async () => {
     try {
@@ -69,6 +99,12 @@ export default function DeckBuilder() {
     } catch (err) {
       alert('Failed to save deck');
     }
+  };
+
+  const handleClassChange = (cls: CardClass) => {
+    setSelectedClass(cls);
+    setSelectedArchetype(CLASS_ARCHETYPES[cls]?.[0] || '');
+    setDeckCards([]);
   };
 
   return (
@@ -106,7 +142,7 @@ export default function DeckBuilder() {
         <div style={{ flex: 2, display: 'flex', flexDirection: 'column', borderRight: '1px solid rgba(255,255,255,0.1)' }}>
           {/* Filters */}
           <div style={{ padding: '8px 12px', display: 'flex', gap: '8px', flexWrap: 'wrap', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-            <select value={selectedClass} onChange={(e) => { setSelectedClass(e.target.value as CardClass); setDeckCards([]); }}>
+            <select value={selectedClass} onChange={(e) => handleClassChange(e.target.value as CardClass)}>
               {Object.values(CardClass).filter(c => c !== 'Neutral').map(cls => (
                 <option key={cls} value={cls}>{cls}</option>
               ))}
@@ -146,11 +182,68 @@ export default function DeckBuilder() {
             gap: '8px',
             alignContent: 'flex-start',
           }}>
-            {filteredCards.map(card => (
-              <div key={card.id} onDoubleClick={() => addToDeck(card.id)} onClick={() => setDetailCard(card)}>
-                <CardView card={card} />
-              </div>
-            ))}
+            {filteredCards.map(card => {
+              const copies = copyCount(card.id);
+              const canAdd = canAddToDeck(card.id);
+              return (
+                <div key={card.id} style={{ position: 'relative' }}>
+                  <div onClick={() => setDetailCard(card)}>
+                    <CardView card={card} />
+                  </div>
+                  {/* Add to deck button */}
+                  <button
+                    onClick={(e) => { e.stopPropagation(); addToDeck(card.id); }}
+                    disabled={!canAdd}
+                    style={{
+                      position: 'absolute',
+                      top: '-4px',
+                      left: '-4px',
+                      width: '24px',
+                      height: '24px',
+                      borderRadius: '50%',
+                      background: canAdd ? '#66bb6a' : '#555',
+                      color: canAdd ? '#000' : '#888',
+                      border: '2px solid #1a1a2e',
+                      cursor: canAdd ? 'pointer' : 'default',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 'bold',
+                      fontSize: '16px',
+                      lineHeight: 1,
+                      zIndex: 2,
+                      padding: 0,
+                    }}
+                    title={canAdd ? 'Add to deck' : 'Cannot add more copies'}
+                  >
+                    +
+                  </button>
+                  {/* Copy count badge */}
+                  {copies > 0 && (
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '-4px',
+                      left: '-4px',
+                      minWidth: '20px',
+                      height: '20px',
+                      borderRadius: '10px',
+                      background: '#e94560',
+                      color: '#fff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 'bold',
+                      fontSize: '11px',
+                      border: '2px solid #1a1a2e',
+                      zIndex: 2,
+                      padding: '0 4px',
+                    }}>
+                      {copies} in deck
+                    </div>
+                  )}
+                </div>
+              );
+            })}
             {filteredCards.length === 0 && (
               <div style={{ color: '#555', padding: '24px', width: '100%', textAlign: 'center' }}>
                 {cardsLoaded ? 'No cards match your filters' : 'Loading cards...'}
@@ -164,6 +257,45 @@ export default function DeckBuilder() {
           <h3 style={{ margin: '0 0 8px', fontSize: '14px' }}>
             Deck ({deckCards.length} cards)
           </h3>
+
+          {/* Archetype Starter Deck Selector */}
+          <div style={{
+            display: 'flex',
+            gap: '4px',
+            marginBottom: '8px',
+          }}>
+            {archetypes.map(arch => (
+              <button
+                key={arch}
+                onClick={() => setSelectedArchetype(arch)}
+                style={{
+                  flex: 1,
+                  padding: '4px 2px',
+                  fontSize: '10px',
+                  background: selectedArchetype === arch ? '#8d6e63' : 'rgba(255,255,255,0.05)',
+                  color: selectedArchetype === arch ? '#fff' : '#aaa',
+                  border: selectedArchetype === arch ? '1px solid #a1887f' : '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                }}
+              >
+                {arch}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={loadStarterDeck}
+            style={{
+              marginBottom: '8px',
+              background: '#8d6e63',
+              color: '#fff',
+              fontSize: '12px',
+              padding: '6px 8px',
+            }}
+          >
+            Load {selectedArchetype} Starter Deck
+          </button>
 
           {/* Mana Curve */}
           <div style={{
@@ -211,6 +343,7 @@ export default function DeckBuilder() {
                   display: 'flex',
                   justifyContent: 'space-between',
                 }}
+                title="Click to remove"
               >
                 <span>{card.name}</span>
                 <span style={{ color: '#4fc3f7' }}>{card.manaCost}</span>
@@ -228,7 +361,11 @@ export default function DeckBuilder() {
       </div>
 
       {detailCard && (
-        <CardDetailModal card={detailCard} onClose={() => setDetailCard(null)} />
+        <CardDetailModal
+          card={detailCard}
+          onClose={() => setDetailCard(null)}
+          onAddToDeck={canAddToDeck(detailCard.id) ? () => addToDeck(detailCard.id) : undefined}
+        />
       )}
     </div>
   );
