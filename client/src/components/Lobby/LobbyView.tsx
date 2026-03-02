@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGameStore } from '../../store/gameStore';
-import { CardClass } from '@deck-and-dominion/shared';
+import { CardClass, DeckDefinition } from '@deck-and-dominion/shared';
 
 const CLASS_COLORS: Record<string, string> = {
   Commander: '#f5f5f5',
@@ -19,8 +19,16 @@ const CLASS_DESCRIPTIONS: Record<string, string> = {
 };
 
 export default function LobbyView() {
-  const { lobby, playerId, selectClass, setAsDM, toggleReady, startGame, leaveLobby, setView } = useGameStore();
+  const { lobby, playerId, selectClass, selectDeck, setAsDM, toggleReady, startGame, leaveLobby, setView } = useGameStore();
   const [dmHP, setDmHP] = useState(40);
+  const [savedDecks, setSavedDecks] = useState<DeckDefinition[]>([]);
+
+  useEffect(() => {
+    fetch('/api/decks?playerId=local')
+      .then(res => res.json())
+      .then(decks => setSavedDecks(decks))
+      .catch(() => {});
+  }, []);
 
   if (!lobby) {
     return <div style={{ padding: '24px', textAlign: 'center' }}>Loading lobby...</div>;
@@ -157,6 +165,37 @@ export default function LobbyView() {
               </button>
             );
           })}
+
+          {/* Deck Selection */}
+          {currentPlayer?.cardClass && !currentPlayer?.isDM && (
+            <>
+              <h4 style={{ marginTop: '16px', marginBottom: '8px', color: '#a0a0a0' }}>Select Deck:</h4>
+              {savedDecks
+                .filter(d => d.cardClass === currentPlayer.cardClass)
+                .map(deck => (
+                  <button
+                    key={deck.id}
+                    onClick={() => selectDeck(deck.id)}
+                    style={{
+                      width: '100%',
+                      marginBottom: '8px',
+                      padding: '10px',
+                      background: currentPlayer.deckId === deck.id ? 'rgba(255,215,0,0.15)' : 'rgba(255,255,255,0.03)',
+                      border: currentPlayer.deckId === deck.id ? '2px solid #ffd700' : '2px solid transparent',
+                      textAlign: 'left',
+                    }}
+                  >
+                    <div style={{ color: '#e0e0e0', fontWeight: 'bold' }}>{deck.name}</div>
+                    <div style={{ color: '#a0a0a0', fontSize: '12px' }}>{deck.cardIds.length} cards</div>
+                  </button>
+                ))}
+              {savedDecks.filter(d => d.cardClass === currentPlayer.cardClass).length === 0 && (
+                <div style={{ color: '#666', fontSize: '12px', padding: '8px' }}>
+                  No decks for {currentPlayer.cardClass}. Use the Deck Builder to create one.
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
 

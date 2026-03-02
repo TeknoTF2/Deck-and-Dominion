@@ -119,7 +119,8 @@ export default function DMPanel({ gameState }: DMPanelProps) {
               <div>Turn: {gameState.turnNumber} - {gameState.phase}</div>
               <div>Board: {gameState.board.playerCreatures.length} party, {gameState.board.dmCreatures.length} DM</div>
               <div>Graveyard: {gameState.graveyard.length}</div>
-              <div>Mana: {gameState.manaPool.persistent}P + {gameState.manaPool.burst}B</div>
+              <div>Party Mana: {gameState.manaPool.persistent}P + {gameState.manaPool.burst}B</div>
+              <div>DM Mana: {gameState.dmState.manaAvailable ?? '?'}</div>
             </div>
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '8px' }}>
               <div style={{ fontSize: '10px', color: '#a0a0a0', marginBottom: '4px' }}>Quick Actions</div>

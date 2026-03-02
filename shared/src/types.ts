@@ -44,6 +44,7 @@ export enum Keyword {
   Tower = 'Tower',
   Shield = 'Shield',
   Reaction = 'Reaction',
+  Poison = 'Poison',
 }
 
 export enum Phase {
@@ -172,6 +173,7 @@ export interface DMState {
   deck: CardInstance[];
   encounterDeck?: CardInstance[];
   landsPlayed: number;
+  manaAvailable: number;
 }
 
 // --- Card Instance (in-game) ---
@@ -195,6 +197,7 @@ export interface CardInstance {
   poisonStacks: PoisonStack[];
   ownerId: string;
   zone: Zone;
+  faceDown?: boolean;
 }
 
 export interface Buff {
@@ -378,6 +381,7 @@ export const MAX_HAND_SIZE = 8;
 export const STARTING_HAND_SIZE = 5;
 export const MAX_MULLIGANS = 2;
 export const HP_PER_PLAYER = 8;
+export const MAX_CARD_COPIES = 2; // Max copies of a single card in a deck (Starter/Land exempt)
 
 // --- Socket Events ---
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useGameStore } from '../../store/gameStore';
 import CardView from '../Card/CardView';
 import CardDetailModal from '../Card/CardDetailModal';
-import { CardDefinition, CardClass, Rarity, DECK_MIN_SIZE, DECK_MAX_SIZE } from '@deck-and-dominion/shared';
+import { CardDefinition, CardClass, CardType, Rarity, DECK_MIN_SIZE, DECK_MAX_SIZE, MAX_CARD_COPIES } from '@deck-and-dominion/shared';
 
 export default function DeckBuilder() {
   const { allCards, setView, cardsLoaded, loadCards } = useGameStore();
@@ -32,6 +32,12 @@ export default function DeckBuilder() {
 
   const addToDeck = (cardId: string) => {
     if (deckCards.length >= DECK_MAX_SIZE) return;
+    // Enforce per-card copy limits (Starter rarity and Land type exempt)
+    const card = allCards.find(c => c.id === cardId);
+    if (card && card.rarity !== Rarity.Starter && card.cardType !== CardType.Land) {
+      const currentCopies = deckCards.filter(id => id === cardId).length;
+      if (currentCopies >= MAX_CARD_COPIES) return;
+    }
     setDeckCards([...deckCards, cardId]);
   };
 
