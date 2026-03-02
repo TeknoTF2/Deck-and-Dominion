@@ -3,8 +3,22 @@ import {
   GameState, Phase, PlayerState, CardInstance, CardDefinition,
   GameAction, DMAction, LogEntry, ManaPool, BoardState, Zone,
   Keyword, Buff, Debuff, ActiveEffect, CardType, DMState,
+  DurationType, TriggerEvent,
   HP_PER_PLAYER, STARTING_HAND_SIZE, MAX_HAND_SIZE, MAX_MULLIGANS,
 } from '@deck-and-dominion/shared';
+
+// Keyword lookup for text parsing
+const KEYWORD_MAP: Record<string, Keyword> = {
+  'haste': Keyword.Haste,
+  'trample': Keyword.Trample,
+  'deathtouch': Keyword.Deathtouch,
+  'lifelink': Keyword.Lifelink,
+  'first strike': Keyword.FirstStrike,
+  'taunt': Keyword.Taunt,
+  'persistent': Keyword.Persistent,
+  'tower': Keyword.Tower,
+  'flying': Keyword.Flying,
+};
 
 export class GameEngine {
   private state: GameState;
@@ -468,73 +482,587 @@ export class GameEngine {
     }
   }
 
-  // --- Spell Resolution ---
+  // ============================================================
+  // COMPREHENSIVE CARD EFFECT RESOLUTION SYSTEM
+  // Handles: damage, draw, heal, mana, shield, buffs, debuffs,
+  // keywords, tokens, sacrifice, resurrection, exile, counter,
+  // untap, bounce, destroy, and conditional effects.
+  // ============================================================
 
   private resolveSpellEffect(card: CardInstance, casterId: string, targets?: string[]): void {
-    // Generic spell resolution - effect text is parsed for common patterns
-    const effect = card.definition.effectText.toLowerCase();
+    this.resolveEffect(card.definition.effectText, card, casterId, targets);
+  }
 
-    if (effect.includes('deal') && effect.includes('damage')) {
-      const dmgMatch = effect.match(/deal\s+(\d+)\s+damage/);
-      if (dmgMatch) {
-        const damage = parseInt(dmgMatch[1]);
-        if (targets && targets.length > 0) {
-          for (const targetId of targets) {
-            if (targetId === 'dm') {
-              this.state.dmHP = Math.max(0, this.state.dmHP - damage);
-              this.addLog('damage', `${card.definition.name} deals ${damage} damage to DM`);
-            } else {
-              const target = this.findCreatureOnBoard(targetId);
-              if (target) {
-                this.dealDamageToCreature(card, target, damage);
-              }
+  private resolveEffect(effectText: string, source: CardInstance, casterId: string, targets?: string[]): void {
+    const effect = effectText.toLowerCase();
+
+    // --- Deal damage ---
+    if (effect.includes('damage')) {
+      this.resolveEffectDamage(effect, source, casterId, targets);
+    }
+
+    // --- Draw cards ---
+    if (effect.includes('draw')) {
+      this.resolveEffectDraw(effect, source, casterId);
+    }
+
+    // --- Restore / Heal HP ---
+    if (effect.includes('restore') || effect.includes('heal')) {
+      this.resolveEffectHeal(effect, source, casterId, targets);
+    }
+
+    // --- Generate mana ---
+    if (effect.includes('generate') && effect.includes('mana')) {
+      this.resolveEffectMana(effect, source);
+    }
+
+    // --- Shield ---
+    if (effect.includes('shield') && !effect.includes('shieldvalue')) {
+      this.resolveEffectShield(effect, source, targets);
+    }
+
+    // --- Buff: +X/+Y ---
+    if (effect.includes('+') && effect.includes('/+')) {
+      this.resolveEffectBuff(effect, source, casterId, targets);
+    }
+
+    // --- Debuff: -X/-Y ---
+    if (effect.includes('-') && effect.includes('/-')) {
+      this.resolveEffectDebuff(effect, source, targets);
+    }
+
+    // --- Grant keywords ---
+    if (effect.includes('gain') || effect.includes('give') || effect.includes('grant')) {
+      this.resolveEffectKeywords(effect, source, targets);
+    }
+
+    // --- Create tokens ---
+    if (effect.includes('create') || effect.includes('summon')) {
+      this.resolveEffectTokens(effect, source, casterId);
+    }
+
+    // --- Destroy creature ---
+    if (effect.includes('destroy')) {
+      this.resolveEffectDestroy(effect, source, targets);
+    }
+
+    // --- Return to hand (bounce) ---
+    if (effect.includes('return') && effect.includes('hand')) {
+      this.resolveEffectBounce(effect, source, casterId, targets);
+    }
+
+    // --- Untap ---
+    if (effect.includes('untap')) {
+      this.resolveEffectUntap(effect, source, casterId, targets);
+    }
+
+    // --- Sacrifice ---
+    if (effect.includes('sacrifice')) {
+      this.resolveEffectSacrifice(effect, source, casterId, targets);
+    }
+
+    // --- Resurrection / Graveyard return to board ---
+    if (effect.includes('graveyard') && effect.includes('board')) {
+      this.resolveEffectResurrection(effect, source, casterId, targets);
+    }
+
+    // --- Exile from graveyard ---
+    if (effect.includes('exile')) {
+      this.resolveEffectExile(effect, source);
+    }
+
+    // --- Track persistent enchantment effects ---
+    if (source.definition.cardType === CardType.Enchantment && effect.includes('persistent')) {
+      this.state.activeEffects.push({
+        id: uuid(),
+        source: source.instanceId,
+        effect: effectText,
+        duration: DurationType.WhileAlive,
+      });
+    }
+  }
+
+  // --- Damage resolution ---
+  private resolveEffectDamage(effect: string, source: CardInstance, casterId: string, targets?: string[]): void {
+    // "deal X damage to target" / "deal X damage to all enemy creatures"
+    const dmgMatch = effect.match(/deal\s+(\d+)\s+damage/);
+    if (dmgMatch) {
+      const damage = parseInt(dmgMatch[1]);
+
+      if (effect.includes('all enemy') || effect.includes('each enemy')) {
+        const enemies = source.ownerId === 'dm'
+          ? [...this.state.board.playerCreatures]
+          : [...this.state.board.dmCreatures];
+        for (const enemy of enemies) {
+          if (enemy.definition.cardType === CardType.Creature) {
+            this.dealDamageToCreature(source, enemy, damage);
+          }
+        }
+        this.addLog('damage', `${source.definition.name} deals ${damage} damage to all enemy creatures`);
+      } else if (effect.includes('all creatures') || effect.includes('each creature')) {
+        const allCreatures = [...this.state.board.playerCreatures, ...this.state.board.dmCreatures];
+        for (const creature of allCreatures) {
+          if (creature.definition.cardType === CardType.Creature) {
+            this.dealDamageToCreature(source, creature, damage);
+          }
+        }
+        this.addLog('damage', `${source.definition.name} deals ${damage} damage to all creatures`);
+      } else if (targets && targets.length > 0) {
+        for (const targetId of targets) {
+          if (targetId === 'dm') {
+            this.state.dmHP = Math.max(0, this.state.dmHP - damage);
+            this.addLog('damage', `${source.definition.name} deals ${damage} damage to DM`);
+          } else {
+            const target = this.findCreatureOnBoard(targetId);
+            if (target) {
+              this.dealDamageToCreature(source, target, damage);
             }
           }
         }
       }
+      return;
     }
 
-    if (effect.includes('draw') && effect.includes('card')) {
-      const drawMatch = effect.match(/draw\s+(\d+)\s+card/);
-      if (drawMatch) {
-        const count = parseInt(drawMatch[1]);
-        for (let i = 0; i < count; i++) {
-          this.drawCard(casterId);
+    // "deal damage equal to creatures in graveyard (max X)"
+    const equalGraveyardMatch = effect.match(/deal damage (?:to target )?equal to (?:the number of )?creatures? in graveyard/);
+    if (equalGraveyardMatch && targets && targets.length > 0) {
+      let damage = this.getGraveyardCreatureCount();
+      const maxMatch = effect.match(/\(max\s+(\d+)\)/);
+      if (maxMatch) damage = Math.min(damage, parseInt(maxMatch[1]));
+
+      for (const targetId of targets) {
+        if (targetId === 'dm') {
+          this.state.dmHP = Math.max(0, this.state.dmHP - damage);
+        } else {
+          const target = this.findCreatureOnBoard(targetId);
+          if (target) this.dealDamageToCreature(source, target, damage);
         }
-        this.addLog('system', `${this.state.players[casterId]?.name} draws ${count} card(s)`);
       }
+      this.addLog('damage', `${source.definition.name} deals ${damage} graveyard-scaled damage`);
+      return;
     }
 
-    if (effect.includes('restore') || effect.includes('heal')) {
-      const healMatch = effect.match(/(?:restore|heal)\s+(\d+)\s+(?:hp|health|life)/);
-      if (healMatch) {
-        const amount = parseInt(healMatch[1]);
-        this.state.partyHP = Math.min(this.state.maxPartyHP, this.state.partyHP + amount);
-        this.addLog('heal', `${card.definition.name} restores ${amount} HP`);
+    // "deal damage equal to its attack to target"
+    if (effect.includes('deal damage equal to') && effect.includes('attack') && targets && targets.length > 1) {
+      const sacrificed = this.findCreatureOnBoard(targets[0]);
+      if (sacrificed) {
+        const damage = sacrificed.currentAttack || 0;
+        for (let i = 1; i < targets.length; i++) {
+          const target = this.findCreatureOnBoard(targets[i]);
+          if (target) this.dealDamageToCreature(source, target, damage);
+        }
       }
     }
+  }
 
-    if (effect.includes('generate') && effect.includes('mana')) {
-      const manaMatch = effect.match(/generate\s+(\d+)\s+mana/);
-      if (manaMatch) {
-        const amount = parseInt(manaMatch[1]);
+  // --- Draw resolution ---
+  private resolveEffectDraw(effect: string, source: CardInstance, casterId: string): void {
+    const drawMatch = effect.match(/draw\s+(\d+)\s+card/);
+    if (!drawMatch) return;
+
+    const count = parseInt(drawMatch[1]);
+
+    // Check for graveyard conditional: "If graveyard has 5+ cards, draw X instead"
+    const condGrave = effect.match(/if graveyard has (\d+)\+?\s*cards?,?\s*draw\s+(\d+)\s+instead/);
+    if (condGrave) {
+      const threshold = parseInt(condGrave[1]);
+      const altCount = parseInt(condGrave[2]);
+      const finalCount = this.state.graveyard.length >= threshold ? altCount : count;
+      for (let i = 0; i < finalCount; i++) this.drawCard(casterId);
+      this.addLog('system', `${this.state.players[casterId]?.name} draws ${finalCount} card(s)`);
+      return;
+    }
+
+    for (let i = 0; i < count; i++) this.drawCard(casterId);
+    this.addLog('system', `${this.state.players[casterId]?.name} draws ${count} card(s)`);
+  }
+
+  // --- Heal resolution ---
+  private resolveEffectHeal(effect: string, source: CardInstance, casterId: string, targets?: string[]): void {
+    // "restore X party HP" / "restore X HP"
+    const partyHealMatch = effect.match(/restore\s+(\d+)\s+(?:party\s+)?hp/);
+    if (partyHealMatch) {
+      const amount = parseInt(partyHealMatch[1]);
+      this.state.partyHP = Math.min(this.state.maxPartyHP, this.state.partyHP + amount);
+      this.addLog('heal', `${source.definition.name} restores ${amount} party HP`);
+    }
+
+    // "restore target creature to full health"
+    if (effect.includes('restore target creature to full health') || effect.includes('full health')) {
+      if (targets && targets.length > 0) {
+        for (const targetId of targets) {
+          const target = this.findCreatureOnBoard(targetId);
+          if (target && target.currentHealth !== undefined && target.maxHealth !== undefined) {
+            target.currentHealth = target.maxHealth;
+            this.addLog('heal', `${target.definition.name} restored to full health`);
+          }
+        }
+      } else if (effect.includes('all friendly')) {
+        for (const creature of this.state.board.playerCreatures) {
+          if (creature.definition.cardType === CardType.Creature && creature.currentHealth !== undefined && creature.maxHealth !== undefined) {
+            creature.currentHealth = creature.maxHealth;
+          }
+        }
+        this.addLog('heal', 'All friendly creatures restored to full health');
+      }
+    }
+  }
+
+  // --- Mana generation ---
+  private resolveEffectMana(effect: string, source: CardInstance): void {
+    const manaMatch = effect.match(/generate\s+(\d+)\s+(?:(burst|persistent)\s+)?mana/);
+    if (manaMatch) {
+      const amount = parseInt(manaMatch[1]);
+      if (manaMatch[2] === 'persistent') {
+        this.state.manaPool.persistent += amount;
+        this.addLog('mana', `${source.definition.name} generates ${amount} persistent mana`);
+      } else {
         this.state.manaPool.burst += amount;
-        this.addLog('mana', `${card.definition.name} generates ${amount} burst mana`);
+        this.addLog('mana', `${source.definition.name} generates ${amount} burst mana`);
       }
     }
+  }
 
-    if (effect.includes('shield')) {
-      const shieldMatch = effect.match(/shield\s+(\d+)/i);
-      if (shieldMatch && targets && targets.length > 0) {
-        const amount = parseInt(shieldMatch[1]);
+  // --- Shield ---
+  private resolveEffectShield(effect: string, source: CardInstance, targets?: string[]): void {
+    const shieldMatch = effect.match(/shield\s+(\d+)/i);
+    if (!shieldMatch) return;
+    const amount = parseInt(shieldMatch[1]);
+
+    if (effect.includes('all friendly')) {
+      for (const creature of this.state.board.playerCreatures) {
+        if (creature.definition.cardType === CardType.Creature) {
+          creature.currentShield = (creature.currentShield || 0) + amount;
+        }
+      }
+      this.addLog('system', `All friendly creatures gain Shield ${amount}`);
+    } else if (targets && targets.length > 0) {
+      for (const targetId of targets) {
+        const target = this.findCreatureOnBoard(targetId);
+        if (target) {
+          target.currentShield = (target.currentShield || 0) + amount;
+          this.addLog('system', `${target.definition.name} gains Shield ${amount}`);
+        }
+      }
+    }
+  }
+
+  // --- Buff: +X/+Y ---
+  private resolveEffectBuff(effect: string, source: CardInstance, casterId: string, targets?: string[]): void {
+    const buffMatch = effect.match(/\+(\d+)\/\+(\d+)/);
+    if (!buffMatch) return;
+
+    const atkBuff = parseInt(buffMatch[1]);
+    const hpBuff = parseInt(buffMatch[2]);
+    const isPermanent = effect.includes('permanent');
+    const duration = isPermanent ? DurationType.Permanent : DurationType.ThisTurn;
+
+    if (effect.includes('all friendly creatures') || effect.includes('all other friendly')) {
+      for (const creature of this.state.board.playerCreatures) {
+        if (creature.definition.cardType === CardType.Creature) {
+          if (effect.includes('all other') && creature.instanceId === source.instanceId) continue;
+          this.applyBuff(creature, atkBuff, hpBuff, duration, source.instanceId);
+        }
+      }
+      this.addLog('system', `All friendly creatures get +${atkBuff}/+${hpBuff}${isPermanent ? ' permanently' : ' this turn'}`);
+    } else if (targets && targets.length > 0) {
+      for (const targetId of targets) {
+        const target = this.findCreatureOnBoard(targetId);
+        if (target) {
+          this.applyBuff(target, atkBuff, hpBuff, duration, source.instanceId);
+          this.addLog('system', `${target.definition.name} gets +${atkBuff}/+${hpBuff}`);
+        }
+      }
+    }
+  }
+
+  // --- Debuff: -X/-Y ---
+  private resolveEffectDebuff(effect: string, source: CardInstance, targets?: string[]): void {
+    const debuffMatch = effect.match(/-(\d+)\/-(\d+)/);
+    if (!debuffMatch) return;
+
+    const atkDebuff = parseInt(debuffMatch[1]);
+    const hpDebuff = parseInt(debuffMatch[2]);
+    const isPermanent = effect.includes('permanent');
+    const duration = isPermanent ? DurationType.Permanent : DurationType.ThisTurn;
+
+    if (effect.includes('all enemy creatures') || effect.includes('each enemy')) {
+      const enemies = source.ownerId === 'dm'
+        ? [...this.state.board.playerCreatures]
+        : [...this.state.board.dmCreatures];
+      for (const enemy of enemies) {
+        if (enemy.definition.cardType === CardType.Creature) {
+          this.applyDebuff(enemy, atkDebuff, hpDebuff, duration, source.instanceId);
+        }
+      }
+      this.addLog('system', `All enemy creatures get -${atkDebuff}/-${hpDebuff}`);
+    } else if (targets && targets.length > 0) {
+      for (const targetId of targets) {
+        const target = this.findCreatureOnBoard(targetId);
+        if (target) {
+          this.applyDebuff(target, atkDebuff, hpDebuff, duration, source.instanceId);
+          this.addLog('system', `${target.definition.name} gets -${atkDebuff}/-${hpDebuff}`);
+        }
+      }
+    }
+  }
+
+  // --- Keyword granting ---
+  private resolveEffectKeywords(effect: string, source: CardInstance, targets?: string[]): void {
+    const isPermanent = effect.includes('permanently');
+    const duration = isPermanent ? DurationType.Permanent : DurationType.ThisTurn;
+
+    for (const [kwText, kwEnum] of Object.entries(KEYWORD_MAP)) {
+      if (!effect.includes(kwText)) continue;
+      // Only match if it's a grant pattern, not just a mention
+      if (!effect.match(new RegExp(`(?:gain|give|grant|gets?)\\s+.*?${kwText}`, 'i'))) continue;
+
+      if (effect.includes('all friendly')) {
+        for (const creature of this.state.board.playerCreatures) {
+          if (creature.definition.cardType === CardType.Creature) {
+            this.grantKeyword(creature, kwEnum, duration);
+          }
+        }
+        this.addLog('system', `All friendly creatures gain ${kwEnum}`);
+      } else if (targets && targets.length > 0) {
         for (const targetId of targets) {
           const target = this.findCreatureOnBoard(targetId);
           if (target) {
-            target.currentShield = (target.currentShield || 0) + amount;
-            this.addLog('system', `${target.definition.name} gains Shield ${amount}`);
+            this.grantKeyword(target, kwEnum, duration);
+            this.addLog('system', `${target.definition.name} gains ${kwEnum}`);
           }
         }
       }
+    }
+  }
+
+  // --- Token creation ---
+  private resolveEffectTokens(effect: string, source: CardInstance, casterId: string): void {
+    // Match: "create/summon [count] X/Y Name token(s)"
+    const tokenMatch = effect.match(/(?:create|summon)\s+(?:a\s+|an\s+)?(?:(\d+|two|three|four)\s+)?(\d+)\/(\d+)\s+([\w\s]+?)\s*tokens?/i);
+    if (!tokenMatch) return;
+
+    let count = 1;
+    const countStr = tokenMatch[1];
+    if (countStr === 'two') count = 2;
+    else if (countStr === 'three') count = 3;
+    else if (countStr === 'four') count = 4;
+    else if (countStr) count = parseInt(countStr) || 1;
+
+    const atk = parseInt(tokenMatch[2]);
+    const hp = parseInt(tokenMatch[3]);
+    const name = tokenMatch[4].trim();
+
+    const tokenKeywords: Keyword[] = [];
+    if (effect.includes('with haste') || (effect.includes('haste') && effect.includes('token'))) tokenKeywords.push(Keyword.Haste);
+    if (effect.includes('with taunt') || (effect.includes('taunt') && effect.includes('token'))) tokenKeywords.push(Keyword.Taunt);
+    if (effect.includes('with trample')) tokenKeywords.push(Keyword.Trample);
+
+    for (let i = 0; i < count; i++) {
+      this.createToken(name, atk, hp, casterId, tokenKeywords);
+    }
+    this.addLog('system', `${source.definition.name} creates ${count} ${atk}/${hp} ${name} token(s)`);
+  }
+
+  // --- Destroy creature ---
+  private resolveEffectDestroy(effect: string, source: CardInstance, targets?: string[]): void {
+    if (effect.includes('destroy target creature') || effect.includes('destroy target enemy')) {
+      if (targets && targets.length > 0) {
+        for (const targetId of targets) {
+          const target = this.findCreatureOnBoard(targetId);
+          if (target) this.destroyCreature(target);
+        }
+      }
+    }
+
+    if (effect.includes('destroy all creatures') || effect.includes('destroy all enemy creatures')) {
+      if (effect.includes('all enemy')) {
+        const enemies = source.ownerId === 'dm'
+          ? [...this.state.board.playerCreatures]
+          : [...this.state.board.dmCreatures];
+        for (const enemy of enemies) {
+          if (enemy.definition.cardType === CardType.Creature) this.destroyCreature(enemy);
+        }
+      } else {
+        const all = [...this.state.board.playerCreatures, ...this.state.board.dmCreatures]
+          .filter(c => c.definition.cardType === CardType.Creature && c.instanceId !== source.instanceId);
+        for (const creature of all) this.destroyCreature(creature);
+      }
+    }
+
+    // "destroy target equipment"
+    if (effect.includes('destroy target equipment') && targets && targets.length > 0) {
+      for (const creature of [...this.state.board.playerCreatures, ...this.state.board.dmCreatures]) {
+        for (let i = creature.equipment.length - 1; i >= 0; i--) {
+          if (creature.equipment[i].instanceId === targets[0]) {
+            const equip = creature.equipment.splice(i, 1)[0];
+            equip.zone = Zone.Graveyard;
+            this.state.graveyard.push(equip);
+            this.addLog('system', `${equip.definition.name} destroyed`);
+          }
+        }
+      }
+    }
+  }
+
+  // --- Return to hand (bounce) ---
+  private resolveEffectBounce(effect: string, source: CardInstance, casterId: string, targets?: string[]): void {
+    // "return target creature from graveyard to hand"
+    if (effect.includes('graveyard') && effect.includes('hand')) {
+      // Count-based: "return 3 creatures from graveyard to hand"
+      const countMatch = effect.match(/return\s+(\d+)\s+creatures?\s+from\s+graveyard/);
+      if (countMatch) {
+        const count = parseInt(countMatch[1]);
+        const graveyardCreatures = this.state.graveyard
+          .filter(c => c.definition.cardType === CardType.Creature)
+          .slice(0, count);
+        for (const card of graveyardCreatures) {
+          this.resurrectFromGraveyard(card, Zone.Hand, casterId);
+        }
+        return;
+      }
+
+      // Target-based
+      if (targets && targets.length > 0) {
+        for (const targetId of targets) {
+          const card = this.state.graveyard.find(c => c.instanceId === targetId);
+          if (card) this.resurrectFromGraveyard(card, Zone.Hand, casterId);
+        }
+      }
+      return;
+    }
+
+    // "return target creature to hand" (from board)
+    if (effect.includes('return target creature to') && effect.includes('hand')) {
+      if (targets && targets.length > 0) {
+        for (const targetId of targets) {
+          const target = this.findCreatureOnBoard(targetId);
+          if (target) this.bounceToHand(target);
+        }
+      }
+    }
+
+    // "return target friendly creature to hand"
+    if (effect.includes('return target friendly creature') && effect.includes('hand')) {
+      if (targets && targets.length > 0) {
+        const target = this.findCreatureOnBoard(targets[0]);
+        if (target) this.bounceToHand(target);
+      }
+    }
+  }
+
+  // --- Untap ---
+  private resolveEffectUntap(effect: string, source: CardInstance, casterId: string, targets?: string[]): void {
+    if (effect.includes('untap all friendly') || effect.includes('untap all creatures')) {
+      for (const creature of this.state.board.playerCreatures) {
+        if (creature.ownerId === casterId || !effect.includes('friendly')) {
+          creature.tapped = false;
+          creature.canAttack = true;
+        }
+      }
+      this.addLog('system', 'All friendly creatures untapped');
+    } else if (effect.includes('untap target')) {
+      if (targets && targets.length > 0) {
+        for (const targetId of targets) {
+          const target = this.findCreatureOnBoard(targetId);
+          if (target) {
+            target.tapped = false;
+            target.canAttack = true;
+            this.addLog('system', `${target.definition.name} untapped`);
+          }
+        }
+      }
+    }
+  }
+
+  // --- Sacrifice ---
+  private resolveEffectSacrifice(effect: string, source: CardInstance, casterId: string, targets?: string[]): void {
+    // "sacrifice all other friendly creatures"
+    if (effect.includes('sacrifice all') && (effect.includes('friendly') || effect.includes('other'))) {
+      const toSacrifice = this.state.board.playerCreatures
+        .filter(c => c.ownerId === casterId && c.instanceId !== source.instanceId && c.definition.cardType === CardType.Creature);
+      for (const creature of [...toSacrifice]) {
+        this.sacrificeCreature(creature, casterId);
+      }
+      return;
+    }
+
+    // "sacrifice X creatures"
+    const sacCountMatch = effect.match(/sacrifice\s+(\d+)\s+creatures?/);
+    if (sacCountMatch && targets && targets.length > 0) {
+      const count = parseInt(sacCountMatch[1]);
+      for (let i = 0; i < Math.min(count, targets.length); i++) {
+        const target = this.findCreatureOnBoard(targets[i]);
+        if (target && target.ownerId === casterId) this.sacrificeCreature(target, casterId);
+      }
+      return;
+    }
+
+    // "sacrifice a creature" / "sacrifice target creature"
+    if (effect.match(/sacrifice\s+(?:a|target)\s+creature/) && targets && targets.length > 0) {
+      const target = this.findCreatureOnBoard(targets[0]);
+      if (target && target.ownerId === casterId) this.sacrificeCreature(target, casterId);
+    }
+  }
+
+  // --- Resurrection ---
+  private resolveEffectResurrection(effect: string, source: CardInstance, casterId: string, targets?: string[]): void {
+    // "return all creatures from graveyard to board"
+    if (effect.includes('return all creatures from graveyard')) {
+      const costMatch = effect.match(/cost\s+(\d+)\s+or\s+less/);
+      const maxCost = costMatch ? parseInt(costMatch[1]) : Infinity;
+      const graveyardCreatures = [...this.state.graveyard].filter(
+        c => c.definition.cardType === CardType.Creature && c.definition.manaCost <= maxCost
+      );
+      for (const card of graveyardCreatures) {
+        this.resurrectFromGraveyard(card, Zone.Board, casterId);
+        if (effect.includes('with 1 health') && card.currentHealth !== undefined) card.currentHealth = 1;
+      }
+      return;
+    }
+
+    // "return target creature from graveyard to board"
+    if (targets && targets.length > 0) {
+      for (const targetId of targets) {
+        const card = this.state.graveyard.find(c => c.instanceId === targetId);
+        if (card) {
+          this.resurrectFromGraveyard(card, Zone.Board, casterId);
+          if (effect.includes('with 1 health') && card.currentHealth !== undefined) card.currentHealth = 1;
+          if (effect.includes('destroy it at end of turn')) {
+            card.buffs.push({
+              id: uuid(), source: 'end_of_turn_destroy', attackMod: 0, healthMod: 0,
+              keywords: [], duration: DurationType.ThisTurn, turnsRemaining: 1,
+            });
+          }
+        }
+      }
+    }
+  }
+
+  // --- Exile from graveyard ---
+  private resolveEffectExile(effect: string, source: CardInstance): void {
+    if (effect.includes('exile entire graveyard') || effect.includes('exile all cards from graveyard')) {
+      const count = this.state.graveyard.length;
+      while (this.state.graveyard.length > 0) {
+        const card = this.state.graveyard.pop()!;
+        card.zone = Zone.Exile;
+        this.state.exile.push(card);
+      }
+      if (count > 0) this.addLog('system', `${source.definition.name} exiles ${count} card(s) from graveyard`);
+      return;
+    }
+
+    const exileMatch = effect.match(/exile\s+(\d+)\s+cards?\s*(?:from\s+)?(?:the\s+)?(?:graveyard)?/);
+    if (exileMatch) {
+      const count = parseInt(exileMatch[1]);
+      let exiled = 0;
+      for (let i = 0; i < count && this.state.graveyard.length > 0; i++) {
+        const card = this.state.graveyard.pop()!;
+        card.zone = Zone.Exile;
+        this.state.exile.push(card);
+        exiled++;
+      }
+      if (exiled > 0) this.addLog('system', `${source.definition.name} exiles ${exiled} card(s) from graveyard`);
     }
   }
 
@@ -548,25 +1076,27 @@ export class GameEngine {
     if (statMatch) {
       const atkBuff = parseInt(statMatch[1]);
       const hpBuff = parseInt(statMatch[2]);
-      creature.buffs.push({
-        id: uuid(),
-        source: equipment.instanceId,
-        attackMod: atkBuff,
-        healthMod: hpBuff,
-        keywords: [],
-        duration: 'while_alive' as any,
-      });
-      creature.currentAttack = (creature.currentAttack || 0) + atkBuff;
-      creature.currentHealth = (creature.currentHealth || 0) + hpBuff;
-      creature.maxHealth = (creature.maxHealth || 0) + hpBuff;
+      this.applyBuff(creature, atkBuff, hpBuff, DurationType.WhileAlive, equipment.instanceId);
+    }
+
+    // Parse -X patterns (e.g. "but -1 max health")
+    const penaltyMatch = effect.match(/but\s+-(\d+)\s+(?:max\s+)?health/);
+    if (penaltyMatch) {
+      const hpPenalty = parseInt(penaltyMatch[1]);
+      this.applyDebuff(creature, 0, hpPenalty, DurationType.WhileAlive, equipment.instanceId);
+    }
+
+    // Parse Shield X grants
+    const shieldMatch = effect.match(/shield\s+(\d+)/i);
+    if (shieldMatch) {
+      creature.currentShield = (creature.currentShield || 0) + parseInt(shieldMatch[1]);
     }
 
     // Parse keyword grants
-    for (const kw of Object.values(Keyword)) {
-      if (effect.includes(kw.toLowerCase())) {
-        if (!creature.activeKeywords.includes(kw)) {
-          creature.activeKeywords.push(kw);
-        }
+    for (const [kwText, kwEnum] of Object.entries(KEYWORD_MAP)) {
+      if (kwText === 'persistent' || kwText === 'shield') continue; // skip non-combat keywords
+      if (effect.includes(kwText)) {
+        this.grantKeyword(creature, kwEnum, DurationType.WhileAlive);
       }
     }
   }
@@ -994,11 +1524,143 @@ export class GameEngine {
   }
 
   private fireTriggers(event: string, source: CardInstance): void {
-    // Trigger system - fires triggers based on event type
-    if (!source.definition.triggers) return;
-    for (const trigger of source.definition.triggers) {
-      if (trigger.event === event) {
-        this.addLog('trigger', `Trigger: ${source.definition.name} - ${trigger.effect}`);
+    const effectText = source.definition.effectText.toLowerCase();
+
+    // --- Structured triggers from definition ---
+    if (source.definition.triggers) {
+      for (const trigger of source.definition.triggers) {
+        if (trigger.event === event) {
+          this.addLog('trigger', `Trigger: ${source.definition.name} - ${trigger.effect}`);
+          this.resolveEffect(trigger.effect, source, source.ownerId);
+        }
+      }
+    }
+
+    // --- Effect-text based triggers (parsed from effectText) ---
+
+    // ON PLAY triggers
+    if (event === 'on_play') {
+      const onPlayMatch = effectText.match(/on play:\s*(.+?)(?:\.|$)/i);
+      if (onPlayMatch) {
+        this.addLog('trigger', `On Play: ${source.definition.name}`);
+        this.resolveEffect(onPlayMatch[1], source, source.ownerId);
+      }
+    }
+
+    // ON DEATH triggers
+    if (event === 'on_death') {
+      const onDeathMatch = effectText.match(/on death:\s*(.+?)(?:\.|$)/i);
+      if (onDeathMatch) {
+        this.addLog('trigger', `On Death: ${source.definition.name}`);
+        this.resolveEffect(onDeathMatch[1], source, source.ownerId);
+      }
+
+      // "Destroyed at end of turn" creatures (already dead, so no action needed)
+      // Check for "on death: return this to your hand"
+      if (effectText.includes('on death') && effectText.includes('return this to your hand')) {
+        const player = this.state.players[source.ownerId];
+        if (player && player.hand.length < MAX_HAND_SIZE) {
+          const idx = this.state.graveyard.findIndex(c => c.instanceId === source.instanceId);
+          if (idx !== -1) {
+            this.state.graveyard.splice(idx, 1);
+            source.zone = Zone.Hand;
+            source.currentAttack = source.definition.attack;
+            source.currentHealth = source.definition.health;
+            source.maxHealth = source.definition.health;
+            source.buffs = [];
+            source.debuffs = [];
+            source.poisonStacks = [];
+            player.hand.push(source);
+            this.addLog('trigger', `${source.definition.name} returns to hand on death`);
+          }
+        }
+      }
+
+      // Process enchantment triggers for creature death
+      this.processEnchantmentTrigger('creature_death', source, source.ownerId);
+    }
+
+    // ON ATTACK triggers
+    if (event === 'on_attack') {
+      const onAttackMatch = effectText.match(/on attack:\s*(.+?)(?:\.|$)/i);
+      if (onAttackMatch) {
+        this.addLog('trigger', `On Attack: ${source.definition.name}`);
+        this.resolveEffect(onAttackMatch[1], source, source.ownerId);
+      }
+
+      // "when attacks, defender gets -X/-Y"
+      if (effectText.includes('when attacks') && effectText.includes('defender gets')) {
+        const debuffMatch = effectText.match(/-(\d+)\/-(\d+)/);
+        if (debuffMatch) {
+          // The defender was the last combat target - apply debuff via active effects
+          this.addLog('trigger', `${source.definition.name} weakens the defender`);
+        }
+      }
+    }
+
+    // ON SACRIFICE triggers
+    if (event === 'on_sacrifice') {
+      // Process enchantment triggers for sacrifice
+      this.processEnchantmentTrigger('sacrifice', source, source.ownerId);
+    }
+
+    // START OF TURN triggers
+    if (event === 'start_of_turn') {
+      if (effectText.includes('at start of turn') || effectText.includes('at the start of turn')) {
+        const startMatch = effectText.match(/at (?:the )?start of turn[,:]\s*(.+?)(?:\.|$)/i);
+        if (startMatch) {
+          this.addLog('trigger', `Start of turn: ${source.definition.name}`);
+          this.resolveEffect(startMatch[1], source, source.ownerId);
+        }
+      }
+    }
+
+    // END OF TURN triggers
+    if (event === 'end_of_turn') {
+      if (effectText.includes('at end of turn') || effectText.includes('at the end of turn')) {
+        const endMatch = effectText.match(/at (?:the )?end of (?:each )?turn[,:]\s*(.+?)(?:\.|$)/i);
+        if (endMatch) {
+          this.addLog('trigger', `End of turn: ${source.definition.name}`);
+          this.resolveEffect(endMatch[1], source, source.ownerId);
+        }
+      }
+
+      // "destroyed at end of turn"
+      if (effectText.includes('destroyed at end of turn') || effectText.includes('destroy it at end of turn')) {
+        this.destroyCreature(source);
+      }
+
+      // Check buffs tagged for end-of-turn destruction
+      const destroyBuff = source.buffs.find(b => b.source === 'end_of_turn_destroy');
+      if (destroyBuff) {
+        this.destroyCreature(source);
+      }
+    }
+
+    // WHEN ANOTHER CREATURE DIES triggers
+    if (event === 'when_another_creature_dies') {
+      if (effectText.includes('whenever another friendly creature dies') ||
+          effectText.includes('whenever a friendly creature dies')) {
+        const whenDiesMatch = effectText.match(/whenever (?:another )?friendly creature dies[,:]\s*(.+?)(?:\.|$)/i);
+        if (whenDiesMatch) {
+          this.resolveEffect(whenDiesMatch[1], source, source.ownerId);
+        }
+      }
+
+      // "gets +X/+Y for each creature in graveyard" - recalculate
+      if (effectText.includes('for each creature in graveyard')) {
+        // These are continuous effects that scale, handled by stat recalculation
+        const gravCount = this.getGraveyardCreatureCount();
+        const scaleMatch = effectText.match(/\+(\d+)\/\+(\d+)\s+for each creature in graveyard/);
+        if (scaleMatch) {
+          // Reset to base and recalculate
+          const baseAtk = source.definition.attack || 0;
+          const baseHp = source.definition.health || 0;
+          const maxMatch = effectText.match(/\(max\s+\+(\d+)\)/);
+          const maxBonus = maxMatch ? parseInt(maxMatch[1]) : Infinity;
+          const bonus = Math.min(gravCount * parseInt(scaleMatch[1]), maxBonus);
+          source.currentAttack = baseAtk + bonus;
+        }
       }
     }
   }
@@ -1008,9 +1670,19 @@ export class GameEngine {
       // Clean up buffs
       for (let i = creature.buffs.length - 1; i >= 0; i--) {
         const buff = creature.buffs[i];
-        if (buff.duration === 'this_turn' as any || (buff.turnsRemaining !== undefined && buff.turnsRemaining <= 0)) {
+        if (buff.duration === DurationType.ThisTurn || (buff.turnsRemaining !== undefined && buff.turnsRemaining <= 0)) {
+          // Reverse stat modifications
           creature.currentAttack = (creature.currentAttack || 0) - buff.attackMod;
           creature.currentHealth = (creature.currentHealth || 0) - buff.healthMod;
+
+          // Remove granted keywords
+          if (buff.keywords && buff.keywords.length > 0) {
+            for (const kw of buff.keywords) {
+              const kwIdx = creature.activeKeywords.indexOf(kw);
+              if (kwIdx !== -1) creature.activeKeywords.splice(kwIdx, 1);
+            }
+          }
+
           creature.buffs.splice(i, 1);
         } else if (buff.turnsRemaining !== undefined) {
           buff.turnsRemaining--;
@@ -1020,9 +1692,10 @@ export class GameEngine {
       // Clean up debuffs
       for (let i = creature.debuffs.length - 1; i >= 0; i--) {
         const debuff = creature.debuffs[i];
-        if (debuff.duration === 'this_turn' as any || (debuff.turnsRemaining !== undefined && debuff.turnsRemaining <= 0)) {
-          creature.currentAttack = (creature.currentAttack || 0) - debuff.attackMod;
-          creature.currentHealth = (creature.currentHealth || 0) - debuff.healthMod;
+        if (debuff.duration === DurationType.ThisTurn || (debuff.turnsRemaining !== undefined && debuff.turnsRemaining <= 0)) {
+          // Reverse stat modifications (debuffs subtract, so reversal adds back)
+          creature.currentAttack = (creature.currentAttack || 0) + debuff.attackMod;
+          creature.currentHealth = (creature.currentHealth || 0) + debuff.healthMod;
           creature.debuffs.splice(i, 1);
         } else if (debuff.turnsRemaining !== undefined) {
           debuff.turnsRemaining--;
@@ -1030,9 +1703,19 @@ export class GameEngine {
       }
     }
 
-    // Clean up global active effects
+    // Clean up global active effects and remove enchantment effects whose source left the board
     for (let i = this.state.activeEffects.length - 1; i >= 0; i--) {
       const effect = this.state.activeEffects[i];
+
+      // Check if source enchantment is still on board
+      if (effect.duration === DurationType.WhileAlive) {
+        const sourceOnBoard = this.findCreatureOnBoard(effect.source);
+        if (!sourceOnBoard) {
+          this.state.activeEffects.splice(i, 1);
+          continue;
+        }
+      }
+
       if (effect.turnsRemaining !== undefined) {
         effect.turnsRemaining--;
         if (effect.turnsRemaining <= 0) {
@@ -1060,6 +1743,315 @@ export class GameEngine {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  // ============================================================
+  // HELPER METHODS: Token, Sacrifice, Resurrection, Buff/Debuff
+  // ============================================================
+
+  private createToken(name: string, attack: number, health: number, ownerId: string, keywords: Keyword[] = []): CardInstance {
+    const token: CardInstance = {
+      instanceId: uuid(),
+      definitionId: `token_${name.toLowerCase().replace(/\s+/g, '_')}`,
+      definition: {
+        id: `token_${name.toLowerCase().replace(/\s+/g, '_')}`,
+        name: `${name} Token`,
+        cardClass: 'Neutral' as any,
+        archetype: 'Token',
+        set: 'Token',
+        cardType: CardType.Token,
+        rarity: 'Common' as any,
+        manaCost: 0,
+        attack,
+        health,
+        shieldValue: 0,
+        poisonValue: 0,
+        effectText: '',
+        keywords: [...keywords],
+        triggers: [],
+      },
+      currentAttack: attack,
+      currentHealth: health,
+      maxHealth: health,
+      currentShield: 0,
+      activeKeywords: [...keywords],
+      equipment: [],
+      buffs: [],
+      debuffs: [],
+      tapped: false,
+      canAttack: keywords.includes(Keyword.Haste),
+      summonedThisTurn: true,
+      poisonStacks: [],
+      ownerId,
+      zone: Zone.Board,
+    };
+
+    if (ownerId === 'dm') {
+      this.state.board.dmCreatures.push(token);
+    } else {
+      this.state.board.playerCreatures.push(token);
+    }
+    return token;
+  }
+
+  private sacrificeCreature(creature: CardInstance, casterId: string): void {
+    this.addLog('system', `${creature.definition.name} is sacrificed`);
+
+    // Remove from board
+    const playerIdx = this.state.board.playerCreatures.findIndex(c => c.instanceId === creature.instanceId);
+    if (playerIdx !== -1) this.state.board.playerCreatures.splice(playerIdx, 1);
+    const dmIdx = this.state.board.dmCreatures.findIndex(c => c.instanceId === creature.instanceId);
+    if (dmIdx !== -1) this.state.board.dmCreatures.splice(dmIdx, 1);
+
+    // Move equipment to graveyard
+    for (const equip of creature.equipment) {
+      equip.zone = Zone.Graveyard;
+      this.state.graveyard.push(equip);
+    }
+    creature.equipment = [];
+
+    // Move to graveyard
+    creature.zone = Zone.Graveyard;
+    this.state.graveyard.push(creature);
+
+    // Fire sacrifice triggers on the sacrificed creature
+    this.fireTriggers('on_sacrifice', creature);
+
+    // Fire on_death too since sacrifice counts as dying
+    this.fireTriggers('on_death', creature);
+
+    // Fire "when another creature dies" for all remaining board creatures
+    for (const c of [...this.state.board.playerCreatures, ...this.state.board.dmCreatures]) {
+      this.fireTriggers('when_another_creature_dies', c);
+    }
+  }
+
+  private resurrectFromGraveyard(card: CardInstance, toZone: Zone, ownerId: string): void {
+    const idx = this.state.graveyard.findIndex(c => c.instanceId === card.instanceId);
+    if (idx === -1) return;
+
+    this.state.graveyard.splice(idx, 1);
+    card.zone = toZone;
+
+    if (toZone === Zone.Board) {
+      // Reset creature state for board
+      if (card.currentHealth !== undefined && card.maxHealth !== undefined) {
+        card.currentHealth = card.maxHealth;
+      }
+      card.tapped = false;
+      card.canAttack = false;
+      card.summonedThisTurn = true;
+      card.buffs = [];
+      card.debuffs = [];
+      card.poisonStacks = [];
+      card.activeKeywords = [...(card.definition.keywords || [])];
+
+      if (card.ownerId === 'dm') {
+        this.state.board.dmCreatures.push(card);
+      } else {
+        this.state.board.playerCreatures.push(card);
+      }
+
+      // Check for resurrection bonuses
+      const resEffect = card.definition.effectText.toLowerCase();
+      if (resEffect.includes('when resurrected')) {
+        const resBuff = resEffect.match(/when resurrected[,.]?\s*(?:gets?|gains?)\s*\+(\d+)\/\+(\d+)/);
+        if (resBuff) {
+          this.applyBuff(card, parseInt(resBuff[1]), parseInt(resBuff[2]), DurationType.Permanent, card.instanceId);
+        }
+        if (resEffect.includes('taunt') && resEffect.includes('resurrected')) {
+          this.grantKeyword(card, Keyword.Taunt, DurationType.Permanent);
+        }
+      }
+
+      this.addLog('system', `${card.definition.name} is resurrected to the board`);
+    } else if (toZone === Zone.Hand) {
+      const player = this.state.players[ownerId];
+      if (player && player.hand.length < MAX_HAND_SIZE) {
+        // Reset card state
+        card.currentAttack = card.definition.attack;
+        card.currentHealth = card.definition.health;
+        card.maxHealth = card.definition.health;
+        card.activeKeywords = [...(card.definition.keywords || [])];
+        card.buffs = [];
+        card.debuffs = [];
+        card.poisonStacks = [];
+        player.hand.push(card);
+        this.addLog('system', `${card.definition.name} returned from graveyard to hand`);
+      }
+    }
+  }
+
+  private applyBuff(creature: CardInstance, atkMod: number, hpMod: number, duration: DurationType, sourceId: string): void {
+    creature.buffs.push({
+      id: uuid(),
+      source: sourceId,
+      attackMod: atkMod,
+      healthMod: hpMod,
+      keywords: [],
+      duration,
+      turnsRemaining: duration === DurationType.ThisTurn ? 1 : undefined,
+    });
+    creature.currentAttack = (creature.currentAttack || 0) + atkMod;
+    creature.currentHealth = (creature.currentHealth || 0) + hpMod;
+    if (duration !== DurationType.ThisTurn) {
+      creature.maxHealth = (creature.maxHealth || 0) + hpMod;
+    }
+  }
+
+  private applyDebuff(creature: CardInstance, atkMod: number, hpMod: number, duration: DurationType, sourceId: string): void {
+    creature.debuffs.push({
+      id: uuid(),
+      source: sourceId,
+      attackMod: atkMod,
+      healthMod: hpMod,
+      duration,
+      turnsRemaining: duration === DurationType.ThisTurn ? 1 : undefined,
+    });
+    creature.currentAttack = Math.max(0, (creature.currentAttack || 0) - atkMod);
+    creature.currentHealth = (creature.currentHealth || 0) - hpMod;
+
+    // Check if debuff kills the creature
+    if (creature.currentHealth !== undefined && creature.currentHealth <= 0) {
+      this.destroyCreature(creature);
+    }
+  }
+
+  private grantKeyword(creature: CardInstance, keyword: Keyword, duration: DurationType): void {
+    if (!creature.activeKeywords.includes(keyword)) {
+      creature.activeKeywords.push(keyword);
+    }
+    if (duration === DurationType.ThisTurn) {
+      creature.buffs.push({
+        id: uuid(),
+        source: 'keyword_grant',
+        attackMod: 0,
+        healthMod: 0,
+        keywords: [keyword],
+        duration: DurationType.ThisTurn,
+        turnsRemaining: 1,
+      });
+    }
+  }
+
+  private bounceToHand(creature: CardInstance): void {
+    // Remove from board
+    const playerIdx = this.state.board.playerCreatures.findIndex(c => c.instanceId === creature.instanceId);
+    if (playerIdx !== -1) this.state.board.playerCreatures.splice(playerIdx, 1);
+    const dmIdx = this.state.board.dmCreatures.findIndex(c => c.instanceId === creature.instanceId);
+    if (dmIdx !== -1) this.state.board.dmCreatures.splice(dmIdx, 1);
+
+    // Move equipment to graveyard
+    for (const equip of creature.equipment) {
+      equip.zone = Zone.Graveyard;
+      this.state.graveyard.push(equip);
+    }
+    creature.equipment = [];
+
+    // Return to owner's hand
+    const player = this.state.players[creature.ownerId];
+    if (player && player.hand.length < MAX_HAND_SIZE) {
+      creature.zone = Zone.Hand;
+      creature.currentAttack = creature.definition.attack;
+      creature.currentHealth = creature.definition.health;
+      creature.maxHealth = creature.definition.health;
+      creature.currentShield = creature.definition.shieldValue || 0;
+      creature.activeKeywords = [...(creature.definition.keywords || [])];
+      creature.buffs = [];
+      creature.debuffs = [];
+      creature.poisonStacks = [];
+      player.hand.push(creature);
+      this.addLog('system', `${creature.definition.name} returned to hand`);
+    } else {
+      creature.zone = Zone.Graveyard;
+      this.state.graveyard.push(creature);
+      this.addLog('system', `${creature.definition.name} sent to graveyard (hand full)`);
+    }
+  }
+
+  private getGraveyardCreatureCount(): number {
+    return this.state.graveyard.filter(c => c.definition.cardType === CardType.Creature).length;
+  }
+
+  // --- Enchantment trigger processing ---
+  private processEnchantmentTrigger(triggerType: string, triggerSource: CardInstance, casterId: string): void {
+    for (const card of [...this.state.board.playerCreatures]) {
+      if (card.definition.cardType !== CardType.Enchantment) continue;
+      const effect = card.definition.effectText.toLowerCase();
+
+      // SACRIFICE triggers
+      if (triggerType === 'sacrifice' && effect.includes('whenever') && effect.includes('sacrifice')) {
+        if (effect.includes('draw')) {
+          const drawMatch = effect.match(/draw\s+(\d+)\s+card/);
+          if (drawMatch) {
+            const count = parseInt(drawMatch[1]);
+            for (let i = 0; i < count; i++) this.drawCard(card.ownerId);
+            this.addLog('trigger', `${card.definition.name}: draw ${count} card(s)`);
+          }
+        }
+        if (effect.includes('restore') && effect.includes('hp')) {
+          const healMatch = effect.match(/restore\s+(\d+)\s+(?:party\s+)?hp/);
+          if (healMatch) {
+            const amount = parseInt(healMatch[1]);
+            this.state.partyHP = Math.min(this.state.maxPartyHP, this.state.partyHP + amount);
+            this.addLog('trigger', `${card.definition.name}: restore ${amount} party HP`);
+          }
+        }
+        if (effect.includes('all friendly creatures get')) {
+          const buffMatch = effect.match(/all friendly creatures get \+(\d+)\/\+(\d+)/);
+          if (buffMatch) {
+            for (const creature of this.state.board.playerCreatures) {
+              if (creature.definition.cardType === CardType.Creature) {
+                this.applyBuff(creature, parseInt(buffMatch[1]), parseInt(buffMatch[2]), DurationType.ThisTurn, card.instanceId);
+              }
+            }
+          }
+        }
+        if (effect.includes('generate') && effect.includes('mana')) {
+          const manaMatch = effect.match(/generate\s+(\d+)\s+(?:burst\s+)?mana/);
+          if (manaMatch) {
+            this.state.manaPool.burst += parseInt(manaMatch[1]);
+            this.addLog('trigger', `${card.definition.name}: generate ${manaMatch[1]} burst mana`);
+          }
+        }
+      }
+
+      // CREATURE DEATH triggers
+      if (triggerType === 'creature_death' && effect.includes('whenever') &&
+          (effect.includes('creature dies') || effect.includes('creature enters the graveyard'))) {
+        if (effect.includes('draw')) {
+          const drawMatch = effect.match(/draw\s+(\d+)\s+card/);
+          if (drawMatch) {
+            const count = parseInt(drawMatch[1]);
+            for (let i = 0; i < count; i++) this.drawCard(card.ownerId);
+            this.addLog('trigger', `${card.definition.name}: draw ${count} card(s)`);
+          }
+        }
+        if (effect.includes('generate') && effect.includes('mana')) {
+          const manaMatch = effect.match(/generate\s+(\d+)\s+(?:burst\s+)?mana/);
+          if (manaMatch) {
+            this.state.manaPool.burst += parseInt(manaMatch[1]);
+            this.addLog('trigger', `${card.definition.name}: generate ${manaMatch[1]} burst mana`);
+          }
+        }
+        if (effect.includes('return it to your hand') || effect.includes('return it to hand')) {
+          if (triggerSource.ownerId === card.ownerId) {
+            this.resurrectFromGraveyard(triggerSource, Zone.Hand, card.ownerId);
+          }
+        }
+        if (effect.includes('opponent must sacrifice a creature') || effect.includes('dm sacrifices a creature')) {
+          // Force DM to sacrifice a creature
+          if (this.state.board.dmCreatures.length > 0) {
+            const dmCreatures = this.state.board.dmCreatures.filter(c => c.definition.cardType === CardType.Creature);
+            if (dmCreatures.length > 0) {
+              const victim = dmCreatures[Math.floor(Math.random() * dmCreatures.length)];
+              this.sacrificeCreature(victim, 'dm');
+              this.addLog('trigger', `${card.definition.name} forces DM to sacrifice ${victim.definition.name}`);
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -13,7 +13,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Negate the effect of a spell being cast. (Reaction)",
-    "keywords": ["Reaction"],
+    "keywords": [
+      "Reaction"
+    ],
     "flavorText": ""
   },
   {
@@ -234,7 +236,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -251,7 +255,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste. First Strike.",
-    "keywords": ["Haste", "First Strike"],
+    "keywords": [
+      "Haste",
+      "First Strike"
+    ],
     "flavorText": ""
   },
   {
@@ -336,7 +343,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Tower. Persistent. When you cast a spell, deal 1 damage to a random enemy creature.",
-    "keywords": ["Tower", "Persistent"],
+    "keywords": [
+      "Tower",
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -472,7 +482,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. All friendly creatures gain First Strike while this is in play.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -489,7 +501,11 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste. First Strike. Trample.",
-    "keywords": ["Haste", "First Strike", "Trample"],
+    "keywords": [
+      "Haste",
+      "First Strike",
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -608,7 +624,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Taunt. Doesn't actually deal damage.",
-    "keywords": ["Taunt"],
+    "keywords": [
+      "Taunt"
+    ],
     "flavorText": ""
   },
   {
@@ -727,7 +745,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. When you play a creature, create a 1/1 copy of it.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -812,7 +832,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Counter target spell. (Reaction)",
-    "keywords": ["Reaction"],
+    "keywords": [
+      "Reaction"
+    ],
     "flavorText": ""
   },
   {
@@ -829,7 +851,9 @@
     "shieldValue": 2,
     "poisonValue": 0,
     "effectText": "Give target creature Shield 2. (Reaction)",
-    "keywords": ["Reaction"],
+    "keywords": [
+      "Reaction"
+    ],
     "flavorText": ""
   },
   {
@@ -846,7 +870,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Counter target spell that costs 2 or less. (Reaction)",
-    "keywords": ["Reaction"],
+    "keywords": [
+      "Reaction"
+    ],
     "flavorText": ""
   },
   {
@@ -863,7 +889,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Send target spell back at its caster. (Reaction)",
-    "keywords": ["Reaction"],
+    "keywords": [
+      "Reaction"
+    ],
     "flavorText": ""
   },
   {
@@ -914,7 +942,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. All friendly creatures get Shield 1.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -931,7 +961,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Tower. Persistent. Enemy spells cost 1 more mana.",
-    "keywords": ["Tower", "Persistent"],
+    "keywords": [
+      "Tower",
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -948,7 +981,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Counter target spell. Draw 1 card. (Reaction)",
-    "keywords": ["Reaction"],
+    "keywords": [
+      "Reaction"
+    ],
     "flavorText": ""
   },
   {
@@ -982,7 +1017,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Counter target spell. Lose 2 party HP. (Reaction)",
-    "keywords": ["Reaction"],
+    "keywords": [
+      "Reaction"
+    ],
     "flavorText": ""
   },
   {
@@ -999,7 +1036,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. Friendly creatures cannot lose keywords.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1016,7 +1055,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Change the target of a spell to a different target. (Reaction)",
-    "keywords": ["Reaction"],
+    "keywords": [
+      "Reaction"
+    ],
     "flavorText": ""
   },
   {
@@ -1033,7 +1074,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. All friendly creatures are immune to enemy spells. DM spells cost 2 more mana.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1118,7 +1161,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste. On play: give all other friendly creatures Haste this turn.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -1169,7 +1214,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. Whenever you give a creature a keyword, draw 1 card.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1186,7 +1233,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste. First Strike. On play: deal 2 damage to target creature.",
-    "keywords": ["Haste", "First Strike"],
+    "keywords": [
+      "Haste",
+      "First Strike"
+    ],
     "flavorText": ""
   },
   {
@@ -1305,7 +1355,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Taunt. On play: gain Shield 2.",
-    "keywords": ["Taunt"],
+    "keywords": [
+      "Taunt"
+    ],
     "flavorText": ""
   },
   {
@@ -1322,7 +1374,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Counter target spell. Gain mana equal to its cost. (Reaction)",
-    "keywords": ["Reaction"],
+    "keywords": [
+      "Reaction"
+    ],
     "flavorText": ""
   },
   {
@@ -1339,7 +1393,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Counter target spell. Discard 1 card from your hand. (Reaction)",
-    "keywords": ["Reaction"],
+    "keywords": [
+      "Reaction"
+    ],
     "flavorText": ""
   },
   {
@@ -1356,7 +1412,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. Friendly creatures with Shield cannot be destroyed by spells.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1373,7 +1431,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Tower. Persistent. When an enemy spell is cast, it costs 2 more mana.",
-    "keywords": ["Tower", "Persistent"],
+    "keywords": [
+      "Tower",
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1390,7 +1451,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Counter target spell that costs 3 or less. Gain 1 mana. (Reaction)",
-    "keywords": ["Reaction"],
+    "keywords": [
+      "Reaction"
+    ],
     "flavorText": ""
   },
   {
@@ -1425,6 +1488,2691 @@
     "poisonValue": 0,
     "effectText": "On play: create a 1/1 Illusion creature token.",
     "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_basic_land_085",
+    "name": "Basic Land",
+    "cardClass": "Wizard",
+    "archetype": "Shared",
+    "set": "Starter",
+    "cardType": "Land",
+    "rarity": "Starter",
+    "manaCost": 0,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Generates 1 mana.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_quicken_086",
+    "name": "Quicken",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Haste this turn.",
+    "keywords": [
+      "Haste"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_sharpen_087",
+    "name": "Sharpen",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains First Strike this turn.",
+    "keywords": [
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_venomtip_088",
+    "name": "Venomtip",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Deathtouch this turn.",
+    "keywords": [
+      "Deathtouch"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_lifebound_089",
+    "name": "Lifebound",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Lifelink this turn.",
+    "keywords": [
+      "Lifelink"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_fortify_090",
+    "name": "Fortify",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Taunt this turn.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_trample_hex_091",
+    "name": "Trample Hex",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Trample this turn.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_dual_enchant_092",
+    "name": "Dual Enchant",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains two keywords of your choice from: Haste, First Strike, Trample, Taunt this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_ignite_093",
+    "name": "Ignite",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Trample this turn.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_flame_tongue_094",
+    "name": "Flame Tongue",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains \"deal 1 damage to another enemy target when this attacks\" this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_searing_brand_095",
+    "name": "Searing Brand",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Deathtouch this turn.",
+    "keywords": [
+      "Deathtouch"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_blazing_charge_096",
+    "name": "Blazing Charge",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Haste this turn.",
+    "keywords": [
+      "Haste"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_fire_shield_097",
+    "name": "Fire Shield",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains \"when attacked, deal 2 damage to the attacker\" this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_combustion_098",
+    "name": "Combustion",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Trample and First Strike this turn.",
+    "keywords": [
+      "Trample",
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_inferno_mark_099",
+    "name": "Inferno Mark",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains \"deal 1 damage to all enemy creatures when this attacks\" this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_wildfire_brand_100",
+    "name": "Wildfire Brand",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains \"when this kills a creature, deal 2 damage to another random enemy creature\" this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_scorch_enchant_101",
+    "name": "Scorch Enchant",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains First Strike this turn. If it already has First Strike, it gains Deathtouch instead.",
+    "keywords": [
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_pyroclasm_102",
+    "name": "Pyroclasm",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures gain Trample this turn.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_tempest_touch_103",
+    "name": "Tempest Touch",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains First Strike and Trample this turn.",
+    "keywords": [
+      "First Strike",
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_storm_surge_104",
+    "name": "Storm Surge",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Haste and Lifelink this turn.",
+    "keywords": [
+      "Haste",
+      "Lifelink"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_gale_brand_105",
+    "name": "Gale Brand",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Taunt and First Strike this turn.",
+    "keywords": [
+      "Taunt",
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_thunder_mark_106",
+    "name": "Thunder Mark",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Haste and Deathtouch this turn.",
+    "keywords": [
+      "Haste",
+      "Deathtouch"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_squall_line_107",
+    "name": "Squall Line",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Up to 2 creatures each gain Trample this turn.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_windborne_108",
+    "name": "Windborne",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Lifelink and First Strike this turn.",
+    "keywords": [
+      "Lifelink",
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_eye_of_the_storm_109",
+    "name": "Eye of the Storm",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Haste, First Strike, and Trample this turn.",
+    "keywords": [
+      "Haste",
+      "First Strike",
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_howling_wind_110",
+    "name": "Howling Wind",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures gain First Strike this turn.",
+    "keywords": [
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_maelstrom_111",
+    "name": "Maelstrom",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures gain Trample and First Strike this turn.",
+    "keywords": [
+      "Trample",
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_static_charge_112",
+    "name": "Static Charge",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature is attacked, it gains First Strike for this combat.",
+    "keywords": [
+      "Reaction",
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_galvanize_113",
+    "name": "Galvanize",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature enters play, it gains Haste this turn.",
+    "keywords": [
+      "Reaction",
+      "Haste"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_thunderclap_114",
+    "name": "Thunderclap",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When DM plays a creature, target friendly creature gains Deathtouch this turn.",
+    "keywords": [
+      "Reaction",
+      "Deathtouch"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_chain_lightning_115",
+    "name": "Chain Lightning",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature kills an enemy, it gains Haste this turn.",
+    "keywords": [
+      "Reaction",
+      "Haste"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_overcharge_116",
+    "name": "Overcharge",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Haste and Trample this turn. Deal 1 damage to it at end of turn.",
+    "keywords": [
+      "Haste",
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_arc_117",
+    "name": "Arc",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature attacks, it gains Trample for this attack.",
+    "keywords": [
+      "Reaction",
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_jolt_118",
+    "name": "Jolt",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature attacks, it gains First Strike for this attack.",
+    "keywords": [
+      "Reaction",
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_conductor_119",
+    "name": "Conductor",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature with a keyword kills an enemy creature, give that keyword to another friendly creature this turn.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_ball_lightning_120",
+    "name": "Ball Lightning",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Target creature gains Deathtouch and First Strike this turn. Destroy it at end of turn.",
+    "keywords": [
+      "Reaction",
+      "Deathtouch",
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_storm_strike_121",
+    "name": "Storm Strike",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature attacks, it gains First Strike, Trample, and Deathtouch for this attack. Deal 2 damage to it after combat.",
+    "keywords": [
+      "Reaction",
+      "First Strike",
+      "Trample",
+      "Deathtouch"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_freeze_122",
+    "name": "Freeze",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target enemy creature cannot attack this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_frostbite_123",
+    "name": "Frostbite",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target enemy creature loses all keywords this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_ice_chains_124",
+    "name": "Ice Chains",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target enemy creature cannot attack for 2 turns.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_flash_freeze_125",
+    "name": "Flash Freeze",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When an enemy creature gains a keyword or buff, negate it.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_bitter_cold_126",
+    "name": "Bitter Cold",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All enemy creatures lose Haste this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_glacial_pace_127",
+    "name": "Glacial Pace",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When DM plays a creature, it cannot attack until DM's next turn.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_frozen_solid_128",
+    "name": "Frozen Solid",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target enemy creature cannot attack or use abilities this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_numbing_cold_129",
+    "name": "Numbing Cold",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target enemy creature loses First Strike and Deathtouch this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_permafrost_130",
+    "name": "Permafrost",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target enemy creature cannot attack for 3 turns.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_absolute_zero_131",
+    "name": "Absolute Zero",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All enemy creatures lose all keywords and cannot attack this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_stoneskin_enchant_132",
+    "name": "Stoneskin Enchant",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Taunt permanently.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_ironhide_133",
+    "name": "Ironhide",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains First Strike permanently.",
+    "keywords": [
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_earthen_might_134",
+    "name": "Earthen Might",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Trample permanently.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_rootbound_135",
+    "name": "Rootbound",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Lifelink permanently.",
+    "keywords": [
+      "Lifelink"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_bedrock_enchant_136",
+    "name": "Bedrock Enchant",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Taunt and First Strike permanently.",
+    "keywords": [
+      "Taunt",
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_mountains_heart_137",
+    "name": "Mountain's Heart",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Trample and Lifelink permanently.",
+    "keywords": [
+      "Trample",
+      "Lifelink"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_fossilize_138",
+    "name": "Fossilize",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Deathtouch permanently. It cannot gain Haste.",
+    "keywords": [
+      "Deathtouch"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_tectonic_brand_139",
+    "name": "Tectonic Brand",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Trample, First Strike, and Taunt permanently.",
+    "keywords": [
+      "Trample",
+      "First Strike",
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_living_stone_140",
+    "name": "Living Stone",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains \"this creature's keywords cannot be removed\" permanently.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_world_anchor_141",
+    "name": "World Anchor",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 6,
+    "attack": 0,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. All keywords on friendly creatures cannot be removed or negated.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_void_enchant_142",
+    "name": "Void Enchant",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Legendary",
+    "manaCost": 8,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains \"creatures killed by this are exiled instead of going to the graveyard\" and \"this creature's keywords cannot be removed\" permanently.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_entropy_143",
+    "name": "Entropy",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Legendary",
+    "manaCost": 6,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All enemy creatures lose all keywords and all abilities permanently.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_split_144",
+    "name": "Split",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature becomes two with half stats (rounded down).",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_mirage_army_145",
+    "name": "Mirage Army",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create 1/1 copies of up to 3 creatures (no abilities).",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_dark_reflection_146",
+    "name": "Dark Reflection",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create a copy of target creature with cost 2 or less. It has -1 health.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_shade_147",
+    "name": "Shade",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create a 1/1 Shadow token. When it dies, deal 1 damage to any target.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_shadow_step_148",
+    "name": "Shadow Step",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature cannot be targeted by attacks this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_umbral_echo_149",
+    "name": "Umbral Echo",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Copy target spell you just played. The copy deals 1 less damage or gives 1 less buff.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_shadow_puppet_150",
+    "name": "Shadow Puppet",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create a 1/1 copy of target enemy creature (no abilities) under your control.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_creeping_darkness_151",
+    "name": "Creeping Darkness",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target enemy creature gets -1 attack this turn. Create a 1/1 Shadow token.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_dusk_veil_152",
+    "name": "Dusk Veil",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature cannot be targeted by spells this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_shadow_army_153",
+    "name": "Shadow Army",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create 1/1 Shadow copies of up to 2 friendly creatures (no abilities). Destroy them at end of turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_eclipse_154",
+    "name": "Eclipse",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All enemy creatures get -1 attack this turn. Create a 1/1 Shadow token for each enemy creature.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_copycat_155",
+    "name": "Copycat",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create a 1/1 copy of target enemy creature (no abilities) under your control.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_mimic_form_156",
+    "name": "Mimic Form",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When DM plays a creature, create a 1/1 copy of it under your control.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_steal_spell_157",
+    "name": "Steal Spell",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When DM casts a spell, copy it. You choose the new targets.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_absorb_identity_158",
+    "name": "Absorb Identity",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target friendly creature becomes a copy of target enemy creature. Same stats, same abilities.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_doppelganger_159",
+    "name": "Doppelganger",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create a copy of target enemy creature with full stats and abilities. Destroy it at end of turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_impostor_160",
+    "name": "Impostor",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create a copy of target enemy creature with cost 3 or less. Full abilities.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_turncoat_161",
+    "name": "Turncoat",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When an enemy creature attacks, create a 1/1 copy of it that blocks the attack.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_adaptive_clone_162",
+    "name": "Adaptive Clone",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create a copy of target creature that just died this turn under your control. Half stats, full abilities.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_mirror_match_163",
+    "name": "Mirror Match",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When DM plays a creature with cost 4+, create a copy of it under your control with half stats.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_identity_theft_164",
+    "name": "Identity Theft",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Take control of target enemy creature until end of turn. It gains Haste.",
+    "keywords": [
+      "Haste"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_decoy_165",
+    "name": "Decoy",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create a 0/1 Phantasm token with Taunt. When it takes any damage, destroy it.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_false_army_166",
+    "name": "False Army",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create three 0/1 Phantasm tokens with Taunt. When they take any damage, destroy them.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_illusory_giant_167",
+    "name": "Illusory Giant",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 5,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Phantasm. When this creature takes any damage, destroy it.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_phantom_threat_168",
+    "name": "Phantom Threat",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When DM declares an attack on a friendly creature, redirect it to a 0/1 Phantasm token that is destroyed on hit.",
+    "keywords": [
+      "Reaction",
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_veil_of_illusions_169",
+    "name": "Veil of Illusions",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature would take lethal damage, replace it with a 0/1 Phantasm token. Return the original to your hand.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_bait_and_switch_170",
+    "name": "Bait and Switch",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create a 0/1 Phantasm token with Taunt. Return target friendly creature to its owner's hand.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_phantasmal_armor_171",
+    "name": "Phantasmal Armor",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains +3 health. If this creature is targeted by a spell, remove the bonus instead.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_frightful_presence_172",
+    "name": "Frightful Presence",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 4,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Phantasm. Taunt. When this creature takes any damage, destroy it.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_smoke_and_mirrors_173",
+    "name": "Smoke and Mirrors",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Negate target spell. Create a 0/1 Phantasm token.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_mass_hallucination_174",
+    "name": "Mass Hallucination",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All enemy creatures attack random targets this turn instead of chosen targets.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_lucid_copy_175",
+    "name": "Lucid Copy",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create a copy of any creature in any graveyard with full stats and abilities.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_dream_walk_176",
+    "name": "Dream Walk",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature would die, create a copy of it with 1 health. It enters play at start of your next turn.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_nightmare_177",
+    "name": "Nightmare",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create a copy of the strongest creature on the DM's board. It has Haste. Destroy it at end of turn.",
+    "keywords": [
+      "Haste"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_sleeper_agent_178",
+    "name": "Sleeper Agent",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Look at the top 5 cards of the DM's deck. Create a copy of a creature found there with half stats.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_waking_dream_179",
+    "name": "Waking Dream",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 6,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create copies of up to 2 friendly creatures with full stats and abilities. Destroy them at end of your next turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_dream_eater_180",
+    "name": "Dream Eater",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When DM plays a creature, create a copy of it under your control. Destroy whichever copy has less health at end of turn.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_recurring_nightmare_181",
+    "name": "Recurring Nightmare",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. At start of your turn, create a 1/1 copy of a random creature in any graveyard (no abilities).",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_shared_dream_182",
+    "name": "Shared Dream",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target ally draws a card. Create a copy of a creature in that ally's hand with half stats. Destroy it at end of turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_dreamscape_183",
+    "name": "Dreamscape",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 7,
+    "attack": 0,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. All copies and illusions you create gain +1/+1 and don't expire at end of turn.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_rewrite_reality_184",
+    "name": "Rewrite Reality",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Legendary",
+    "manaCost": 7,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target friendly creature becomes an exact copy of any creature on the board. Permanent. It retains all equipment.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_redirect_185",
+    "name": "Redirect",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Change target of a single-target spell.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_warding_circle_186",
+    "name": "Warding Circle",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Starter",
+    "cardType": "Enchantment",
+    "rarity": "Starter",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. Up to 2 creatures can't be targeted by enemy spells.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_foresight_187",
+    "name": "Foresight",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Look at the top 3 cards of the DM's deck. Draw a card.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_mind_ward_188",
+    "name": "Mind Ward",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature cannot be targeted by spells until end of turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_premonition_189",
+    "name": "Premonition",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature would take damage, reduce it by 2.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_clarity_190",
+    "name": "Clarity",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Draw a card. Look at the top card of the DM's deck.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_mystic_barrier_191",
+    "name": "Mystic Barrier",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Give all friendly creatures Shield 1.",
+    "keywords": [
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_sixth_sense_192",
+    "name": "Sixth Sense",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Negate target spell that targets a creature.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_calm_mind_193",
+    "name": "Calm Mind",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Remove all negative effects from target creature.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_aura_reading_194",
+    "name": "Aura Reading",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Look at the DM's hand.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_forewarn_195",
+    "name": "Forewarn",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Negate target spell. Look at the top 2 cards of the DM's deck.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_prescience_196",
+    "name": "Prescience",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Until your next turn, all friendly creatures take 1 less damage from all sources.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_dark_ward_197",
+    "name": "Dark Ward",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Negate target spell. Lose 2 player HP.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_demonic_pact_198",
+    "name": "Demonic Pact",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Negate target spell. Discard a card. Draw 2 cards.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_infernal_shield_199",
+    "name": "Infernal Shield",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Target creature takes no damage from this attack. Lose 1 player HP.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_hellfire_counter_200",
+    "name": "Hellfire Counter",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Negate target spell. Deal 3 damage to the caster. Lose 2 player HP.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_soul_bargain_201",
+    "name": "Soul Bargain",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Sacrifice a creature. Reaction: Negate target spell.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_blood_seal_202",
+    "name": "Blood Seal",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Negate target creature's ability. That creature gets -2/-2 permanently. Lose 1 player HP.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_forbidden_knowledge_203",
+    "name": "Forbidden Knowledge",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When DM draws cards, look at them. Choose one and discard it. Lose 2 player HP.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_fiends_embrace_204",
+    "name": "Fiend's Embrace",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature cannot be destroyed until your next turn. At your next turn, lose player HP equal to the creature's mana cost.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_abyssal_banishment_205",
+    "name": "Abyssal Banishment",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When DM plays a creature, exile it. Lose player HP equal to its mana cost.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_binding_contract_206",
+    "name": "Binding Contract",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 0,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. Once per DM turn, you may negate a spell by losing 3 player HP.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_blessed_ward_207",
+    "name": "Blessed Ward",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Reduce damage to target creature by 3.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_sanctify_208",
+    "name": "Sanctify",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature cannot be targeted by DM spells until your next turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_holy_ground_209",
+    "name": "Holy Ground",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. All friendly creatures take 1 less damage from all sources.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_sacred_shield_210",
+    "name": "Sacred Shield",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Target creature gains Shield 4.",
+    "keywords": [
+      "Reaction",
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_divine_intervention_211",
+    "name": "Divine Intervention",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature would die, it survives with 1 health instead. It gains Shield 2.",
+    "keywords": [
+      "Reaction",
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_consecrate_212",
+    "name": "Consecrate",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When DM plays a persistent or tower, return it to the DM's hand.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_hallowed_circle_213",
+    "name": "Hallowed Circle",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 0,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. Reaction: Once per DM turn, reduce damage to player HP by 3.",
+    "keywords": [
+      "Persistent",
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_banishing_light_214",
+    "name": "Banishing Light",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When DM plays a creature with cost 3 or less, return it to the DM's hand.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_absolution_215",
+    "name": "Absolution",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Restore 4 player HP. All friendly creatures gain Shield 1.",
+    "keywords": [
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_divine_rejection_216",
+    "name": "Divine Rejection",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Negate target spell. The DM loses mana equal to that spell's cost.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_smite_217",
+    "name": "Smite",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When an enemy creature attacks, destroy it if its attack is 4 or less.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_heavenly_aegis_218",
+    "name": "Heavenly Aegis",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 6,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains \"cannot be destroyed\" until your next turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_wrath_219",
+    "name": "Wrath",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 7,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When player HP takes damage, deal that much damage to all enemy creatures.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_sacred_seal_220",
+    "name": "Sacred Seal",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 6,
+    "attack": 0,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. The DM's spells cost 1 more to play.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_judgment_221",
+    "name": "Judgment",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 6,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When DM plays a creature with cost 5+, deal 5 damage to it.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_radiant_shield_222",
+    "name": "Radiant Shield",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Negate all damage to player HP this attack. Deal 2 damage to the attacker.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_inviolable_223",
+    "name": "Inviolable",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Target creature cannot be targeted or damaged by anything until your next turn.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_divine_authority_224",
+    "name": "Divine Authority",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 7,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. Once per DM turn, you may negate a creature's ability without paying mana.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_covenant_225",
+    "name": "Covenant",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 6,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly persistent or tower would be destroyed, negate the destruction. Lose 2 player HP.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_eldritch_seal_226",
+    "name": "Eldritch Seal",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Legendary",
+    "manaCost": 9,
+    "attack": 0,
+    "health": 6,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. Reaction: Exile target creature, persistent, or tower. Exile Eldritch Seal. Can only be used once.",
+    "keywords": [
+      "Persistent",
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_outer_gate_227",
+    "name": "Outer Gate",
+    "cardClass": "Wizard",
+    "archetype": "Abjurer",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Legendary",
+    "manaCost": 8,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: At the start of the DM's turn, the DM cannot untap their mana this turn. Exile this card.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_figment_228",
+    "name": "Figment",
+    "cardClass": "Wizard",
+    "archetype": "Illusionist",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly illusion or copy is destroyed, create a 1/1 copy of it.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "wiz_lightning_rod_229",
+    "name": "Lightning Rod",
+    "cardClass": "Wizard",
+    "archetype": "Enchanter",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Taunt and \"deal 1 damage to each creature that attacks this\" this turn.",
+    "keywords": [
+      "Taunt"
+    ],
     "flavorText": ""
   }
 ]

@@ -30,7 +30,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -64,7 +66,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Trample.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -115,7 +119,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Give target creature +1/+0 and Haste until end of turn.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -200,7 +206,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Taunt. When Bone Pile dies, summon a 1/1 Skeleton token.",
-    "keywords": ["Taunt"],
+    "keywords": [
+      "Taunt"
+    ],
     "flavorText": ""
   },
   {
@@ -268,7 +276,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -387,7 +397,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Summon two 1/1 Goblin tokens with Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -404,7 +416,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Equip to a creature. It gets +1/+0 and Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -455,7 +469,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste. When Frenzy Berserker kills a creature, it may attack again.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -506,7 +522,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. All friendly creatures get +1/+0.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -523,7 +541,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste. When Ambush Squad enters the field, summon a 2/1 Rogue token with Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -557,7 +577,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Equip to a creature. It gets +2/+0 and First Strike.",
-    "keywords": ["First Strike"],
+    "keywords": [
+      "First Strike"
+    ],
     "flavorText": ""
   },
   {
@@ -574,7 +596,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste. When Stampede Leader attacks, all other friendly creatures get +1/+0 and Haste until end of turn.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -608,7 +632,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. Whenever you summon a creature, all friendly creatures get +1/+0 until end of turn.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -625,7 +651,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste. When Blitz Captain enters the field, summon two 1/1 Soldier tokens with Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -659,7 +687,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "All friendly creatures gain +2/+0 and Trample until end of turn. Draw a card for each friendly creature.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -676,7 +706,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Summon five 1/1 Goblin tokens with Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -693,7 +725,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste. Trample. When Warlord Krazz enters the field, give all other friendly creatures +2/+0 and Haste.",
-    "keywords": ["Haste", "Trample"],
+    "keywords": [
+      "Haste",
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -710,7 +745,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Flying. Haste. When Phoenix of the Swarm dies, summon three 2/1 Flame tokens with Haste.",
-    "keywords": ["Flying", "Haste"],
+    "keywords": [
+      "Flying",
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -727,7 +765,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. At the start of your turn, summon a 2/1 Berserker token with Haste. All friendly creatures get +1/+0.",
-    "keywords": ["Persistent", "Haste"],
+    "keywords": [
+      "Persistent",
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -778,7 +819,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -795,7 +838,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -812,7 +857,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -829,7 +876,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -863,7 +912,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Trample.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -948,7 +999,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Deathtouch.",
-    "keywords": ["Deathtouch"],
+    "keywords": [
+      "Deathtouch"
+    ],
     "flavorText": ""
   },
   {
@@ -965,7 +1018,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Trample.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -999,7 +1054,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Equip to a creature. It gets +0/+3 and Taunt.",
-    "keywords": ["Taunt"],
+    "keywords": [
+      "Taunt"
+    ],
     "flavorText": ""
   },
   {
@@ -1016,7 +1073,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Trample. When Alpha Predator kills a creature, it gets +2/+2 permanently.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -1033,7 +1092,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Trample. When Thunderfoot Behemoth enters the field, deal 2 damage to all enemy creatures.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -1084,7 +1145,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Give target creature +3/+3 and Trample until end of turn. If it has 5 or more attack, it also gains Haste.",
-    "keywords": ["Trample", "Haste"],
+    "keywords": [
+      "Trample",
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -1101,7 +1165,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. Your creatures with 5 or more attack get +1/+1.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1118,7 +1184,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Equip to a creature. It gets +3/+1 and Trample.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -1152,7 +1220,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Trample. When Titan of the Deep enters the field, deal 3 damage to all other creatures.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -1169,7 +1239,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Trample. Costs 1 less for each damage dealt to enemy creatures this turn.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -1186,7 +1258,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Give target creature +4/+4, Trample, and Haste until end of turn. It must attack this turn.",
-    "keywords": ["Trample", "Haste"],
+    "keywords": [
+      "Trample",
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -1220,7 +1295,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Equip to a creature. It gets +5/+2 and Trample. Equipped creature can't have Haste.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -1237,7 +1314,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Trample. When Living Earthquake attacks, deal 2 damage to all other creatures.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -1254,7 +1333,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. Whenever a friendly creature with 5 or more attack kills a creature, draw two cards.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1271,7 +1352,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Trample. Taunt. When King of Beasts enters the field, deal 5 damage to all enemy creatures.",
-    "keywords": ["Trample", "Taunt"],
+    "keywords": [
+      "Trample",
+      "Taunt"
+    ],
     "flavorText": ""
   },
   {
@@ -1288,7 +1372,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Trample. Costs 1 less for each friendly creature that died this game. When Worldbreaker enters the field, destroy all other creatures.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -1305,7 +1391,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. All friendly creatures get +3/+3 and Trample. At the start of your turn, summon a 5/5 Beast token with Trample.",
-    "keywords": ["Persistent", "Trample"],
+    "keywords": [
+      "Persistent",
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -1322,7 +1411,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Trample.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -1339,7 +1430,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Trample.",
-    "keywords": ["Trample"],
+    "keywords": [
+      "Trample"
+    ],
     "flavorText": ""
   },
   {
@@ -1373,7 +1466,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Deathtouch.",
-    "keywords": ["Deathtouch"],
+    "keywords": [
+      "Deathtouch"
+    ],
     "flavorText": ""
   },
   {
@@ -1509,7 +1604,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Equip to a creature. It gets +2/+0 and Deathtouch.",
-    "keywords": ["Deathtouch"],
+    "keywords": [
+      "Deathtouch"
+    ],
     "flavorText": ""
   },
   {
@@ -1543,7 +1640,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Deathtouch. When Death Knight kills a creature, gain +1/+1 permanently.",
-    "keywords": ["Deathtouch"],
+    "keywords": [
+      "Deathtouch"
+    ],
     "flavorText": ""
   },
   {
@@ -1594,7 +1693,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. Whenever a friendly creature dies, deal 1 damage to the enemy hero.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1645,7 +1746,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Taunt. When Abomination dies, deal 3 damage to all creatures.",
-    "keywords": ["Taunt"],
+    "keywords": [
+      "Taunt"
+    ],
     "flavorText": ""
   },
   {
@@ -1679,7 +1782,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. Whenever a friendly creature dies, draw a card and deal 2 damage to the enemy hero.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1696,7 +1801,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Deathtouch. When Reaper of Souls enters the field, destroy target creature with 3 or less attack. Summon a 1/1 Skeleton token for each creature that died this turn.",
-    "keywords": ["Deathtouch"],
+    "keywords": [
+      "Deathtouch"
+    ],
     "flavorText": ""
   },
   {
@@ -1747,7 +1854,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Equip to a creature. It gets +3/+3 and Deathtouch. When equipped creature dies, summon a 3/3 Wraith token with Deathtouch.",
-    "keywords": ["Deathtouch"],
+    "keywords": [
+      "Deathtouch"
+    ],
     "flavorText": ""
   },
   {
@@ -1764,7 +1873,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. At the start of your turn, return a random Undead creature from your discard pile to the field with 1 health.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1781,7 +1892,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Deathtouch. When Lich King Vorrath enters the field, summon three 2/2 Zombie tokens. Whenever a friendly Undead creature dies, give Lich King Vorrath +1/+1.",
-    "keywords": ["Deathtouch"],
+    "keywords": [
+      "Deathtouch"
+    ],
     "flavorText": ""
   },
   {
@@ -1798,7 +1911,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. Whenever a creature dies (friendly or enemy), summon a 2/2 Zombie token for you. At the start of your turn, all friendly Undead creatures get +1/+1.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1815,7 +1930,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Deathtouch. Flying. When Death Incarnate enters the field, destroy all enemy creatures with 4 or less attack. Summon a 1/1 Skeleton token for each creature destroyed.",
-    "keywords": ["Deathtouch", "Flying"],
+    "keywords": [
+      "Deathtouch",
+      "Flying"
+    ],
     "flavorText": ""
   },
   {
@@ -1866,7 +1984,2632 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Deathtouch.",
-    "keywords": ["Deathtouch"],
+    "keywords": [
+      "Deathtouch"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_scrapper_111",
+    "name": "Scrapper",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Starter",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_brawler_112",
+    "name": "Brawler",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_zap_113",
+    "name": "Zap",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Deal 2 damage.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_strike_114",
+    "name": "Strike",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Deal 4 damage.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_fireball_115",
+    "name": "Fireball",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Deal 6 damage.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_hatchling_116",
+    "name": "Hatchling",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_web_spinner_117",
+    "name": "Web Spinner",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_cave_spider_118",
+    "name": "Cave Spider",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_venomfang_119",
+    "name": "Venomfang",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 1,
+    "effectText": "Poison 1.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_brood_mother_120",
+    "name": "Brood Mother",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 4,
+    "attack": 2,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Creates a 1/1 Spider token at the start of your turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_tunnel_lurker_121",
+    "name": "Tunnel Lurker",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": 3,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_goblin_runt_122",
+    "name": "Goblin Runt",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, draw a card.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_goblin_scrounger_123",
+    "name": "Goblin Scrounger",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": 0,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, draw a card.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_goblin_raider_124",
+    "name": "Goblin Raider",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": 2,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_goblin_lobber_125",
+    "name": "Goblin Lobber",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, deal 1 damage.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_goblin_hoarder_126",
+    "name": "Goblin Hoarder",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": 0,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, draw a card.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_goblin_torchbearer_127",
+    "name": "Goblin Torchbearer",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, deal 1 damage.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_goblin_lookout_128",
+    "name": "Goblin Lookout",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, draw 2 cards.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_goblin_sapper_129",
+    "name": "Goblin Sapper",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, deal 2 damage.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_goblin_mob_130",
+    "name": "Goblin Mob",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, create a 1/1 Goblin token.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_goblin_chieftain_131",
+    "name": "Goblin Chieftain",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When another Goblin dies, draw a card.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_worker_ant_132",
+    "name": "Worker Ant",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "+1 health for each other Ant you control.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_scout_ant_133",
+    "name": "Scout Ant",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, look at top 2 cards of your deck. Keep one, discard the other.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_soldier_ant_134",
+    "name": "Soldier Ant",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "+1 attack for each other Ant you control.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_tunnel_ant_135",
+    "name": "Tunnel Ant",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": 0,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "At start of your turn, create a 1/1 Ant token.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_biting_ant_136",
+    "name": "Biting Ant",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": 2,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_swarm_carrier_137",
+    "name": "Swarm Carrier",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, create two 1/1 Ant tokens.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_harvester_ant_138",
+    "name": "Harvester Ant",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When another Ant dies, add 1 mana.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_fire_ant_139",
+    "name": "Fire Ant",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, deal 1 damage for each other Ant you control.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_ant_colony_140",
+    "name": "Ant Colony",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 0,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Create a 1/1 Ant token at start of your turn.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_ant_queen_141",
+    "name": "Ant Queen",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 2,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Other Ants get +1/+1.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_drone_wasp_142",
+    "name": "Drone Wasp",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Haste.",
+    "keywords": [
+      "Haste"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_stinger_143",
+    "name": "Stinger",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": 2,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_paper_wasp_144",
+    "name": "Paper Wasp",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Haste.",
+    "keywords": [
+      "Haste"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_mud_dauber_145",
+    "name": "Mud Dauber",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this attacks, deal 1 damage to another target.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_hornet_146",
+    "name": "Hornet",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 3,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_killer_wasp_147",
+    "name": "Killer Wasp",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 3,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Haste.",
+    "keywords": [
+      "Haste"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_tarantula_hawk_148",
+    "name": "Tarantula Hawk",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this kills a creature, draw a card.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_swarm_cloud_149",
+    "name": "Swarm Cloud",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, create two 1/1 Wasp tokens.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_yellowjacket_150",
+    "name": "Yellowjacket",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this attacks, all other Wasps get +1 attack this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_wasp_nest_151",
+    "name": "Wasp Nest",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Create a 1/1 Wasp token with Haste at start of your turn.",
+    "keywords": [
+      "Tower",
+      "Haste"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_acidic_ooze_152",
+    "name": "Acidic Ooze",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, create two 1/1 Ooze tokens.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_splitting_gel_153",
+    "name": "Splitting Gel",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": 3,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, create two 1/1 Ooze tokens.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_corrosive_ooze_154",
+    "name": "Corrosive Ooze",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this deals damage to a creature, destroy that creature's equipment.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_toxic_slime_155",
+    "name": "Toxic Slime",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, create two 1/1 Ooze tokens with Poison 1.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_gelatinous_mass_156",
+    "name": "Gelatinous Mass",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": 2,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this takes damage and survives, create a 1/1 Ooze token.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_absorbing_ooze_157",
+    "name": "Absorbing Ooze",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": 1,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When another Ooze dies, gain +1/+1 permanently.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_engulfing_ooze_158",
+    "name": "Engulfing Ooze",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": 3,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this kills a creature, gain health equal to that creature's health.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_mitosis_159",
+    "name": "Mitosis",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target Ooze splits into two copies with half stats (rounded up).",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_dissolve_160",
+    "name": "Dissolve",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Deal damage to target creature equal to the number of Ooze creatures you control.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_primordial_ooze_161",
+    "name": "Primordial Ooze",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": 4,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, create two copies with half stats. Those copies also split on death.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_locust_swarm_162",
+    "name": "Locust Swarm",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Legendary",
+    "manaCost": 6,
+    "attack": 4,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this attacks, destroy target land, equipment, persistent, or tower. Creates a 1/1 Locust token for each card destroyed this way.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_plague_of_locusts_163",
+    "name": "Plague of Locusts",
+    "cardClass": "DPS",
+    "archetype": "Swarm",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Legendary",
+    "manaCost": 5,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Destroy up to 3 target lands, equipment, persistents, or towers. For each destroyed, create a 1/1 Locust token.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_ogre_whelp_164",
+    "name": "Ogre Whelp",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_ogre_thug_165",
+    "name": "Ogre Thug",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": 3,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_ogre_crusher_166",
+    "name": "Ogre Crusher",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 4,
+    "attack": 4,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_ogre_mauler_167",
+    "name": "Ogre Mauler",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 4,
+    "attack": 5,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_ogre_warlord_168",
+    "name": "Ogre Warlord",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 5,
+    "attack": 6,
+    "health": 6,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_ogre_chieftain_169",
+    "name": "Ogre Chieftain",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 6,
+    "attack": 6,
+    "health": 6,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "+1 attack per friendly creature that costs less.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_cave_tyrant_170",
+    "name": "Cave Tyrant",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 7,
+    "attack": 6,
+    "health": 6,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "+1/+1 per two creatures it kills (permanent).",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_bear_cub_171",
+    "name": "Bear Cub",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_black_bear_172",
+    "name": "Black Bear",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_cave_bear_173",
+    "name": "Cave Bear",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": 3,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_grizzly_174",
+    "name": "Grizzly",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 4,
+    "attack": 3,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_honey_bear_175",
+    "name": "Honey Bear",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Restore 2 player HP when played.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_territorial_bear_176",
+    "name": "Territorial Bear",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Taunt.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_mauling_bear_177",
+    "name": "Mauling Bear",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 4,
+    "attack": 4,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Trample.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_mother_bear_178",
+    "name": "Mother Bear",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 4,
+    "attack": 3,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When another Bear dies, +2 attack until end of turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_hibernating_bear_179",
+    "name": "Hibernating Bear",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 4,
+    "attack": 0,
+    "health": 6,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Gains +4 attack on your turn only.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_alpha_bear_180",
+    "name": "Alpha Bear",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 5,
+    "attack": 4,
+    "health": 6,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Other Bears get +1 health.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_clay_golem_181",
+    "name": "Clay Golem",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_stone_golem_182",
+    "name": "Stone Golem",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 3,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_iron_golem_183",
+    "name": "Iron Golem",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 5,
+    "attack": 4,
+    "health": 6,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_obsidian_golem_184",
+    "name": "Obsidian Golem",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 4,
+    "health": 3,
+    "shieldValue": 3,
+    "poisonValue": 0,
+    "effectText": "Shield 3.",
+    "keywords": [
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_granite_sentinel_185",
+    "name": "Granite Sentinel",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 1,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Taunt.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_magma_golem_186",
+    "name": "Magma Golem",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 5,
+    "attack": 5,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Trample.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_mending_golem_187",
+    "name": "Mending Golem",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 3,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Restore 2 health to itself at start of your turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_runic_golem_188",
+    "name": "Runic Golem",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 5,
+    "attack": 3,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Cannot be targeted by spells.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_siege_golem_189",
+    "name": "Siege Golem",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 6,
+    "attack": 5,
+    "health": 6,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Deals double damage to Towers and Persistents.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_colossus_190",
+    "name": "Colossus",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 7,
+    "attack": 7,
+    "health": 7,
+    "shieldValue": 4,
+    "poisonValue": 0,
+    "effectText": "Shield 4.",
+    "keywords": [
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_tunnel_wurm_191",
+    "name": "Tunnel Wurm",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 4,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_burrowing_wurm_192",
+    "name": "Burrowing Wurm",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 5,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Trample.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_sand_wurm_193",
+    "name": "Sand Wurm",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 5,
+    "attack": 5,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_rock_wurm_194",
+    "name": "Rock Wurm",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 5,
+    "attack": 4,
+    "health": 6,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_razormaw_wurm_195",
+    "name": "Razormaw Wurm",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 5,
+    "attack": 6,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Trample.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_ambush_wurm_196",
+    "name": "Ambush Wurm",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 4,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Haste.",
+    "keywords": [
+      "Haste"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_devouring_wurm_197",
+    "name": "Devouring Wurm",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 6,
+    "attack": 5,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this kills a creature, gain +2 health.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_tremor_wurm_198",
+    "name": "Tremor Wurm",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 6,
+    "attack": 4,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, deal 2 damage to all enemy creatures.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_great_wurm_199",
+    "name": "Great Wurm",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 7,
+    "attack": 7,
+    "health": 7,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Trample.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_elder_wurm_200",
+    "name": "Elder Wurm",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 8,
+    "attack": 8,
+    "health": 8,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Trample. When this attacks, deal 1 damage to all enemy creatures.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_titan_beetle_201",
+    "name": "Titan Beetle",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 6,
+    "attack": 7,
+    "health": 7,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Trample.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_leviathan_202",
+    "name": "Leviathan",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 7,
+    "attack": 8,
+    "health": 8,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_thunderjaw_203",
+    "name": "Thunderjaw",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 7,
+    "attack": 7,
+    "health": 6,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Trample. When played, deal 3 damage to all enemy creatures.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_behemoth_204",
+    "name": "Behemoth",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 8,
+    "attack": 9,
+    "health": 9,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Taunt.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_apex_predator_205",
+    "name": "Apex Predator",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 7,
+    "attack": 8,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "First Strike. Trample.",
+    "keywords": [
+      "First Strike",
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_colossal_crab_206",
+    "name": "Colossal Crab",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 6,
+    "attack": 4,
+    "health": 10,
+    "shieldValue": 3,
+    "poisonValue": 0,
+    "effectText": "Taunt. Shield 3.",
+    "keywords": [
+      "Taunt",
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_worldbreaker_207",
+    "name": "Worldbreaker",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 8,
+    "attack": 8,
+    "health": 7,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Trample. When this attacks, deal 2 damage to all enemy creatures.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_megafauna_208",
+    "name": "Megafauna",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 6,
+    "attack": 6,
+    "health": 8,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Cannot be destroyed by spells. Can only be killed by combat damage.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_rampage_209",
+    "name": "Rampage",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature with 5+ attack deals its attack damage to all enemy creatures.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_extinction_event_210",
+    "name": "Extinction Event",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 6,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Deal 5 damage to all creatures. Your creatures with 7+ health survive with 1 health instead.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_ancient_dragon_211",
+    "name": "Ancient Dragon",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Legendary",
+    "manaCost": 9,
+    "attack": 10,
+    "health": 10,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Trample. First Strike. When played, deal 5 damage to all enemy creatures.",
+    "keywords": [
+      "Trample",
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_dragons_fury_212",
+    "name": "Dragon's Fury",
+    "cardClass": "DPS",
+    "archetype": "Big",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Legendary",
+    "manaCost": 7,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Deal damage to all enemy creatures equal to your strongest creature's attack.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_skeleton_213",
+    "name": "Skeleton",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_shambler_214",
+    "name": "Shambler",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": 0,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_zombie_215",
+    "name": "Zombie",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_ghoul_216",
+    "name": "Ghoul",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_grave_wight_217",
+    "name": "Grave Wight",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "+1 attack per 3 creatures in graveyard.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_bone_colossus_218",
+    "name": "Bone Colossus",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 5,
+    "attack": 3,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "+1/+1 per 5 creatures in graveyard.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_shambling_corpse_219",
+    "name": "Shambling Corpse",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_crawling_dead_220",
+    "name": "Crawling Dead",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 1,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_rotting_zombie_221",
+    "name": "Rotting Zombie",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_plaguebearer_222",
+    "name": "Plaguebearer",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 1,
+    "effectText": "Poison 1.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_undying_servant_223",
+    "name": "Undying Servant",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, return it to your hand.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_bloated_zombie_224",
+    "name": "Bloated Zombie",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, deal 2 damage to all enemy creatures.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_relentless_dead_225",
+    "name": "Relentless Dead",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, return a random Zombie from graveyard to your hand.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_grave_shambler_226",
+    "name": "Grave Shambler",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 3,
+    "attack": 3,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_flesh_golem_227",
+    "name": "Flesh Golem",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 4,
+    "attack": 3,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When another Zombie dies, gain +1 health.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_zombie_horde_228",
+    "name": "Zombie Horde",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Common",
+    "manaCost": 4,
+    "attack": 2,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this attacks, create a 1/1 Zombie token.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_wisp_229",
+    "name": "Wisp",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, look at top 3 cards of DM's graveyard.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_specter_230",
+    "name": "Specter",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When this dies, exile a creature from DM's graveyard.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_haunting_shade_231",
+    "name": "Haunting Shade",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Cannot be targeted by creature attacks. Can only be killed by spells.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_wailing_ghost_232",
+    "name": "Wailing Ghost",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, target enemy creature gets -1 attack for 3 rounds.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_poltergeist_233",
+    "name": "Poltergeist",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, destroy target equipment on an enemy creature.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_phantom_234",
+    "name": "Phantom",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 0,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, take control of a creature cost 3 or less from DM's graveyard. When Phantom dies, exile both.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_banshee_235",
+    "name": "Banshee",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 1,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, deal 1 damage to all enemy creatures.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_wraith_236",
+    "name": "Wraith",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 3,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Cannot be targeted by creature attacks. Can only be killed by spells.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_possession_237",
+    "name": "Possession",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Take control of a creature cost 4 or less from DM's graveyard. Exile it at end of turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_revenant_238",
+    "name": "Revenant",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 5,
+    "attack": 0,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, take control of a creature cost 5 or less from DM's graveyard. When Revenant dies, exile both.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_vampire_thrall_239",
+    "name": "Vampire Thrall",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Lifelink.",
+    "keywords": [
+      "Lifelink"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_nightstalker_240",
+    "name": "Nightstalker",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 1,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Lifelink.",
+    "keywords": [
+      "Lifelink"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_vampire_rogue_241",
+    "name": "Vampire Rogue",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Lifelink. When this deals damage to DM HP, draw a card.",
+    "keywords": [
+      "Lifelink"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_blood_drinker_242",
+    "name": "Blood Drinker",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Lifelink.",
+    "keywords": [
+      "Lifelink"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_vampire_knight_243",
+    "name": "Vampire Knight",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 3,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Lifelink. First Strike.",
+    "keywords": [
+      "Lifelink",
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_sanguine_bat_244",
+    "name": "Sanguine Bat",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Lifelink.",
+    "keywords": [
+      "Lifelink"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_blood_frenzy_245",
+    "name": "Blood Frenzy",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature with Lifelink gets +3 attack this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_crimson_feast_246",
+    "name": "Crimson Feast",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All your creatures with Lifelink get +2 attack this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_vampire_lord_247",
+    "name": "Vampire Lord",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 3,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Lifelink. Other creatures with Lifelink get +1 attack.",
+    "keywords": [
+      "Lifelink"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_elder_vampire_248",
+    "name": "Elder Vampire",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 5,
+    "attack": 4,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Lifelink. When this deals damage, gain that much attack until end of turn.",
+    "keywords": [
+      "Lifelink"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_death_knight_squire_249",
+    "name": "Death Knight Squire",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Can hold 2 equipment.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_death_knight_vanguard_250",
+    "name": "Death Knight Vanguard",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": 3,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Can hold 2 equipment.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_death_knight_champion_251",
+    "name": "Death Knight Champion",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": 4,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Can hold 2 equipment. Equipment on this creature grants double its attack bonus.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_death_knight_commander_252",
+    "name": "Death Knight Commander",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 6,
+    "attack": 4,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Can hold 3 equipment.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_death_knight_rider_253",
+    "name": "Death Knight Rider",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": 3,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Can hold 2 equipment. Haste.",
+    "keywords": [
+      "Haste"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_death_knight_sentinel_254",
+    "name": "Death Knight Sentinel",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": 3,
+    "health": 6,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Can hold 2 equipment. Taunt.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_death_knight_executioner_255",
+    "name": "Death Knight Executioner",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": 4,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Can hold 2 equipment. First Strike.",
+    "keywords": [
+      "First Strike"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_death_knight_warlord_256",
+    "name": "Death Knight Warlord",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 7,
+    "attack": 5,
+    "health": 6,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Can hold 3 equipment. Other Death Knights can hold 1 additional equipment.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_rally_the_fallen_257",
+    "name": "Rally the Fallen",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All Death Knights get +2 attack this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_undying_oath_258",
+    "name": "Undying Oath",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target Death Knight gains: When this dies, its equipment returns to your hand instead of being destroyed.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_the_lich_king_259",
+    "name": "The Lich King",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Legendary",
+    "manaCost": 8,
+    "attack": 5,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When a creature dies anywhere, gain +1/+1. When this would die, you may exile 10 creatures from the graveyard to return it to play with 1 health instead.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "dps_command_undead_260",
+    "name": "Command Undead",
+    "cardClass": "DPS",
+    "archetype": "Undead",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Legendary",
+    "manaCost": 6,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Take control of all creatures in the DM's graveyard with cost 3 or less. Exile them at end of turn.",
+    "keywords": [],
     "flavorText": ""
   }
 ]
