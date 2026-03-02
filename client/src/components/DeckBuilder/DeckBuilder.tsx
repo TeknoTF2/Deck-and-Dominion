@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useGameStore } from '../../store/gameStore';
 import CardView from '../Card/CardView';
 import CardDetailModal from '../Card/CardDetailModal';
 import { CardDefinition, CardClass, CardType, Rarity, DECK_MIN_SIZE, DECK_MAX_SIZE, MAX_CARD_COPIES } from '@deck-and-dominion/shared';
 
+const CLASS_ARCHETYPES: Record<string, string[]> = {
+  Commander: ['Marshal', 'Tactician', 'Warden'],
+  DPS: ['Swarm', 'Big', 'Undead'],
+  Wizard: ['Enchanter', 'Illusionist', 'Abjurer'],
+  Sorcerer: ['Necromancer', 'Dark Ritualist', 'Hexer'],
+  Crafter: ['Blacksmith', 'Farmer', 'Alchemist'],
+};
+
 export default function DeckBuilder() {
   const { allCards, setView, cardsLoaded, loadCards } = useGameStore();
   const [selectedClass, setSelectedClass] = useState<CardClass>(CardClass.Commander);
+  const [selectedArchetype, setSelectedArchetype] = useState<string>('Marshal');
   const [filterRarity, setFilterRarity] = useState<string>('all');
   const [filterType, setFilterType] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -17,6 +26,8 @@ export default function DeckBuilder() {
   useEffect(() => {
     if (!cardsLoaded) loadCards();
   }, []);
+
+  const archetypes = CLASS_ARCHETYPES[selectedClass] || [];
 
   const classCards = allCards.filter(c => c.cardClass === selectedClass || c.cardClass === CardClass.Neutral);
 
@@ -50,11 +61,16 @@ export default function DeckBuilder() {
   };
 
   const loadStarterDeck = () => {
+    // Starter deck = Shared staple cards + selected archetype's starter cards
     const starterCards = allCards
-      .filter(c => c.rarity === Rarity.Starter && (c.cardClass === selectedClass || c.cardClass === CardClass.Neutral))
+      .filter(c =>
+        c.rarity === Rarity.Starter &&
+        (c.cardClass === selectedClass || c.cardClass === CardClass.Neutral) &&
+        (c.archetype === 'Shared' || c.archetype === selectedArchetype)
+      )
       .map(c => c.id);
     setDeckCards(starterCards);
-    setDeckName(`${selectedClass} Starter Deck`);
+    setDeckName(`${selectedClass} ${selectedArchetype} Starter`);
   };
 
   const manaCurve = deckCardDefs.reduce((acc, c) => {
@@ -83,6 +99,12 @@ export default function DeckBuilder() {
     } catch (err) {
       alert('Failed to save deck');
     }
+  };
+
+  const handleClassChange = (cls: CardClass) => {
+    setSelectedClass(cls);
+    setSelectedArchetype(CLASS_ARCHETYPES[cls]?.[0] || '');
+    setDeckCards([]);
   };
 
   return (
@@ -120,7 +142,7 @@ export default function DeckBuilder() {
         <div style={{ flex: 2, display: 'flex', flexDirection: 'column', borderRight: '1px solid rgba(255,255,255,0.1)' }}>
           {/* Filters */}
           <div style={{ padding: '8px 12px', display: 'flex', gap: '8px', flexWrap: 'wrap', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-            <select value={selectedClass} onChange={(e) => { setSelectedClass(e.target.value as CardClass); setDeckCards([]); }}>
+            <select value={selectedClass} onChange={(e) => handleClassChange(e.target.value as CardClass)}>
               {Object.values(CardClass).filter(c => c !== 'Neutral').map(cls => (
                 <option key={cls} value={cls}>{cls}</option>
               ))}
@@ -236,7 +258,32 @@ export default function DeckBuilder() {
             Deck ({deckCards.length} cards)
           </h3>
 
-          {/* Starter Deck Button */}
+          {/* Archetype Starter Deck Selector */}
+          <div style={{
+            display: 'flex',
+            gap: '4px',
+            marginBottom: '8px',
+          }}>
+            {archetypes.map(arch => (
+              <button
+                key={arch}
+                onClick={() => setSelectedArchetype(arch)}
+                style={{
+                  flex: 1,
+                  padding: '4px 2px',
+                  fontSize: '10px',
+                  background: selectedArchetype === arch ? '#8d6e63' : 'rgba(255,255,255,0.05)',
+                  color: selectedArchetype === arch ? '#fff' : '#aaa',
+                  border: selectedArchetype === arch ? '1px solid #a1887f' : '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                }}
+              >
+                {arch}
+              </button>
+            ))}
+          </div>
+
           <button
             onClick={loadStarterDeck}
             style={{
@@ -247,7 +294,7 @@ export default function DeckBuilder() {
               padding: '6px 8px',
             }}
           >
-            Load {selectedClass} Starter Deck
+            Load {selectedArchetype} Starter Deck
           </button>
 
           {/* Mana Curve */}
