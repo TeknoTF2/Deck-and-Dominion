@@ -64,7 +64,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. While on board, all friendly creatures get +0/+1.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -132,7 +134,9 @@
     "shieldValue": 1,
     "poisonValue": 0,
     "effectText": "Give all friendly creatures Shield 1 this turn.",
-    "keywords": ["Shield"],
+    "keywords": [
+      "Shield"
+    ],
     "flavorText": ""
   },
   {
@@ -149,7 +153,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Equipped creature gets Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -234,7 +240,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Taunt. Must be attacked first.",
-    "keywords": ["Taunt"],
+    "keywords": [
+      "Taunt"
+    ],
     "flavorText": ""
   },
   {
@@ -302,7 +310,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "On play: all friendly creatures get Haste this turn.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -319,7 +329,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "First Strike.",
-    "keywords": ["First Strike"],
+    "keywords": [
+      "First Strike"
+    ],
     "flavorText": ""
   },
   {
@@ -370,7 +382,10 @@
     "shieldValue": 2,
     "poisonValue": 0,
     "effectText": "Taunt. Shield 2. All friendly creatures get +0/+1.",
-    "keywords": ["Taunt", "Shield"],
+    "keywords": [
+      "Taunt",
+      "Shield"
+    ],
     "flavorText": ""
   },
   {
@@ -421,7 +436,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. All friendly creatures get +1/+1.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -506,7 +523,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "All friendly creatures get +2/+2 while alive. Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -540,7 +559,10 @@
     "shieldValue": 2,
     "poisonValue": 0,
     "effectText": "Persistent. All friendly creatures get Shield 2.",
-    "keywords": ["Persistent", "Shield"],
+    "keywords": [
+      "Persistent",
+      "Shield"
+    ],
     "flavorText": ""
   },
   {
@@ -659,7 +681,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste. Can attack immediately.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -727,7 +751,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste. First Strike.",
-    "keywords": ["Haste", "First Strike"],
+    "keywords": [
+      "Haste",
+      "First Strike"
+    ],
     "flavorText": ""
   },
   {
@@ -761,7 +788,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste. Other friendly creatures gain Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -812,7 +841,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Taunt. Draws fire, protects the team.",
-    "keywords": ["Taunt"],
+    "keywords": [
+      "Taunt"
+    ],
     "flavorText": ""
   },
   {
@@ -846,7 +877,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "All friendly creatures gain Haste this turn.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -863,7 +896,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. At start of turn, choose: all creatures get +2/+0 or untap all creatures.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -914,7 +949,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Reorder the top 10 cards of any deck. Draw 3 cards. All friendly creatures get +2/+2 and Haste this turn.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -931,7 +968,9 @@
     "shieldValue": 2,
     "poisonValue": 0,
     "effectText": "Equipped creature gets Shield 2.",
-    "keywords": ["Shield"],
+    "keywords": [
+      "Shield"
+    ],
     "flavorText": ""
   },
   {
@@ -965,7 +1004,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Tower. Persistent. At end of turn, restore 1 party HP.",
-    "keywords": ["Tower", "Persistent"],
+    "keywords": [
+      "Tower",
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -982,7 +1024,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Taunt.",
-    "keywords": ["Taunt"],
+    "keywords": [
+      "Taunt"
+    ],
     "flavorText": ""
   },
   {
@@ -1016,7 +1060,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Tower. Persistent.",
-    "keywords": ["Tower", "Persistent"],
+    "keywords": [
+      "Tower",
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1033,7 +1080,10 @@
     "shieldValue": 1,
     "poisonValue": 0,
     "effectText": "Taunt. Shield 1.",
-    "keywords": ["Taunt", "Shield"],
+    "keywords": [
+      "Taunt",
+      "Shield"
+    ],
     "flavorText": ""
   },
   {
@@ -1050,7 +1100,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. At end of turn, restore 1 party HP.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1084,7 +1136,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Tower. Persistent. Deals 2 damage to a random attacker at start of DM turn.",
-    "keywords": ["Tower", "Persistent"],
+    "keywords": [
+      "Tower",
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1101,7 +1156,10 @@
     "shieldValue": 2,
     "poisonValue": 0,
     "effectText": "Taunt. Shield 2.",
-    "keywords": ["Taunt", "Shield"],
+    "keywords": [
+      "Taunt",
+      "Shield"
+    ],
     "flavorText": ""
   },
   {
@@ -1118,7 +1176,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Tower. Persistent. At end of turn, restore 2 party HP.",
-    "keywords": ["Tower", "Persistent"],
+    "keywords": [
+      "Tower",
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1135,7 +1196,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Equipped creature gets +0/+3 and Taunt.",
-    "keywords": ["Taunt"],
+    "keywords": [
+      "Taunt"
+    ],
     "flavorText": ""
   },
   {
@@ -1152,7 +1215,10 @@
     "shieldValue": 3,
     "poisonValue": 0,
     "effectText": "Give target creature Shield 3 and Taunt.",
-    "keywords": ["Shield", "Taunt"],
+    "keywords": [
+      "Shield",
+      "Taunt"
+    ],
     "flavorText": ""
   },
   {
@@ -1169,7 +1235,10 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Tower. Persistent. All friendly towers have +0/+2. At end of turn, restore 3 party HP.",
-    "keywords": ["Tower", "Persistent"],
+    "keywords": [
+      "Tower",
+      "Persistent"
+    ],
     "flavorText": ""
   },
   {
@@ -1186,7 +1255,9 @@
     "shieldValue": 3,
     "poisonValue": 0,
     "effectText": "All friendly creatures get Shield 3 permanently.",
-    "keywords": ["Shield"],
+    "keywords": [
+      "Shield"
+    ],
     "flavorText": ""
   },
   {
@@ -1220,7 +1291,11 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Tower. Persistent. Taunt. All damage to party HP is redirected to this creature. At end of turn, restore 4 HP to this creature.",
-    "keywords": ["Tower", "Persistent", "Taunt"],
+    "keywords": [
+      "Tower",
+      "Persistent",
+      "Taunt"
+    ],
     "flavorText": ""
   },
   {
@@ -1237,7 +1312,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -1271,7 +1348,11 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Tower. Persistent. Taunt.",
-    "keywords": ["Tower", "Persistent", "Taunt"],
+    "keywords": [
+      "Tower",
+      "Persistent",
+      "Taunt"
+    ],
     "flavorText": ""
   },
   {
@@ -1305,7 +1386,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "On play: all friendly creatures get +1/+1 permanently. Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -1322,7 +1405,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Haste. On play: deal 3 damage to all enemy creatures.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -1339,7 +1424,12 @@
     "shieldValue": 3,
     "poisonValue": 0,
     "effectText": "Tower. Persistent. Taunt. Shield 3. At end of turn, restore 2 party HP.",
-    "keywords": ["Tower", "Persistent", "Taunt", "Shield"],
+    "keywords": [
+      "Tower",
+      "Persistent",
+      "Taunt",
+      "Shield"
+    ],
     "flavorText": ""
   },
   {
@@ -1356,7 +1446,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Summon two 2/2 Soldier tokens with Haste.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -1373,7 +1465,11 @@
     "shieldValue": 1,
     "poisonValue": 0,
     "effectText": "Tower. Persistent. Shield 1.",
-    "keywords": ["Tower", "Persistent", "Shield"],
+    "keywords": [
+      "Tower",
+      "Persistent",
+      "Shield"
+    ],
     "flavorText": ""
   },
   {
@@ -1390,7 +1486,9 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Deal 2 damage to each enemy creature. Your creatures gain Haste this turn.",
-    "keywords": ["Haste"],
+    "keywords": [
+      "Haste"
+    ],
     "flavorText": ""
   },
   {
@@ -1407,7 +1505,1816 @@
     "shieldValue": 0,
     "poisonValue": 0,
     "effectText": "Persistent. All friendly creatures with Taunt get +0/+3. At end of turn, restore 2 party HP.",
-    "keywords": ["Persistent"],
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_basic_land_084",
+    "name": "Basic Land",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Starter",
+    "cardType": "Land",
+    "rarity": "Starter",
+    "manaCost": 0,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Mana generation.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_squire_085",
+    "name": "Squire",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Starter",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "None.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_bannerman_086",
+    "name": "Bannerman",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Up to 2 creatures get +1 attack.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_battle_cry_087",
+    "name": "Battle Cry",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Up to 2 creatures get +1 attack this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_hold_the_line_088",
+    "name": "Hold the Line",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Up to 2 creatures get +1 health this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_banner_089",
+    "name": "Banner",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Starter",
+    "cardType": "Enchantment",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. Up to 2 creatures get +1 attack.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_formation_090",
+    "name": "Formation",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Up to 3 creatures get +1/+1 this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_charge_order_091",
+    "name": "Charge Order",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures get +1 attack this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_forward_march_092",
+    "name": "Forward March",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures that attacked this turn may attack again. They get -1 attack for the second attack.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_vanguard_banner_093",
+    "name": "Vanguard Banner",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. All friendly creatures get +1 attack.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_war_drums_094",
+    "name": "War Drums",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gains Haste this turn. One other friendly creature gets +1 attack this turn.",
+    "keywords": [
+      "Haste"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_blood_frenzy_095",
+    "name": "Blood Frenzy",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures get +1 attack this turn. They take 1 damage at end of turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_exploit_weakness_096",
+    "name": "Exploit Weakness",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gets +3 attack this turn when attacking a creature with lower health than it.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_press_forward_097",
+    "name": "Press Forward",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures gain Trample this turn.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_rallying_charge_098",
+    "name": "Rallying Charge",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures get +1/+1 this turn. Draw a card.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_overwhelming_force_099",
+    "name": "Overwhelming Force",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 5,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures get +2 attack this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_defensive_formation_100",
+    "name": "Defensive Formation",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 1,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures gain Shield 1.",
+    "keywords": [
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_centurion_banner_101",
+    "name": "Centurion Banner",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. All friendly creatures get +1 health.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_brace_for_impact_102",
+    "name": "Brace for Impact",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: All friendly creatures take 1 less damage from the next source this turn.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_stalwart_order_103",
+    "name": "Stalwart Order",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature with Taunt gets +3/+3 this turn.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_fortify_104",
+    "name": "Fortify",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gets +3 health this turn and gains Taunt.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_phalanx_105",
+    "name": "Phalanx",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures gain Taunt and +1 health this turn.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_centurion_guard_106",
+    "name": "Centurion Guard",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 2,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Taunt. Other creatures with Taunt get +1 health.",
+    "keywords": [
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_stand_fast_107",
+    "name": "Stand Fast",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature would take lethal damage, it survives with 1 health instead.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_unbreakable_line_108",
+    "name": "Unbreakable Line",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 5,
+    "attack": null,
+    "health": null,
+    "shieldValue": 2,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures get +2 health and Shield 2 this turn.",
+    "keywords": [
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_inspiring_presence_109",
+    "name": "Inspiring Presence",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": 3,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures get +1/+1 while this is alive.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_battlefield_promotion_110",
+    "name": "Battlefield Promotion",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gets +2/+2 permanently.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_grand_banner_111",
+    "name": "Grand Banner",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Enchantment",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. 0/4. All friendly creatures get +1/+1.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_veterans_instinct_112",
+    "name": "Veteran's Instinct",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature kills an enemy creature, it gets +1/+1 permanently.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_tactical_retreat_113",
+    "name": "Tactical Retreat",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Return up to 2 friendly creatures to their owners' hands. All remaining friendly creatures get +2/+2 this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_commanders_authority_114",
+    "name": "Commander's Authority",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Choose one: All friendly creatures get +3 attack this turn, OR all friendly creatures get +3 health this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_decorated_hero_115",
+    "name": "Decorated Hero",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": 3,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Gets +1/+1 permanently each time another friendly creature dies.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_mobilize_116",
+    "name": "Mobilize",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures get +1/+1 this turn. Target player draws 2 cards.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_legend_of_the_field_117",
+    "name": "Legend of the Field",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Enchantment",
+    "rarity": "Rare",
+    "manaCost": 6,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. 0/5. Whenever a friendly creature attacks and kills an enemy creature, all other friendly creatures get +1 attack permanently.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_last_charge_118",
+    "name": "Last Charge",
+    "cardClass": "Commander",
+    "archetype": "Marshal",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Legendary",
+    "manaCost": 6,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures get +3/+3 and gain Trample this turn. At end of turn, all friendly creatures take 3 damage.",
+    "keywords": [
+      "Trample"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_scout_119",
+    "name": "Scout",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Starter",
+    "manaCost": 1,
+    "attack": 1,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When played, look at top card of DM's deck.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_sergeant_120",
+    "name": "Sergeant",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": 2,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "When another creature attacks, +1 attack this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_flank_121",
+    "name": "Flank",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Target creature gets +2 attack and may attack again.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_anticipate_122",
+    "name": "Anticipate",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Look at top 3 cards of DM's deck. Reorder them.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_scout_report_123",
+    "name": "Scout Report",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Look at the top 3 cards of any deck. Reorder them. Draw a card.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_lightning_raid_124",
+    "name": "Lightning Raid",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Up to 2 creatures that already attacked may attack again this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_seize_initiative_125",
+    "name": "Seize Initiative",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Choose a player. That player takes an extra turn after this one. They draw no card on that turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_tactical_advantage_126",
+    "name": "Tactical Advantage",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Look at the DM's hand. Draw a card.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_overrun_127",
+    "name": "Overrun",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures that killed a creature this turn may attack again.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_coordinated_strike_128",
+    "name": "Coordinated Strike",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Choose 2 creatures. They both get +1 attack and may attack a single target together, combining their damage.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_total_assault_129",
+    "name": "Total Assault",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly creatures get +1 attack this turn. All friendly creatures may attack again this turn. They take 1 damage at end of turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_fall_back_130",
+    "name": "Fall Back",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Return target friendly creature to its owner's hand. Draw a card.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_delay_tactics_131",
+    "name": "Delay Tactics",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: The DM's next card played this turn costs 1 additional mana.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_bottleneck_132",
+    "name": "Bottleneck",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. The DM may only attack with 2 creatures per turn.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_feigned_retreat_133",
+    "name": "Feigned Retreat",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Return up to 2 friendly creatures to their owners' hands. Draw a card for each.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_calculated_risk_134",
+    "name": "Calculated Risk",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When a friendly creature is attacked, look at the top card of your deck. If it costs 2 or less, play it for free.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_stalling_action_135",
+    "name": "Stalling Action",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: The DM's next creature played this turn costs 2 more.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_prepared_defense_136",
+    "name": "Prepared Defense",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Look at the DM's hand. All friendly creatures get +1 health this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_strategic_withdrawal_137",
+    "name": "Strategic Withdrawal",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Return all friendly creatures with 2 or less health to their owners' hands. Draw a card.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_last_stand_138",
+    "name": "Last Stand",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Until your next turn, all friendly creatures gain 'when this would die, deal damage equal to its attack to a random enemy creature'.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_perfect_information_139",
+    "name": "Perfect Information",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Look at the DM's hand and the top 5 cards of their deck. Reorder those 5 cards.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_master_plan_140",
+    "name": "Master Plan",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Each player draws 2 cards. Each player may play one card for free this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_ambush_protocol_141",
+    "name": "Ambush Protocol",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: When DM plays a creature, target friendly creature may immediately attack it.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_double_agent_142",
+    "name": "Double Agent",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Look at the DM's hand. Choose a card. The DM cannot play that card for 2 turns.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_war_room_143",
+    "name": "War Room",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Persistent. At start of each player's turn, that player looks at the top card of their deck and may put it on the bottom.",
+    "keywords": [
+      "Persistent"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_calculated_gambit_144",
+    "name": "Calculated Gambit",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Discard 2 cards. Draw 3 cards. Target player may play an additional card this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_deconstruct_strategy_145",
+    "name": "Deconstruct Strategy",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Look at the top 3 cards of DM's deck. Exile one. Return the rest in any order.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_supreme_tactician_146",
+    "name": "Supreme Tactician",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": 3,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "At start of each round, look at the top card of the DM's deck. You may choose to put it on the bottom.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_heaven_147",
+    "name": "Heaven",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Legendary",
+    "manaCost": 7,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Look at the top 10 cards of the DM's deck. Reorder them. Each player draws 2 cards and may play one card for free this turn.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_earth_148",
+    "name": "Earth",
+    "cardClass": "Commander",
+    "archetype": "Tactician",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Legendary",
+    "manaCost": 6,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Reaction: Until your next turn, you choose all targets for the DM's attacks and spells. The DM still chooses which cards to play.",
+    "keywords": [
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_barrier_149",
+    "name": "Barrier",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 5,
+    "poisonValue": 0,
+    "effectText": "Create 5 player shield.",
+    "keywords": [
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_shield_tower_150",
+    "name": "Shield Tower",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": 0,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Generate 1 player shield at start of turn.",
+    "keywords": [
+      "Tower",
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_restoration_151",
+    "name": "Restoration",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Starter",
+    "cardType": "Spell",
+    "rarity": "Starter",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Restore 5 player HP.",
+    "keywords": [],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_bastion_152",
+    "name": "Bastion",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Starter",
+    "cardType": "Creature",
+    "rarity": "Starter",
+    "manaCost": 3,
+    "attack": 0,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. When friendly creature would die, destroy this instead.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_arrow_tower_153",
+    "name": "Arrow Tower",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Deal 1 damage to a random enemy creature at start of your turn.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_fire_tower_154",
+    "name": "Fire Tower",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Deal 2 damage to target enemy creature at start of your turn.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_spike_trap_155",
+    "name": "Spike Trap",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 1,
+    "attack": 0,
+    "health": 1,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. When an enemy creature attacks, deal 1 damage to it.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_ballista_tower_156",
+    "name": "Ballista Tower",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 0,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Deal 3 damage to target enemy creature at start of your turn.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_catapult_157",
+    "name": "Catapult",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Deal 1 damage to all enemy creatures at start of your turn.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_thornwall_158",
+    "name": "Thornwall",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. When an enemy creature attacks any target, deal 1 damage to it.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_war_beacon_159",
+    "name": "War Beacon",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 0,
+    "health": 2,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. All friendly creatures get +1 attack.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_blade_barrier_160",
+    "name": "Blade Barrier",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Create a 0/2 Tower token. When an enemy creature attacks, deal 2 damage to it. Destroy this tower at end of your next turn.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_siege_platform_161",
+    "name": "Siege Platform",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 0,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Target friendly creature gets +2 attack at start of your turn.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_fortified_cannon_162",
+    "name": "Fortified Cannon",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 5,
+    "attack": 0,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Deal 4 damage to target enemy creature at start of your turn.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_guard_tower_163",
+    "name": "Guard Tower",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Generate 1 player shield at start of your turn.",
+    "keywords": [
+      "Tower",
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_reinforced_wall_164",
+    "name": "Reinforced Wall",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 0,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Taunt.",
+    "keywords": [
+      "Tower",
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_mending_shrine_165",
+    "name": "Mending Shrine",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Restore 1 health to all friendly creatures at start of your turn.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_warding_obelisk_166",
+    "name": "Warding Obelisk",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. All friendly towers gain Shield 1 at start of your turn.",
+    "keywords": [
+      "Tower",
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_haven_167",
+    "name": "Haven",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 2,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Friendly creatures with 2 or less health cannot be targeted by spells.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_restoration_font_168",
+    "name": "Restoration Font",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 0,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Restore 3 player HP at start of your turn.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_bulwark_169",
+    "name": "Bulwark",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Uncommon",
+    "manaCost": 3,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly towers gain +3 health.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_aegis_spire_170",
+    "name": "Aegis Spire",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 4,
+    "attack": 0,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. All friendly creatures gain Shield 1 at start of your turn.",
+    "keywords": [
+      "Tower",
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_eternal_bastion_171",
+    "name": "Eternal Bastion",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Uncommon",
+    "manaCost": 5,
+    "attack": 0,
+    "health": 6,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. When a friendly tower would be destroyed, restore it to full health instead. Can only trigger once per turn.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_grand_healing_tower_172",
+    "name": "Grand Healing Tower",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": 0,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Restore 3 player HP and 1 health to all friendly creatures at start of your turn.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_shield_generator_173",
+    "name": "Shield Generator",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": 0,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. All friendly creatures and towers gain Shield 1 at start of your turn. You may only control one Shield Generator.",
+    "keywords": [
+      "Tower",
+      "Shield"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_inner_sanctum_174",
+    "name": "Inner Sanctum",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": 0,
+    "health": 3,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Friendly creatures cannot take more than 3 damage from a single source.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_reconstruct_175",
+    "name": "Reconstruct",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Return target destroyed tower from the graveyard to the board with full health.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_garrison_176",
+    "name": "Garrison",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": 0,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. When a friendly creature would take lethal damage, this tower takes the damage instead.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_fortress_wall_177",
+    "name": "Fortress Wall",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 3,
+    "attack": 0,
+    "health": 8,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Taunt.",
+    "keywords": [
+      "Tower",
+      "Taunt"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_rejuvenation_wellspring_178",
+    "name": "Rejuvenation Wellspring",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 5,
+    "attack": 0,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. At start of your turn, restore 4 health to target friendly creature.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_architects_vision_179",
+    "name": "Architect's Vision",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly towers gain +3 health. Draw a card.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_sanctuary_gate_180",
+    "name": "Sanctuary Gate",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 4,
+    "attack": 0,
+    "health": 5,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. Reaction: When a friendly creature would die, return it to its owner's hand instead. Can trigger once per round.",
+    "keywords": [
+      "Tower",
+      "Reaction"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_unassailable_keep_181",
+    "name": "Unassailable Keep",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Creature",
+    "rarity": "Rare",
+    "manaCost": 7,
+    "attack": 0,
+    "health": 4,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "Tower. All friendly towers restore 2 health to themselves at start of your turn.",
+    "keywords": [
+      "Tower"
+    ],
+    "flavorText": ""
+  },
+  {
+    "id": "cmd_consecrated_ground_182",
+    "name": "Consecrated Ground",
+    "cardClass": "Commander",
+    "archetype": "Warden",
+    "set": "Core",
+    "cardType": "Spell",
+    "rarity": "Legendary",
+    "manaCost": 7,
+    "attack": null,
+    "health": null,
+    "shieldValue": 0,
+    "poisonValue": 0,
+    "effectText": "All friendly towers become indestructible until your next turn. Restore all friendly towers to full health.",
+    "keywords": [
+      "Tower"
+    ],
     "flavorText": ""
   }
 ]

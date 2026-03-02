@@ -42,6 +42,8 @@ export enum Keyword {
   Persistent = 'Persistent',
   Tower = 'Tower',
   Flying = 'Flying',
+  Shield = 'Shield',
+  Reaction = 'Reaction',
 }
 
 export enum Phase {
