@@ -18,6 +18,7 @@ export default function DeckBuilder() {
   const [selectedArchetype, setSelectedArchetype] = useState<string>('Marshal');
   const [filterRarity, setFilterRarity] = useState<string>('all');
   const [filterType, setFilterType] = useState<string>('all');
+  const [filterArchetype, setFilterArchetype] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [deckCards, setDeckCards] = useState<string[]>([]);
   const [deckName, setDeckName] = useState('My Deck');
@@ -37,9 +38,13 @@ export default function DeckBuilder() {
     ? classCards
     : classCards.filter(c => (collection[c.id] || 0) > 0);
 
+  // Compute unique archetypes from available cards for the filter dropdown
+  const availableArchetypes = [...new Set(availableCards.map(c => c.archetype).filter(Boolean))].sort();
+
   const filteredCards = availableCards.filter(c => {
     if (filterRarity !== 'all' && c.rarity !== filterRarity) return false;
     if (filterType !== 'all' && c.cardType !== filterType) return false;
+    if (filterArchetype !== 'all' && c.archetype !== filterArchetype) return false;
     if (searchQuery && !c.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
         !c.effectText.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     return true;
@@ -111,6 +116,7 @@ export default function DeckBuilder() {
   const handleClassChange = (cls: CardClass) => {
     setSelectedClass(cls);
     setSelectedArchetype(CLASS_ARCHETYPES[cls]?.[0] || '');
+    setFilterArchetype('all');
     setDeckCards([]);
   };
 
@@ -246,6 +252,12 @@ export default function DeckBuilder() {
               <option value="Enchantment">Enchantment</option>
               <option value="Consumable">Consumable</option>
               <option value="Trap">Trap</option>
+            </select>
+            <select value={filterArchetype} onChange={(e) => setFilterArchetype(e.target.value)}>
+              <option value="all">All Archetypes</option>
+              {availableArchetypes.map(arch => (
+                <option key={arch} value={arch}>{arch}</option>
+              ))}
             </select>
             <input
               type="text"

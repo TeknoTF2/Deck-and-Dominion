@@ -62,6 +62,7 @@ interface GameStore {
   setDMMode: (mode: boolean) => void;
   addToCollection: (cardId: string, qty?: number) => void;
   grantStarterCards: (cardClass: CardClass, archetype: string) => void;
+  grantClassStarters: (cardClass: CardClass) => void;
   clearServerError: () => void;
   exportPlayerState: () => string;
   importPlayerState: (json: string) => boolean;
@@ -158,9 +159,19 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   selectClass: (cardClass) => {
-    const { socket } = get();
+    const { socket, allCards } = get();
     if (socket) {
       socket.emit(SocketEvent.SelectClass, { cardClass });
+      // Auto-grant all starter cards for this class to collection
+      const starterCards = allCards.filter(c =>
+        c.rarity === Rarity.Starter &&
+        (c.cardClass === cardClass || c.cardClass === CardClass.Neutral)
+      );
+      const newCollection: Record<string, number> = { ...get().collection };
+      for (const card of starterCards) {
+        newCollection[card.id] = Math.max(newCollection[card.id] || 0, 1);
+      }
+      set({ collection: newCollection });
     }
   },
 
@@ -237,6 +248,19 @@ export const useGameStore = create<GameStore>((set, get) => ({
       c.rarity === Rarity.Starter &&
       (c.cardClass === cardClass || c.cardClass === CardClass.Neutral) &&
       (c.archetype === 'Shared' || c.archetype === archetype)
+    );
+    const newCollection: Record<string, number> = { ...get().collection };
+    for (const card of starterCards) {
+      newCollection[card.id] = Math.max(newCollection[card.id] || 0, 1);
+    }
+    set({ collection: newCollection });
+  },
+
+  grantClassStarters: (cardClass) => {
+    const { allCards } = get();
+    const starterCards = allCards.filter(c =>
+      c.rarity === Rarity.Starter &&
+      (c.cardClass === cardClass || c.cardClass === CardClass.Neutral)
     );
     const newCollection: Record<string, number> = { ...get().collection };
     for (const card of starterCards) {
