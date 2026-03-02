@@ -4,13 +4,20 @@ import CardView from '../Card/CardView';
 import CardDetailModal from '../Card/CardDetailModal';
 import CombatLog from './CombatLog';
 import GameHUD from '../GameHUD/GameHUD';
-import { CardInstance, Phase } from '@deck-and-dominion/shared';
+import ChatPanel from '../Chat/ChatPanel';
+import DMPanel from '../DMPanel/DMPanel';
+import ZoneBrowser from './ZoneBrowser';
+import GameOverOverlay from './GameOverOverlay';
+import { CardInstance, Phase, MAX_HAND_SIZE } from '@deck-and-dominion/shared';
 
 export default function GameBoard() {
-  const { gameState, playerId, isDM, selectedCard, selectCard, sendGameAction } = useGameStore();
+  const { gameState, playerId, isDM, selectedCard, selectCard, sendGameAction, gameOverResult } = useGameStore();
   const [detailCard, setDetailCard] = useState<CardInstance | null>(null);
   const [showLog, setShowLog] = useState(false);
+  const [showChat, setShowChat] = useState(false);
   const [attackMode, setAttackMode] = useState(false);
+  const [browsingZone, setBrowsingZone] = useState<'graveyard' | 'exile' | null>(null);
+  const [drawOrKeepCard, setDrawOrKeepCard] = useState<string | null>(null);
 
   if (!gameState) {
     return <div style={{ padding: '24px', textAlign: 'center' }}>Loading game...</div>;
@@ -55,6 +62,20 @@ export default function GameBoard() {
     sendGameAction({ type: 'mulligan', playerId });
   };
 
+  const handleDrawOrKeep = (choice: 'draw' | 'keep', discardInstanceId?: string) => {
+    sendGameAction({
+      type: 'draw_or_keep',
+      playerId,
+      choice,
+      discardInstanceId,
+    });
+    setDrawOrKeepCard(null);
+  };
+
+  // Check if player needs to make a draw-or-keep decision
+  const needsDrawOrKeep = isMyTurn && phase === Phase.Draw && currentPlayer &&
+    currentPlayer.hand.length >= MAX_HAND_SIZE && !currentPlayer.hasDrawn;
+
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       {/* Top: HUD with HP, Mana, Phase info */}
@@ -67,6 +88,13 @@ export default function GameBoard() {
 
       {/* Main Board Area */}
       <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
+        {/* DM Panel (left sidebar) */}
+        {isDM && (
+          <div style={{ width: '250px', overflow: 'hidden' }}>
+            <DMPanel gameState={gameState} />
+          </div>
+        )}
+
         {/* Game Board */}
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
           {/* DM Side */}
@@ -112,6 +140,42 @@ export default function GameBoard() {
             padding: '8px 12px',
             overflow: 'auto',
           }}>
+            {/* Draw or Keep prompt */}
+            {needsDrawOrKeep && (
+              <div style={{
+                padding: '12px',
+                background: 'rgba(79,195,247,0.1)',
+                border: '1px solid rgba(79,195,247,0.3)',
+                borderRadius: '8px',
+                textAlign: 'center',
+              }}>
+                <div style={{ color: '#4fc3f7', fontWeight: 'bold', marginBottom: '8px' }}>
+                  Hand is full ({currentPlayer.hand.length}/{MAX_HAND_SIZE})
+                </div>
+                <div style={{ color: '#a0a0a0', fontSize: '12px', marginBottom: '8px' }}>
+                  {drawOrKeepCard
+                    ? 'Click "Draw & Discard" to draw a new card and discard the selected one.'
+                    : 'Select a card from your hand to discard, or keep your current hand.'}
+                </div>
+                <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                  <button
+                    onClick={() => handleDrawOrKeep('keep')}
+                    style={{ padding: '6px 16px', background: '#333', borderRadius: '4px', cursor: 'pointer' }}
+                  >
+                    Keep Hand
+                  </button>
+                  {drawOrKeepCard && (
+                    <button
+                      onClick={() => handleDrawOrKeep('draw', drawOrKeepCard)}
+                      style={{ padding: '6px 16px', background: '#0f3460', borderRadius: '4px', cursor: 'pointer' }}
+                    >
+                      Draw & Discard
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
+
             {/* Player Creatures */}
             <div>
               <div style={{ fontSize: '11px', color: '#66bb6a', marginBottom: '4px', fontWeight: 'bold' }}>
@@ -155,7 +219,7 @@ export default function GameBoard() {
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
                 <span style={{ fontSize: '11px', color: '#a0a0a0', fontWeight: 'bold' }}>
-                  Your Hand ({currentPlayer.hand.length}/8)
+                  Your Hand ({currentPlayer.hand.length}/{MAX_HAND_SIZE})
                 </span>
                 <div style={{ display: 'flex', gap: '4px' }}>
                   {currentPlayer.mulligansLeft > 0 && gameState.turnNumber === 1 && (
@@ -170,11 +234,17 @@ export default function GameBoard() {
                   <div
                     key={card.instanceId}
                     onDoubleClick={() => handlePlayCard(card)}
-                    onClick={() => selectCard(card.instanceId === selectedCard ? null : card.instanceId)}
+                    onClick={() => {
+                      if (needsDrawOrKeep) {
+                        setDrawOrKeepCard(card.instanceId === drawOrKeepCard ? null : card.instanceId);
+                      } else {
+                        selectCard(card.instanceId === selectedCard ? null : card.instanceId);
+                      }
+                    }}
                   >
                     <CardView
                       card={card}
-                      selected={selectedCard === card.instanceId}
+                      selected={selectedCard === card.instanceId || drawOrKeepCard === card.instanceId}
                     />
                   </div>
                 ))}
@@ -183,9 +253,9 @@ export default function GameBoard() {
           )}
         </div>
 
-        {/* Right Sidebar - Combat Log */}
+        {/* Right Sidebar - Log & Chat */}
         <div style={{
-          width: showLog ? '280px' : '40px',
+          width: (showLog || showChat) ? '280px' : '40px',
           background: 'rgba(255,255,255,0.02)',
           borderLeft: '1px solid rgba(255,255,255,0.1)',
           transition: '0.3s ease',
@@ -193,20 +263,42 @@ export default function GameBoard() {
           display: 'flex',
           flexDirection: 'column',
         }}>
-          <button
-            onClick={() => setShowLog(!showLog)}
-            style={{
-              padding: '8px',
-              background: 'transparent',
-              color: '#a0a0a0',
-              fontSize: '12px',
-              borderRadius: 0,
-              borderBottom: '1px solid rgba(255,255,255,0.1)',
-            }}
-          >
-            {showLog ? 'Log <<' : '>>'}
-          </button>
+          <div style={{ display: 'flex' }}>
+            <button
+              onClick={() => { setShowLog(!showLog); setShowChat(false); }}
+              style={{
+                flex: 1,
+                padding: '6px',
+                background: showLog ? 'rgba(255,255,255,0.05)' : 'transparent',
+                color: showLog ? '#e0e0e0' : '#a0a0a0',
+                fontSize: '10px',
+                borderRadius: 0,
+                borderBottom: '1px solid rgba(255,255,255,0.1)',
+                cursor: 'pointer',
+              }}
+            >
+              {(showLog || showChat) ? 'Log' : '>>'}
+            </button>
+            {(showLog || showChat) && (
+              <button
+                onClick={() => { setShowChat(!showChat); setShowLog(false); }}
+                style={{
+                  flex: 1,
+                  padding: '6px',
+                  background: showChat ? 'rgba(255,255,255,0.05)' : 'transparent',
+                  color: showChat ? '#e0e0e0' : '#a0a0a0',
+                  fontSize: '10px',
+                  borderRadius: 0,
+                  borderBottom: '1px solid rgba(255,255,255,0.1)',
+                  cursor: 'pointer',
+                }}
+              >
+                Chat
+              </button>
+            )}
+          </div>
           {showLog && <CombatLog entries={gameState.combatLog} />}
+          {showChat && <ChatPanel />}
         </div>
       </div>
 
@@ -233,7 +325,37 @@ export default function GameBoard() {
             </span>
           )}
         </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          {/* Zone browsers */}
+          <button
+            onClick={() => setBrowsingZone('graveyard')}
+            style={{
+              padding: '4px 8px',
+              background: 'rgba(126,87,194,0.2)',
+              color: '#7e57c2',
+              fontSize: '10px',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              border: '1px solid rgba(126,87,194,0.3)',
+            }}
+          >
+            Graveyard ({gameState.graveyard.length})
+          </button>
+          <button
+            onClick={() => setBrowsingZone('exile')}
+            style={{
+              padding: '4px 8px',
+              background: 'rgba(255,152,0,0.2)',
+              color: '#ff9800',
+              fontSize: '10px',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              border: '1px solid rgba(255,152,0,0.3)',
+            }}
+          >
+            Exile ({gameState.exile.length})
+          </button>
+
           {isMyTurn && selectedCard && phase === Phase.Play && (
             <button
               onClick={() => {
@@ -277,10 +399,31 @@ export default function GameBoard() {
         </div>
       </div>
 
+      {/* Zone Browser Modal */}
+      {browsingZone === 'graveyard' && (
+        <ZoneBrowser
+          title="Graveyard"
+          cards={gameState.graveyard}
+          onClose={() => setBrowsingZone(null)}
+          onCardClick={(card) => setDetailCard(card)}
+        />
+      )}
+      {browsingZone === 'exile' && (
+        <ZoneBrowser
+          title="Exile"
+          cards={gameState.exile}
+          onClose={() => setBrowsingZone(null)}
+          onCardClick={(card) => setDetailCard(card)}
+        />
+      )}
+
       {/* Card Detail Modal */}
       {detailCard && (
         <CardDetailModal card={detailCard} onClose={() => setDetailCard(null)} />
       )}
+
+      {/* Game Over Overlay */}
+      <GameOverOverlay />
     </div>
   );
 }

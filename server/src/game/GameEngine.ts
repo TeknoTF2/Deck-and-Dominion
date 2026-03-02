@@ -17,7 +17,6 @@ const KEYWORD_MAP: Record<string, Keyword> = {
   'taunt': Keyword.Taunt,
   'persistent': Keyword.Persistent,
   'tower': Keyword.Tower,
-  'flying': Keyword.Flying,
 };
 
 export class GameEngine {
@@ -65,6 +64,7 @@ export class GameEngine {
       dmState: {
         hand: [],
         deck: dmDeckInstances,
+        landsPlayed: 0,
       },
       combatLog: [],
       activeEffects: [],
@@ -119,6 +119,7 @@ export class GameEngine {
       debuffs: [],
       tapped: false,
       canAttack: false,
+      attacksRemaining: 0,
       summonedThisTurn: true,
       poisonStacks: [],
       ownerId,
@@ -129,6 +130,9 @@ export class GameEngine {
   // --- Core Actions ---
 
   processAction(action: GameAction): { success: boolean; message: string } {
+    if (this.state.gameOver) {
+      return { success: false, message: 'Game is over' };
+    }
     switch (action.type) {
       case 'play_card':
         return this.playCard(action.playerId, action.cardInstanceId, action.targets);
@@ -142,6 +146,8 @@ export class GameEngine {
         return this.passTurn(action.playerId, action.nextPlayerId);
       case 'reaction':
         return this.playReaction(action.playerId, action.cardInstanceId, action.targets);
+      case 'draw_or_keep':
+        return this.drawOrKeep(action.playerId, action.choice, action.discardInstanceId);
       default:
         return { success: false, message: 'Unknown action type' };
     }
@@ -221,7 +227,14 @@ export class GameEngine {
       case CardType.Creature:
         card.zone = Zone.Board;
         card.summonedThisTurn = true;
-        card.canAttack = card.activeKeywords.includes(Keyword.Haste);
+        // Haste: may attack twice this turn
+        if (card.activeKeywords.includes(Keyword.Haste)) {
+          card.canAttack = true;
+          card.attacksRemaining = 2;
+        } else {
+          card.canAttack = false;
+          card.attacksRemaining = 0;
+        }
         this.state.board.playerCreatures.push(card);
         this.addLog('play', `${player.name} plays ${card.definition.name} (${card.currentAttack}/${card.currentHealth})`);
         break;
@@ -307,13 +320,20 @@ export class GameEngine {
     const attacker = this.findCreatureOnBoard(attackerInstanceId);
     if (!attacker) return { success: false, message: 'Attacker not found on board' };
     if (attacker.ownerId === 'dm') return { success: false, message: 'Cannot control DM creatures' };
-    if (!attacker.canAttack) return { success: false, message: 'This creature cannot attack' };
+    if (!attacker.canAttack || attacker.attacksRemaining <= 0) return { success: false, message: 'This creature cannot attack' };
     if (attacker.tapped) return { success: false, message: 'Creature is tapped' };
-    if (attacker.definition.cardType !== CardType.Creature) return { success: false, message: 'Only creatures can attack' };
+    // Creatures and Tokens can attack; Persistent/Tower/Land/Enchantment cannot
+    if (attacker.definition.cardType !== CardType.Creature && attacker.definition.cardType !== CardType.Token) {
+      return { success: false, message: 'Only creatures can attack' };
+    }
+    // Tower keyword means cannot attack
+    if (attacker.activeKeywords.includes(Keyword.Tower)) {
+      return { success: false, message: 'Towers cannot attack' };
+    }
 
-    // Check for taunt
+    // Check for taunt - taunt applies to any targetable card with Taunt
     const dmTaunters = this.state.board.dmCreatures.filter(c =>
-      c.activeKeywords.includes(Keyword.Taunt) && c.definition.cardType === CardType.Creature
+      c.activeKeywords.includes(Keyword.Taunt) && this.isTargetable(c)
     );
 
     if (targetDM && dmTaunters.length > 0) {
@@ -327,8 +347,12 @@ export class GameEngine {
       }
     }
 
-    attacker.tapped = true;
-    attacker.canAttack = false;
+    // Decrement attacks remaining; tap only when all attacks are used
+    attacker.attacksRemaining--;
+    if (attacker.attacksRemaining <= 0) {
+      attacker.tapped = true;
+      attacker.canAttack = false;
+    }
 
     // Fire on_attack triggers
     this.fireTriggers('on_attack', attacker);
@@ -339,9 +363,7 @@ export class GameEngine {
       this.state.dmHP = Math.max(0, this.state.dmHP - damage);
       this.addLog('damage', `${attacker.definition.name} attacks DM for ${damage} damage (DM HP: ${this.state.dmHP})`);
 
-      if (this.state.dmHP <= 0) {
-        this.addLog('system', 'DM HP reached 0! Party wins!');
-      }
+      this.checkGameOver();
     } else {
       // Attack creature
       const target = this.findCreatureOnBoard(targetInstanceId);
@@ -428,6 +450,7 @@ export class GameEngine {
           this.state.partyHP = Math.max(0, this.state.partyHP - excess);
           this.addLog('damage', `${source.definition.name} tramples for ${excess} damage to party HP`);
         }
+        this.checkGameOver();
       }
     }
 
@@ -1115,8 +1138,15 @@ export class GameEngine {
     if (this.state.phase === Phase.Draw) {
       const player = this.state.players[playerId];
       if (player && !player.hasDrawn) {
-        this.drawCard(playerId);
-        player.hasDrawn = true;
+        if (player.hand.length >= MAX_HAND_SIZE) {
+          // At max hand: player must use draw_or_keep action instead
+          // Auto-skip draw if they advance phase (they chose to keep)
+          player.hasDrawn = true;
+          this.addLog('system', `${player.name} keeps hand (at max size)`);
+        } else {
+          this.drawCard(playerId);
+          player.hasDrawn = true;
+        }
       }
     }
 
@@ -1134,13 +1164,46 @@ export class GameEngine {
           card.tapped = true;
         }
       }
+      // Generate mana from creatures that produce mana (tap them)
+      for (const card of this.state.board.playerCreatures) {
+        if (card.definition.cardType === CardType.Creature && card.ownerId === playerId && !card.tapped) {
+          const effect = card.definition.effectText.toLowerCase();
+          const manaMatch = effect.match(/tap:\s*generate\s+(\d+)\s+(?:(persistent|burst)\s+)?mana/);
+          if (manaMatch) {
+            const amount = parseInt(manaMatch[1]);
+            if (manaMatch[2] === 'persistent') {
+              this.state.manaPool.persistent += amount;
+            } else {
+              this.state.manaPool.burst += amount;
+            }
+            card.tapped = true;
+            this.addLog('mana', `${card.definition.name} generates ${amount} mana`);
+          }
+        }
+      }
+
+      // Fire start_of_turn triggers for player creatures
+      for (const creature of this.state.board.playerCreatures) {
+        if (creature.ownerId === playerId) {
+          this.fireTriggers('start_of_turn', creature);
+        }
+      }
     }
 
     if (this.state.phase === Phase.Attack) {
       // Enable attacks for creatures that can
       for (const creature of this.state.board.playerCreatures) {
-        if (creature.ownerId === playerId && !creature.summonedThisTurn) {
+        if (creature.ownerId === playerId && !creature.summonedThisTurn
+            && creature.definition.cardType === CardType.Creature
+            && !creature.activeKeywords.includes(Keyword.Tower)) {
           creature.canAttack = true;
+          creature.attacksRemaining = 1;
+        }
+        // Haste creatures already have attacksRemaining set when summoned
+        if (creature.ownerId === playerId && creature.summonedThisTurn
+            && creature.activeKeywords.includes(Keyword.Haste)) {
+          creature.canAttack = true;
+          // attacksRemaining already set to 2 on play
         }
       }
     }
@@ -1234,11 +1297,22 @@ export class GameEngine {
       }
     }
 
+    // Reset DM lands played for this turn
+    this.state.dmState.landsPlayed = 0;
+
     // Untap DM creatures
     for (const creature of this.state.board.dmCreatures) {
       creature.tapped = false;
       creature.canAttack = true;
+      creature.attacksRemaining = 1;
       creature.summonedThisTurn = false;
+    }
+
+    // Generate mana from DM lands
+    for (const card of this.state.board.dmCreatures) {
+      if (card.definition.cardType === CardType.Land && !card.tapped) {
+        card.tapped = true;
+      }
     }
 
     // Start of turn triggers for DM creatures
@@ -1247,22 +1321,37 @@ export class GameEngine {
     }
 
     // Auto-play DM cards (simplified AI - plays affordable cards)
-    const totalMana = this.state.manaPool.persistent; // DM uses separate mana in full impl
     let dmMana = numPlayers * 2 + this.state.turnNumber; // Scaling DM mana
+    let dmLandsThisTurn = 0;
 
     for (let i = this.state.dmState.hand.length - 1; i >= 0; i--) {
       const card = this.state.dmState.hand[i];
+
+      // DM lands limited to player count
+      if (card.definition.cardType === CardType.Land) {
+        if (dmLandsThisTurn >= numPlayers) continue;
+        this.state.dmState.hand.splice(i, 1);
+        card.zone = Zone.Board;
+        card.tapped = false;
+        this.state.board.dmCreatures.push(card);
+        dmLandsThisTurn++;
+        this.addLog('dm', `DM plays land: ${card.definition.name}`);
+        continue;
+      }
+
       if (card.definition.manaCost <= dmMana) {
         dmMana -= card.definition.manaCost;
         this.state.dmState.hand.splice(i, 1);
 
         if (card.definition.cardType === CardType.Creature) {
           card.zone = Zone.Board;
-          card.canAttack = false; // DM creatures can't attack the turn they're played
+          card.canAttack = false;
+          card.attacksRemaining = 0;
           this.state.board.dmCreatures.push(card);
           this.addLog('dm', `DM plays ${card.definition.name} (${card.currentAttack}/${card.currentHealth})`);
         } else {
           // DM spells resolve immediately
+          this.resolveSpellEffect(card, 'dm');
           card.zone = Zone.Graveyard;
           this.state.graveyard.push(card);
           this.addLog('dm', `DM casts ${card.definition.name}`);
@@ -1272,17 +1361,19 @@ export class GameEngine {
 
     // DM creatures attack
     for (const creature of this.state.board.dmCreatures) {
-      if (creature.canAttack && !creature.tapped && creature.definition.cardType === CardType.Creature) {
+      if (creature.canAttack && !creature.tapped && creature.attacksRemaining > 0
+          && (creature.definition.cardType === CardType.Creature || creature.definition.cardType === CardType.Token)
+          && !creature.activeKeywords.includes(Keyword.Tower)) {
         // DM creatures attack player creatures with taunt first, then party HP
         const playerTaunters = this.state.board.playerCreatures.filter(c =>
-          c.activeKeywords.includes(Keyword.Taunt) && c.definition.cardType === CardType.Creature
+          c.activeKeywords.includes(Keyword.Taunt) && this.isTargetable(c)
         );
 
         if (playerTaunters.length > 0) {
           this.resolveCombat(creature, playerTaunters[0]);
-        } else if (this.state.board.playerCreatures.some(c => c.definition.cardType === CardType.Creature)) {
+        } else if (this.state.board.playerCreatures.some(c => this.isTargetable(c))) {
           // Attack a random player creature
-          const targets = this.state.board.playerCreatures.filter(c => c.definition.cardType === CardType.Creature);
+          const targets = this.state.board.playerCreatures.filter(c => this.isTargetable(c));
           const target = targets[Math.floor(Math.random() * targets.length)];
           this.resolveCombat(creature, target);
         } else {
@@ -1292,13 +1383,11 @@ export class GameEngine {
           this.addLog('damage', `${creature.definition.name} attacks party for ${damage} damage (Party HP: ${this.state.partyHP})`);
         }
         creature.tapped = true;
+        creature.attacksRemaining = 0;
       }
     }
 
-    // Check win condition
-    if (this.state.partyHP <= 0) {
-      this.addLog('system', 'Party HP reached 0! DM wins!');
-    }
+    this.checkGameOver();
   }
 
   // --- Mulligan ---
@@ -1327,6 +1416,57 @@ export class GameEngine {
     this.addLog('system', `${player.name} mulligans (${player.mulligansLeft} remaining)`);
 
     return { success: true, message: `Mulliganed. ${player.mulligansLeft} mulligans remaining` };
+  }
+
+  // --- Draw or Keep (max hand size) ---
+
+  private drawOrKeep(playerId: string, choice: 'draw' | 'keep', discardInstanceId?: string): { success: boolean; message: string } {
+    const player = this.state.players[playerId];
+    if (!player) return { success: false, message: 'Player not found' };
+
+    if (this.state.phase !== Phase.Draw) {
+      return { success: false, message: 'Can only draw during Draw phase' };
+    }
+
+    if (player.hasDrawn) {
+      return { success: false, message: 'Already drawn this turn' };
+    }
+
+    if (choice === 'keep') {
+      player.hasDrawn = true;
+      this.addLog('system', `${player.name} keeps hand`);
+      return { success: true, message: 'Kept hand' };
+    }
+
+    // Draw: if at max hand, must specify a card to discard
+    if (player.hand.length >= MAX_HAND_SIZE) {
+      if (!discardInstanceId) {
+        return { success: false, message: 'Must choose a card to discard when drawing at max hand' };
+      }
+      // Draw first, then discard
+      if (player.deck.length === 0) {
+        return { success: false, message: 'No cards in deck' };
+      }
+      const drawn = player.deck.shift()!;
+      drawn.zone = Zone.Hand;
+      player.hand.push(drawn);
+      this.addLog('system', `${player.name} draws ${drawn.definition.name}`);
+
+      // Now discard the chosen card
+      const discardIdx = player.hand.findIndex(c => c.instanceId === discardInstanceId);
+      if (discardIdx === -1) {
+        return { success: false, message: 'Discard card not found in hand' };
+      }
+      const discarded = player.hand.splice(discardIdx, 1)[0];
+      discarded.zone = Zone.Graveyard;
+      this.state.graveyard.push(discarded);
+      this.addLog('system', `${player.name} discards ${discarded.definition.name}`);
+    } else {
+      this.drawCard(playerId);
+    }
+
+    player.hasDrawn = true;
+    return { success: true, message: 'Drew a card' };
   }
 
   // --- Reactions ---
@@ -1450,8 +1590,35 @@ export class GameEngine {
   }
 
   private dmEndBattle(winner: 'party' | 'dm'): { success: boolean; message: string } {
-    this.addLog('system', `DM ended battle. Winner: ${winner}`);
-    return { success: true, message: `Battle ended. ${winner} wins!` };
+    const msg = winner === 'party' ? 'Party wins the encounter!' : 'DM wins the encounter!';
+    this.state.gameOver = { winner, message: msg };
+    this.addLog('system', `DM ended battle. ${msg}`);
+    return { success: true, message: msg };
+  }
+
+  // --- Game Over Check ---
+
+  private checkGameOver(): void {
+    if (this.state.gameOver) return;
+    if (this.state.partyHP <= 0) {
+      this.state.gameOver = { winner: 'dm', message: 'Party HP reached 0! DM wins!' };
+      this.addLog('system', this.state.gameOver.message);
+    } else if (this.state.dmHP <= 0) {
+      this.state.gameOver = { winner: 'party', message: 'DM HP reached 0! Party wins!' };
+      this.addLog('system', this.state.gameOver.message);
+    }
+  }
+
+  // --- Targetable check (creatures, persistent, tower) ---
+
+  private isTargetable(card: CardInstance): boolean {
+    const type = card.definition.cardType;
+    if (type === CardType.Creature || type === CardType.Token) return true;
+    // Persistent and Tower keywords make cards targetable like creatures
+    if (card.activeKeywords.includes(Keyword.Persistent) || card.activeKeywords.includes(Keyword.Tower)) return true;
+    // Enchantments with health are targetable
+    if (type === CardType.Enchantment && card.currentHealth !== undefined && card.currentHealth > 0) return true;
+    return false;
   }
 
   // --- Helpers ---
@@ -1781,6 +1948,7 @@ export class GameEngine {
       debuffs: [],
       tapped: false,
       canAttack: keywords.includes(Keyword.Haste),
+      attacksRemaining: keywords.includes(Keyword.Haste) ? 2 : 0,
       summonedThisTurn: true,
       poisonStacks: [],
       ownerId,
@@ -1841,6 +2009,7 @@ export class GameEngine {
       }
       card.tapped = false;
       card.canAttack = false;
+      card.attacksRemaining = 0;
       card.summonedThisTurn = true;
       card.buffs = [];
       card.debuffs = [];
@@ -1961,6 +2130,7 @@ export class GameEngine {
       creature.buffs = [];
       creature.debuffs = [];
       creature.poisonStacks = [];
+      creature.attacksRemaining = 0;
       player.hand.push(creature);
       this.addLog('system', `${creature.definition.name} returned to hand`);
     } else {

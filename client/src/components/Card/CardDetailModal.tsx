@@ -1,5 +1,6 @@
 import React from 'react';
 import { CardDefinition, CardInstance } from '@deck-and-dominion/shared';
+import KeywordTooltip from './KeywordTooltip';
 
 const RARITY_COLORS: Record<string, string> = {
   Common: '#9e9e9e',
@@ -136,17 +137,7 @@ export default function CardDetailModal({ card, onClose }: CardDetailModalProps)
         {def.keywords && def.keywords.length > 0 && (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '12px' }}>
             {def.keywords.map((kw, i) => (
-              <span key={i} style={{
-                padding: '4px 10px',
-                background: 'rgba(255,215,0,0.1)',
-                border: '1px solid rgba(255,215,0,0.3)',
-                borderRadius: '12px',
-                fontSize: '12px',
-                color: '#ffd700',
-                fontWeight: 'bold',
-              }}>
-                {kw}
-              </span>
+              <KeywordTooltip key={i} keyword={kw} />
             ))}
           </div>
         )}
