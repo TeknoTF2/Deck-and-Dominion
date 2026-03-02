@@ -21,9 +21,10 @@ const CLASS_COLORS: Record<string, string> = {
 interface CardDetailModalProps {
   card: CardDefinition | CardInstance;
   onClose: () => void;
+  onAddToDeck?: () => void;
 }
 
-export default function CardDetailModal({ card, onClose }: CardDetailModalProps) {
+export default function CardDetailModal({ card, onClose, onAddToDeck }: CardDetailModalProps) {
   const def = 'definition' in card ? card.definition : card;
   const instance = 'definition' in card ? card : null;
   const rarityColor = RARITY_COLORS[def.rarity] || '#9e9e9e';
@@ -175,9 +176,16 @@ export default function CardDetailModal({ card, onClose }: CardDetailModalProps)
           </div>
         )}
 
-        <button onClick={onClose} style={{ width: '100%', padding: '10px', background: '#333' }}>
-          Close
-        </button>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          {onAddToDeck && (
+            <button onClick={onAddToDeck} style={{ flex: 1, padding: '10px', background: '#66bb6a', color: '#000', fontWeight: 'bold' }}>
+              Add to Deck
+            </button>
+          )}
+          <button onClick={onClose} style={{ flex: 1, padding: '10px', background: '#333' }}>
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -30,19 +30,31 @@ export default function DeckBuilder() {
 
   const deckCardDefs = deckCards.map(id => allCards.find(c => c.id === id)).filter((c): c is CardDefinition => !!c);
 
-  const addToDeck = (cardId: string) => {
-    if (deckCards.length >= DECK_MAX_SIZE) return;
-    // Enforce per-card copy limits (Starter rarity and Land type exempt)
+  const canAddToDeck = (cardId: string): boolean => {
+    if (deckCards.length >= DECK_MAX_SIZE) return false;
     const card = allCards.find(c => c.id === cardId);
     if (card && card.rarity !== Rarity.Starter && card.cardType !== CardType.Land) {
       const currentCopies = deckCards.filter(id => id === cardId).length;
-      if (currentCopies >= MAX_CARD_COPIES) return;
+      if (currentCopies >= MAX_CARD_COPIES) return false;
     }
+    return true;
+  };
+
+  const addToDeck = (cardId: string) => {
+    if (!canAddToDeck(cardId)) return;
     setDeckCards([...deckCards, cardId]);
   };
 
   const removeFromDeck = (index: number) => {
     setDeckCards(deckCards.filter((_, i) => i !== index));
+  };
+
+  const loadStarterDeck = () => {
+    const starterCards = allCards
+      .filter(c => c.rarity === Rarity.Starter && (c.cardClass === selectedClass || c.cardClass === CardClass.Neutral))
+      .map(c => c.id);
+    setDeckCards(starterCards);
+    setDeckName(`${selectedClass} Starter Deck`);
   };
 
   const manaCurve = deckCardDefs.reduce((acc, c) => {
@@ -52,6 +64,8 @@ export default function DeckBuilder() {
   }, {} as Record<number, number>);
 
   const maxCurve = Math.max(...Object.values(manaCurve), 1);
+
+  const copyCount = (cardId: string) => deckCards.filter(id => id === cardId).length;
 
   const saveDeck = async () => {
     try {
@@ -146,11 +160,68 @@ export default function DeckBuilder() {
             gap: '8px',
             alignContent: 'flex-start',
           }}>
-            {filteredCards.map(card => (
-              <div key={card.id} onDoubleClick={() => addToDeck(card.id)} onClick={() => setDetailCard(card)}>
-                <CardView card={card} />
-              </div>
-            ))}
+            {filteredCards.map(card => {
+              const copies = copyCount(card.id);
+              const canAdd = canAddToDeck(card.id);
+              return (
+                <div key={card.id} style={{ position: 'relative' }}>
+                  <div onClick={() => setDetailCard(card)}>
+                    <CardView card={card} />
+                  </div>
+                  {/* Add to deck button */}
+                  <button
+                    onClick={(e) => { e.stopPropagation(); addToDeck(card.id); }}
+                    disabled={!canAdd}
+                    style={{
+                      position: 'absolute',
+                      top: '-4px',
+                      left: '-4px',
+                      width: '24px',
+                      height: '24px',
+                      borderRadius: '50%',
+                      background: canAdd ? '#66bb6a' : '#555',
+                      color: canAdd ? '#000' : '#888',
+                      border: '2px solid #1a1a2e',
+                      cursor: canAdd ? 'pointer' : 'default',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 'bold',
+                      fontSize: '16px',
+                      lineHeight: 1,
+                      zIndex: 2,
+                      padding: 0,
+                    }}
+                    title={canAdd ? 'Add to deck' : 'Cannot add more copies'}
+                  >
+                    +
+                  </button>
+                  {/* Copy count badge */}
+                  {copies > 0 && (
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '-4px',
+                      left: '-4px',
+                      minWidth: '20px',
+                      height: '20px',
+                      borderRadius: '10px',
+                      background: '#e94560',
+                      color: '#fff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 'bold',
+                      fontSize: '11px',
+                      border: '2px solid #1a1a2e',
+                      zIndex: 2,
+                      padding: '0 4px',
+                    }}>
+                      {copies} in deck
+                    </div>
+                  )}
+                </div>
+              );
+            })}
             {filteredCards.length === 0 && (
               <div style={{ color: '#555', padding: '24px', width: '100%', textAlign: 'center' }}>
                 {cardsLoaded ? 'No cards match your filters' : 'Loading cards...'}
@@ -164,6 +235,20 @@ export default function DeckBuilder() {
           <h3 style={{ margin: '0 0 8px', fontSize: '14px' }}>
             Deck ({deckCards.length} cards)
           </h3>
+
+          {/* Starter Deck Button */}
+          <button
+            onClick={loadStarterDeck}
+            style={{
+              marginBottom: '8px',
+              background: '#8d6e63',
+              color: '#fff',
+              fontSize: '12px',
+              padding: '6px 8px',
+            }}
+          >
+            Load {selectedClass} Starter Deck
+          </button>
 
           {/* Mana Curve */}
           <div style={{
@@ -211,6 +296,7 @@ export default function DeckBuilder() {
                   display: 'flex',
                   justifyContent: 'space-between',
                 }}
+                title="Click to remove"
               >
                 <span>{card.name}</span>
                 <span style={{ color: '#4fc3f7' }}>{card.manaCost}</span>
@@ -228,7 +314,11 @@ export default function DeckBuilder() {
       </div>
 
       {detailCard && (
-        <CardDetailModal card={detailCard} onClose={() => setDetailCard(null)} />
+        <CardDetailModal
+          card={detailCard}
+          onClose={() => setDetailCard(null)}
+          onAddToDeck={canAddToDeck(detailCard.id) ? () => addToDeck(detailCard.id) : undefined}
+        />
       )}
     </div>
   );
