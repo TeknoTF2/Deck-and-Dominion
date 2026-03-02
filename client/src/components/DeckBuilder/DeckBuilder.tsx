@@ -13,7 +13,7 @@ const CLASS_ARCHETYPES: Record<string, string[]> = {
 };
 
 export default function DeckBuilder() {
-  const { allCards, setView, cardsLoaded, loadCards, isDMMode, setDMMode, collection, grantStarterCards, lobby } = useGameStore();
+  const { allCards, setView, cardsLoaded, loadCards, isDMMode, setDMMode, collection, grantStarterCards, previousView } = useGameStore();
   const [selectedClass, setSelectedClass] = useState<CardClass>(CardClass.Commander);
   const [selectedArchetype, setSelectedArchetype] = useState<string>('Marshal');
   const [filterRarity, setFilterRarity] = useState<string>('all');
@@ -167,8 +167,7 @@ export default function DeckBuilder() {
     e.target.value = '';
   };
 
-  // Determine back destination
-  const backView = lobby ? 'lobby' : 'menu';
+  const backView = previousView || 'menu';
   const collectionCount = Object.keys(collection).length;
 
   return (

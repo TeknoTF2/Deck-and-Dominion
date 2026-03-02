@@ -38,6 +38,7 @@ interface GameStore {
 
   // View
   currentView: 'menu' | 'lobby' | 'deck-builder' | 'game' | 'card-art-manager' | 'collection';
+  previousView: 'menu' | 'lobby' | null;
 
   // Actions
   setPlayerName: (name: string) => void;
@@ -86,6 +87,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   isDMMode: false,
   serverError: null,
   currentView: 'menu',
+  previousView: null,
 
   setPlayerName: (name) => set({ playerName: name }),
 
@@ -226,7 +228,17 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   selectCard: (cardId) => set({ selectedCard: cardId }),
   selectTarget: (targetId) => set({ selectedTarget: targetId }),
-  setView: (view) => set({ currentView: view }),
+  setView: (view) => {
+    const { currentView } = get();
+    // Track where we came from when entering sub-views
+    if (view === 'deck-builder' || view === 'collection' || view === 'card-art-manager') {
+      if (currentView === 'menu' || currentView === 'lobby') {
+        set({ currentView: view, previousView: currentView });
+        return;
+      }
+    }
+    set({ currentView: view });
+  },
   clearGameOver: () => set({ gameOverResult: null, gameState: null, currentView: 'lobby' }),
 
   setDMMode: (mode) => set({ isDMMode: mode }),

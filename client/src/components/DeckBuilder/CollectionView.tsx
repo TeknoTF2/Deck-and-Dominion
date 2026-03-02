@@ -5,7 +5,7 @@ import CardDetailModal from '../Card/CardDetailModal';
 import { CardDefinition, CardClass, Rarity } from '@deck-and-dominion/shared';
 
 export default function CollectionView() {
-  const { allCards, setView, cardsLoaded, loadCards } = useGameStore();
+  const { allCards, setView, cardsLoaded, loadCards, previousView } = useGameStore();
   const [selectedClass, setSelectedClass] = useState<string>('all');
   const [filterRarity, setFilterRarity] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -53,7 +53,7 @@ export default function CollectionView() {
             {filteredCards.length} of {allCards.length} cards shown
           </span>
         </div>
-        <button onClick={() => setView('menu')} style={{ background: '#333' }}>Back</button>
+        <button onClick={() => setView(previousView || 'menu')} style={{ background: '#333' }}>Back</button>
       </div>
 
       {/* Filters */}
