@@ -231,15 +231,16 @@ io.on('connection', (socket) => {
     if (!engine) return;
 
     // Handle dm_give_card with DB lookup
+    let cardDef: CardDefinition | undefined;
     if (action.type === 'dm_give_card') {
-      const cardDef = getCardById(action.cardDefinitionId);
+      cardDef = getCardById(action.cardDefinitionId);
       if (!cardDef) {
         socket.emit(SocketEvent.Error, { message: `Card not found: ${action.cardDefinitionId}` });
         return;
       }
     }
 
-    const result = engine.processDMAction(action);
+    const result = engine.processDMAction(action, cardDef);
 
     if (result.success) {
       broadcastGameState(lobbyId, engine);

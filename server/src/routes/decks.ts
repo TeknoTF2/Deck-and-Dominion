@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { v4 as uuid } from 'uuid';
 import { getDB } from '../database/setup';
 import { getCardById } from '../database/cards';
-import { DeckDefinition, DECK_MIN_SIZE, DECK_MAX_SIZE, CardClass } from '@deck-and-dominion/shared';
+import { DeckDefinition, DECK_MIN_SIZE, DECK_MAX_SIZE, MAX_CARD_COPIES, CardClass, Rarity, CardType } from '@deck-and-dominion/shared';
 
 const router = Router();
 
@@ -58,7 +58,8 @@ router.post('/', (req, res) => {
     return res.status(400).json({ error: `Deck must have ${DECK_MIN_SIZE}-${DECK_MAX_SIZE} cards` });
   }
 
-  // Validate card class restriction
+  // Validate card class restriction and copy limits
+  const cardCounts: Record<string, number> = {};
   for (const cardId of cardIds) {
     const card = getCardById(cardId);
     if (!card) {
@@ -66,6 +67,11 @@ router.post('/', (req, res) => {
     }
     if (card.cardClass !== cardClass && card.cardClass !== 'Neutral') {
       return res.status(400).json({ error: `Card ${card.name} is ${card.cardClass}, not ${cardClass}` });
+    }
+    // Enforce per-card copy limits (Starter rarity and Land type are exempt)
+    cardCounts[cardId] = (cardCounts[cardId] || 0) + 1;
+    if (card.rarity !== Rarity.Starter && card.cardType !== CardType.Land && cardCounts[cardId] > MAX_CARD_COPIES) {
+      return res.status(400).json({ error: `Too many copies of ${card.name} (max ${MAX_CARD_COPIES})` });
     }
   }
 

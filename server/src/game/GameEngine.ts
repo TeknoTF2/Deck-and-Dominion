@@ -17,6 +17,8 @@ const KEYWORD_MAP: Record<string, Keyword> = {
   'taunt': Keyword.Taunt,
   'persistent': Keyword.Persistent,
   'tower': Keyword.Tower,
+  'shield': Keyword.Shield,
+  'poison': Keyword.Poison,
 };
 
 export class GameEngine {
@@ -65,6 +67,7 @@ export class GameEngine {
         hand: [],
         deck: dmDeckInstances,
         landsPlayed: 0,
+        manaAvailable: 0,
       },
       combatLog: [],
       activeEffects: [],
@@ -95,6 +98,16 @@ export class GameEngine {
     }
     view.dmState.hand = [];
     view.dmState.deck = [];
+
+    // Hide face-down trap details from the DM's perspective (traps are hidden from opponents)
+    // Player traps are hidden from DM view; DM traps would be hidden from player view
+    // For players: face-down DM cards should be hidden
+    for (const card of view.board.dmCreatures) {
+      if (card.faceDown) {
+        card.definition = { ...card.definition, name: 'Face-Down Card', effectText: '???', keywords: [], triggers: [] };
+      }
+    }
+
     return view;
   }
 
@@ -153,7 +166,7 @@ export class GameEngine {
     }
   }
 
-  processDMAction(action: DMAction): { success: boolean; message: string } {
+  processDMAction(action: DMAction, cardDef?: CardDefinition): { success: boolean; message: string } {
     switch (action.type) {
       case 'dm_edit_hp':
         return this.dmEditHP(action.target, action.value);
@@ -162,7 +175,7 @@ export class GameEngine {
       case 'dm_modify_creature':
         return this.dmModifyCreature(action.cardInstanceId, action);
       case 'dm_give_card':
-        return this.dmGiveCard(action.cardDefinitionId, action.toPlayerId, action.toZone);
+        return this.dmGiveCard(action.cardDefinitionId, action.toPlayerId, action.toZone, cardDef);
       case 'dm_end_battle':
         return this.dmEndBattle(action.winner);
       default:
@@ -287,6 +300,7 @@ export class GameEngine {
 
       case CardType.Trap:
         card.zone = Zone.Board;
+        card.faceDown = true;
         this.state.board.playerCreatures.push(card);
         this.addLog('play', `${player.name} sets a trap`);
         break;
@@ -457,6 +471,8 @@ export class GameEngine {
     // Check for death
     if (target.currentHealth !== undefined && target.currentHealth <= 0) {
       this.destroyCreature(target);
+      // Fire on_kill trigger for the source that dealt the killing blow
+      this.fireTriggers('on_kill', source);
       return true;
     }
 
@@ -503,6 +519,9 @@ export class GameEngine {
     for (const c of [...this.state.board.playerCreatures, ...this.state.board.dmCreatures]) {
       this.fireTriggers('when_another_creature_dies', c);
     }
+
+    // Check graveyard threshold triggers for all board creatures
+    this.checkGraveyardThresholds();
   }
 
   // ============================================================
@@ -592,6 +611,21 @@ export class GameEngine {
     // --- Exile from graveyard ---
     if (effect.includes('exile')) {
       this.resolveEffectExile(effect, source);
+    }
+
+    // --- Counter (negate last spell/effect) ---
+    if (effect.includes('counter') && (effect.includes('spell') || effect.includes('next'))) {
+      // Counter target spell: remove the last entry from combat log and undo the effect
+      // In practice, counter cards are played as reactions during a response window
+      this.addLog('system', `${source.definition.name} counters a spell!`);
+      // Mark the counter in active effects so the reaction system can check it
+      this.state.activeEffects.push({
+        id: uuid(),
+        source: source.instanceId,
+        effect: 'counter',
+        duration: DurationType.ThisTurn,
+        turnsRemaining: 1,
+      });
     }
 
     // --- Track persistent enchantment effects ---
@@ -1322,6 +1356,7 @@ export class GameEngine {
 
     // Auto-play DM cards (simplified AI - plays affordable cards)
     let dmMana = numPlayers * 2 + this.state.turnNumber; // Scaling DM mana
+    this.state.dmState.manaAvailable = dmMana;
     let dmLandsThisTurn = 0;
 
     for (let i = this.state.dmState.hand.length - 1; i >= 0; i--) {
@@ -1341,6 +1376,7 @@ export class GameEngine {
 
       if (card.definition.manaCost <= dmMana) {
         dmMana -= card.definition.manaCost;
+        this.state.dmState.manaAvailable = dmMana;
         this.state.dmState.hand.splice(i, 1);
 
         if (card.definition.cardType === CardType.Creature) {
@@ -1359,28 +1395,29 @@ export class GameEngine {
       }
     }
 
-    // DM creatures attack
-    for (const creature of this.state.board.dmCreatures) {
+    // Check trap triggers when DM creatures are about to attack
+    this.checkTrapTriggers('dm_attack');
+
+    // DM creatures attack - per rules: must attack Taunt creatures first, otherwise attack party HP directly
+    for (const creature of [...this.state.board.dmCreatures]) {
       if (creature.canAttack && !creature.tapped && creature.attacksRemaining > 0
           && (creature.definition.cardType === CardType.Creature || creature.definition.cardType === CardType.Token)
           && !creature.activeKeywords.includes(Keyword.Tower)) {
-        // DM creatures attack player creatures with taunt first, then party HP
         const playerTaunters = this.state.board.playerCreatures.filter(c =>
           c.activeKeywords.includes(Keyword.Taunt) && this.isTargetable(c)
         );
 
         if (playerTaunters.length > 0) {
+          // Must attack taunt creatures first
           this.resolveCombat(creature, playerTaunters[0]);
-        } else if (this.state.board.playerCreatures.some(c => this.isTargetable(c))) {
-          // Attack a random player creature
-          const targets = this.state.board.playerCreatures.filter(c => this.isTargetable(c));
-          const target = targets[Math.floor(Math.random() * targets.length)];
-          this.resolveCombat(creature, target);
         } else {
-          // Attack party HP directly
+          // No taunters: attack party HP directly (per rulebook)
           const damage = creature.currentAttack || 0;
           this.state.partyHP = Math.max(0, this.state.partyHP - damage);
           this.addLog('damage', `${creature.definition.name} attacks party for ${damage} damage (Party HP: ${this.state.partyHP})`);
+
+          // Fire on_attack trigger
+          this.fireTriggers('on_attack', creature);
         }
         creature.tapped = true;
         creature.attacksRemaining = 0;
@@ -1480,6 +1517,12 @@ export class GameEngine {
     if (cardIndex === -1) return { success: false, message: 'Card not in hand' };
 
     const card = player.hand[cardIndex];
+
+    // Only Reaction type cards or cards with the Reaction keyword can be played as reactions
+    if (card.definition.cardType !== CardType.Reaction && !card.activeKeywords.includes(Keyword.Reaction)) {
+      return { success: false, message: 'Only Reaction cards can be played as reactions' };
+    }
+
     const totalMana = this.state.manaPool.persistent + this.state.manaPool.burst;
 
     if (card.definition.manaCost > totalMana) {
@@ -1511,12 +1554,15 @@ export class GameEngine {
 
   private dmEditHP(target: 'party' | 'dm', value: number): { success: boolean; message: string } {
     if (target === 'party') {
-      this.state.partyHP = Math.max(0, Math.min(this.state.maxPartyHP, value));
-      this.addLog('dm', `DM set party HP to ${this.state.partyHP}`);
+      const prev = this.state.partyHP;
+      this.state.partyHP = Math.max(0, Math.min(this.state.maxPartyHP, this.state.partyHP + value));
+      this.addLog('dm', `DM ${value >= 0 ? 'healed' : 'damaged'} party for ${Math.abs(value)} HP (${prev} -> ${this.state.partyHP})`);
     } else {
-      this.state.dmHP = Math.max(0, value);
-      this.addLog('dm', `DM set DM HP to ${this.state.dmHP}`);
+      const prev = this.state.dmHP;
+      this.state.dmHP = Math.max(0, this.state.dmHP + value);
+      this.addLog('dm', `DM ${value >= 0 ? 'healed' : 'damaged'} DM for ${Math.abs(value)} HP (${prev} -> ${this.state.dmHP})`);
     }
+    this.checkGameOver();
     return { success: true, message: `HP updated` };
   }
 
@@ -1583,10 +1629,46 @@ export class GameEngine {
     return { success: true, message: 'Creature modified' };
   }
 
-  private dmGiveCard(cardDefinitionId: string, toPlayerId: string, toZone: Zone): { success: boolean; message: string } {
-    // This would need the card database - placeholder
-    this.addLog('dm', `DM gave card ${cardDefinitionId} to ${toPlayerId}`);
-    return { success: true, message: 'Card given' };
+  private dmGiveCard(cardDefinitionId: string, toPlayerId: string, toZone: Zone, cardDef?: CardDefinition): { success: boolean; message: string } {
+    if (!cardDef) {
+      return { success: false, message: 'Card definition not provided' };
+    }
+
+    const instance = this.createCardInstance(cardDef, toPlayerId);
+
+    switch (toZone) {
+      case Zone.Hand: {
+        const player = this.state.players[toPlayerId];
+        if (!player) return { success: false, message: 'Player not found' };
+        if (player.hand.length >= MAX_HAND_SIZE) return { success: false, message: 'Player hand is full' };
+        instance.zone = Zone.Hand;
+        player.hand.push(instance);
+        break;
+      }
+      case Zone.Board:
+        instance.zone = Zone.Board;
+        instance.summonedThisTurn = true;
+        if (toPlayerId === 'dm') {
+          this.state.board.dmCreatures.push(instance);
+        } else {
+          this.state.board.playerCreatures.push(instance);
+        }
+        break;
+      case Zone.Deck: {
+        const player = this.state.players[toPlayerId];
+        if (!player) return { success: false, message: 'Player not found' };
+        instance.zone = Zone.Deck;
+        player.deck.push(instance);
+        this.shuffleArray(player.deck);
+        break;
+      }
+      default:
+        return { success: false, message: `Cannot give card to zone: ${toZone}` };
+    }
+
+    const playerName = this.state.players[toPlayerId]?.name || toPlayerId;
+    this.addLog('dm', `DM gave ${cardDef.name} to ${playerName} (${toZone})`);
+    return { success: true, message: `Gave ${cardDef.name} to ${playerName}` };
   }
 
   private dmEndBattle(winner: 'party' | 'dm'): { success: boolean; message: string } {
@@ -1761,6 +1843,23 @@ export class GameEngine {
         if (debuffMatch) {
           // The defender was the last combat target - apply debuff via active effects
           this.addLog('trigger', `${source.definition.name} weakens the defender`);
+        }
+      }
+    }
+
+    // ON KILL triggers
+    if (event === 'on_kill') {
+      const onKillMatch = effectText.match(/on kill:\s*(.+?)(?:\.|$)/i);
+      if (onKillMatch) {
+        this.addLog('trigger', `On Kill: ${source.definition.name}`);
+        this.resolveEffect(onKillMatch[1], source, source.ownerId);
+      }
+      // "whenever this creature kills an enemy" variant
+      if (effectText.includes('whenever this creature kills') || effectText.includes('when this kills')) {
+        const killMatch = effectText.match(/(?:whenever this creature kills|when this kills)[^,.:]*[,:]\s*(.+?)(?:\.|$)/i);
+        if (killMatch) {
+          this.addLog('trigger', `Kill trigger: ${source.definition.name}`);
+          this.resolveEffect(killMatch[1], source, source.ownerId);
         }
       }
     }
@@ -2142,6 +2241,92 @@ export class GameEngine {
 
   private getGraveyardCreatureCount(): number {
     return this.state.graveyard.filter(c => c.definition.cardType === CardType.Creature).length;
+  }
+
+  private checkGraveyardThresholds(): void {
+    const graveyardCount = this.state.graveyard.length;
+    const creatureCount = this.getGraveyardCreatureCount();
+
+    for (const creature of [...this.state.board.playerCreatures, ...this.state.board.dmCreatures]) {
+      const effectText = creature.definition.effectText.toLowerCase();
+
+      // Check structured triggers
+      if (creature.definition.triggers) {
+        for (const trigger of creature.definition.triggers) {
+          if (trigger.event === 'graveyard_threshold' && trigger.condition) {
+            const thresholdMatch = trigger.condition.match(/(\d+)\+?\s*(?:cards?|creatures?)/);
+            if (thresholdMatch) {
+              const threshold = parseInt(thresholdMatch[1]);
+              const useCreatures = trigger.condition.includes('creature');
+              const count = useCreatures ? creatureCount : graveyardCount;
+              if (count >= threshold) {
+                this.addLog('trigger', `Graveyard threshold (${threshold}): ${creature.definition.name}`);
+                this.resolveEffect(trigger.effect, creature, creature.ownerId);
+              }
+            }
+          }
+        }
+      }
+
+      // Check effect text patterns like "if graveyard has X+ cards/creatures"
+      const thresholdMatch = effectText.match(/if (?:the )?graveyard has (\d+)\+?\s*(?:or more\s+)?(?:cards?|creatures?)/);
+      if (thresholdMatch) {
+        const threshold = parseInt(thresholdMatch[1]);
+        const useCreatures = effectText.includes('creature');
+        const count = useCreatures ? creatureCount : graveyardCount;
+        if (count >= threshold) {
+          // Parse the bonus effect
+          const bonusMatch = effectText.match(/if (?:the )?graveyard has \d+\+?\s*(?:or more\s+)?(?:cards?|creatures?)[,:]\s*(.+?)(?:\.|$)/i);
+          if (bonusMatch) {
+            this.resolveEffect(bonusMatch[1], creature, creature.ownerId);
+          }
+        }
+      }
+    }
+  }
+
+  // --- Trap trigger processing ---
+  private checkTrapTriggers(triggerContext: string): void {
+    for (const card of [...this.state.board.playerCreatures]) {
+      if (card.definition.cardType !== CardType.Trap || !card.faceDown) continue;
+      const effect = card.definition.effectText.toLowerCase();
+
+      let shouldTrigger = false;
+
+      if (triggerContext === 'dm_attack') {
+        // Traps that trigger when DM creatures attack
+        if (effect.includes('when') && (effect.includes('attack') || effect.includes('enemy creature'))) {
+          shouldTrigger = true;
+        }
+        // Traps that trigger when DM plays creatures
+        if (effect.includes('when') && effect.includes('plays') && effect.includes('creature')) {
+          shouldTrigger = true;
+        }
+      }
+
+      if (triggerContext === 'dm_play') {
+        // Traps that trigger when DM plays a card
+        if (effect.includes('when') && (effect.includes('plays') || effect.includes('casts'))) {
+          shouldTrigger = true;
+        }
+      }
+
+      // Generic trap: always trigger on DM attack if no specific condition
+      if (triggerContext === 'dm_attack' && !effect.includes('when')) {
+        shouldTrigger = true;
+      }
+
+      if (shouldTrigger) {
+        card.faceDown = false;
+        this.addLog('trigger', `Trap triggered: ${card.definition.name}!`);
+        this.resolveSpellEffect(card, card.ownerId);
+        // Move trap to graveyard after triggering
+        const idx = this.state.board.playerCreatures.findIndex(c => c.instanceId === card.instanceId);
+        if (idx !== -1) this.state.board.playerCreatures.splice(idx, 1);
+        card.zone = Zone.Graveyard;
+        this.state.graveyard.push(card);
+      }
+    }
   }
 
   // --- Enchantment trigger processing ---
