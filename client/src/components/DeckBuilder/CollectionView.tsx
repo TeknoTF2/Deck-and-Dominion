@@ -5,7 +5,7 @@ import CardDetailModal from '../Card/CardDetailModal';
 import { CardDefinition, CardClass, Rarity } from '@deck-and-dominion/shared';
 
 export default function CollectionView() {
-  const { allCards, setView, cardsLoaded, loadCards, previousView } = useGameStore();
+  const { allCards, setView, cardsLoaded, loadCards, previousView, collection } = useGameStore();
   const [selectedClass, setSelectedClass] = useState<string>('all');
   const [filterRarity, setFilterRarity] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -51,6 +51,9 @@ export default function CollectionView() {
           <h2 style={{ color: '#ffd700', margin: 0 }}>Card Collection</h2>
           <span style={{ color: '#a0a0a0', fontSize: '12px' }}>
             {filteredCards.length} of {allCards.length} cards shown
+            {Object.keys(collection).length > 0 && (
+              <> &mdash; {Object.keys(collection).length} owned ({Object.values(collection).reduce((a, b) => a + b, 0)} total copies)</>
+            )}
           </span>
         </div>
         <button onClick={() => setView(previousView || 'menu')} style={{ background: '#333' }}>Back</button>
@@ -100,11 +103,38 @@ export default function CollectionView() {
         gap: '10px',
         alignContent: 'flex-start',
       }}>
-        {filteredCards.map(card => (
-          <div key={card.id} onClick={() => setDetailCard(card)}>
+        {filteredCards.map(card => {
+          const owned = collection[card.id] || 0;
+          return (
+          <div key={card.id} style={{ position: 'relative' }} onClick={() => setDetailCard(card)}>
             <CardView card={card} />
+            {owned > 0 && (
+              <div style={{
+                position: 'absolute',
+                top: '-4px',
+                right: '-4px',
+                minWidth: '22px',
+                height: '22px',
+                borderRadius: '11px',
+                background: '#0f3460',
+                color: '#4fc3f7',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold',
+                fontSize: '11px',
+                border: '2px solid #1a1a2e',
+                zIndex: 2,
+                padding: '0 4px',
+              }}
+                title={`You own ${owned} of this card`}
+              >
+                x{owned}
+              </div>
+            )}
           </div>
-        ))}
+          );
+        })}
         {filteredCards.length === 0 && (
           <div style={{ color: '#555', padding: '48px', width: '100%', textAlign: 'center', fontSize: '16px' }}>
             {cardsLoaded ? 'No cards match your search' : 'Loading cards...'}
