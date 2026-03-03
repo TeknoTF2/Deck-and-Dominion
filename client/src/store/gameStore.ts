@@ -3,6 +3,7 @@ import { io, Socket } from 'socket.io-client';
 import {
   GameState, LobbyState, CardClass, ChatMessage,
   SocketEvent, GameAction, DMAction, CardDefinition, Rarity,
+  UnopenedPack, PackTier, PackFilter, OpenedPackResult,
 } from '@deck-and-dominion/shared';
 
 interface GameStore {
@@ -32,6 +33,11 @@ interface GameStore {
   // Collection (player-owned cards: cardId -> quantity)
   collection: Record<string, number>;
   isDMMode: boolean;
+
+  // Packs
+  unopenedPacks: UnopenedPack[];
+  openingPack: UnopenedPack | null;
+  openedCardIds: string[] | null;
 
   // Errors
   serverError: string | null;
@@ -67,6 +73,9 @@ interface GameStore {
   clearServerError: () => void;
   exportPlayerState: () => string;
   importPlayerState: (json: string) => boolean;
+  grantPack: (targetPlayerId: string, tier: PackTier, size: number, filter: PackFilter, count?: number) => void;
+  requestOpenPack: (pack: UnopenedPack) => void;
+  closePackOpening: () => void;
 }
 
 export const useGameStore = create<GameStore>((set, get) => ({
@@ -85,6 +94,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
   cardsLoaded: false,
   collection: {},
   isDMMode: false,
+  unopenedPacks: [],
+  openingPack: null,
+  openedCardIds: null,
   serverError: null,
   currentView: 'menu',
   previousView: null,
@@ -123,6 +135,23 @@ export const useGameStore = create<GameStore>((set, get) => ({
     socket.on(SocketEvent.Error, ({ message }: { message: string }) => {
       console.error('Server error:', message);
       set({ serverError: message });
+    });
+
+    socket.on(SocketEvent.PackGranted, ({ packs }: { packs: UnopenedPack[] }) => {
+      set(state => ({ unopenedPacks: [...state.unopenedPacks, ...packs] }));
+    });
+
+    socket.on(SocketEvent.PackOpened, ({ packId, cardIds }: OpenedPackResult) => {
+      // Add cards to collection immediately
+      const newCollection = { ...get().collection };
+      for (const cardId of cardIds) {
+        newCollection[cardId] = (newCollection[cardId] || 0) + 1;
+      }
+      set({
+        collection: newCollection,
+        openedCardIds: cardIds,
+        unopenedPacks: get().unopenedPacks.filter(p => p.id !== packId),
+      });
     });
 
     set({ socket });
@@ -282,8 +311,17 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   exportPlayerState: () => {
-    const { playerName, collection } = get();
-    return JSON.stringify({ playerName, collection }, null, 2);
+    const { playerName, collection, unopenedPacks } = get();
+    // Packs are exported with sealedContents intact (opaque blob) — contents stay hidden
+    const exportPacks = unopenedPacks.map(p => ({
+      id: p.id,
+      tier: p.tier,
+      size: p.size,
+      filter: p.filter,
+      label: p.label,
+      sealedContents: p.sealedContents,
+    }));
+    return JSON.stringify({ playerName, collection, packs: exportPacks }, null, 2);
   },
 
   importPlayerState: (json) => {
@@ -293,6 +331,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
         set({
           collection: data.collection,
           playerName: data.playerName || get().playerName,
+          unopenedPacks: Array.isArray(data.packs) ? data.packs : [],
         });
         return true;
       }
@@ -300,6 +339,25 @@ export const useGameStore = create<GameStore>((set, get) => ({
     } catch {
       return false;
     }
+  },
+
+  grantPack: (targetPlayerId, tier, size, filter, count) => {
+    const { socket } = get();
+    if (socket) {
+      socket.emit(SocketEvent.GrantPack, { targetPlayerId, tier, size, filter, count });
+    }
+  },
+
+  requestOpenPack: (pack) => {
+    const { socket } = get();
+    if (socket) {
+      set({ openingPack: pack, openedCardIds: null });
+      socket.emit(SocketEvent.OpenPack, { pack });
+    }
+  },
+
+  closePackOpening: () => {
+    set({ openingPack: null, openedCardIds: null });
   },
 
   loadCards: async () => {

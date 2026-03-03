@@ -6,9 +6,10 @@ import GameBoard from './components/Board/GameBoard';
 import DeckBuilder from './components/DeckBuilder/DeckBuilder';
 import CardArtManager from './components/CardArtManager/CardArtManager';
 import CollectionView from './components/DeckBuilder/CollectionView';
+import PackOpening from './components/Pack/PackOpening';
 
 export default function App() {
-  const { currentView, connect, loadCards, connected } = useGameStore();
+  const { currentView, connect, loadCards, connected, openingPack } = useGameStore();
 
   useEffect(() => {
     connect();
@@ -23,6 +24,7 @@ export default function App() {
       {currentView === 'deck-builder' && <DeckBuilder />}
       {currentView === 'card-art-manager' && <CardArtManager />}
       {currentView === 'collection' && <CollectionView />}
+      {openingPack && <PackOpening />}
     </div>
   );
 }

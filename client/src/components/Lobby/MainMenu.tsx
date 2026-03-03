@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useGameStore } from '../../store/gameStore';
+import PackInventory from '../Pack/PackInventory';
 
 export default function MainMenu() {
   const { playerName, setPlayerName, createLobby, joinLobby, setView, connected, exportPlayerState, importPlayerState } = useGameStore();
@@ -109,6 +110,8 @@ export default function MainMenu() {
             Card Art Manager
           </button>
         </div>
+
+        <PackInventory />
 
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '12px', marginTop: '4px' }}>
           <div style={{ display: 'flex', gap: '8px' }}>

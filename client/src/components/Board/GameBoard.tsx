@@ -8,6 +8,7 @@ import ChatPanel from '../Chat/ChatPanel';
 import DMPanel from '../DMPanel/DMPanel';
 import ZoneBrowser from './ZoneBrowser';
 import GameOverOverlay from './GameOverOverlay';
+import PackInventory from '../Pack/PackInventory';
 import { CardInstance, Phase, MAX_HAND_SIZE } from '@deck-and-dominion/shared';
 
 export default function GameBoard() {
@@ -208,6 +209,13 @@ export default function GameBoard() {
               </div>
             </div>
           </div>
+
+          {/* Pack Inventory */}
+          {!isDM && (
+            <div style={{ padding: '0 12px' }}>
+              <PackInventory />
+            </div>
+          )}
 
           {/* Hand */}
           {currentPlayer && (
