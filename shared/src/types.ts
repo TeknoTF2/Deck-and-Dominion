@@ -383,6 +383,45 @@ export const MAX_MULLIGANS = 2;
 export const HP_PER_PLAYER = 8;
 export const MAX_CARD_COPIES = 2; // Max copies of a single card in a deck (Starter/Land exempt)
 
+// --- Booster Packs ---
+
+export enum PackTier {
+  Common = 'Common',
+  Uncommon = 'Uncommon',
+  Rare = 'Rare',
+  Legendary = 'Legendary',
+}
+
+export interface PackFilter {
+  cardClass?: CardClass;
+  archetype?: string;
+  // If neither is set, the pack pulls from all non-Starter cards
+}
+
+export interface PackDefinition {
+  id: string;
+  tier: PackTier;
+  size: number;
+  filter: PackFilter;
+  label: string; // Display name, e.g. "Rare Commander Pack"
+}
+
+export interface UnopenedPack {
+  id: string;
+  tier: PackTier;
+  size: number;
+  filter: PackFilter;
+  label: string;
+  // Card IDs are determined server-side and stored encrypted/obfuscated
+  // so players can't peek during import/export
+  sealedContents: string; // opaque base64 blob
+}
+
+export interface OpenedPackResult {
+  packId: string;
+  cardIds: string[];
+}
+
 // --- Socket Events ---
 
 export enum SocketEvent {
@@ -408,6 +447,12 @@ export enum SocketEvent {
 
   // Card Art
   CardArtUpdated = 'card_art_updated',
+
+  // Packs
+  GrantPack = 'grant_pack',
+  PackGranted = 'pack_granted',
+  OpenPack = 'open_pack',
+  PackOpened = 'pack_opened',
 
   // Error
   Error = 'error',

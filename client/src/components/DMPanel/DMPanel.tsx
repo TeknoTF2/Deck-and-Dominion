@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useGameStore } from '../../store/gameStore';
-import { GameState, Zone, Keyword, CardDefinition, CardInstance } from '@deck-and-dominion/shared';
+import { GameState, Zone, Keyword, CardDefinition, CardInstance, PackTier, PackFilter, CardClass } from '@deck-and-dominion/shared';
 import CardView from '../Card/CardView';
 
 interface DMPanelProps {
@@ -8,8 +8,8 @@ interface DMPanelProps {
 }
 
 export default function DMPanel({ gameState }: DMPanelProps) {
-  const { sendDMAction, allCards } = useGameStore();
-  const [activeTab, setActiveTab] = useState<'overview' | 'hp' | 'creatures' | 'cards' | 'give'>('overview');
+  const { sendDMAction, allCards, grantPack } = useGameStore();
+  const [activeTab, setActiveTab] = useState<'overview' | 'hp' | 'creatures' | 'cards' | 'give' | 'packs'>('overview');
   const [hpTarget, setHpTarget] = useState<'party' | 'dm'>('party');
   const [hpValue, setHpValue] = useState(0);
   const [selectedCreature, setSelectedCreature] = useState<string | null>(null);
@@ -18,6 +18,14 @@ export default function DMPanel({ gameState }: DMPanelProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [giveTarget, setGiveTarget] = useState('');
   const [giveZone, setGiveZone] = useState<Zone>(Zone.Hand);
+
+  // Pack granting state
+  const [packTarget, setPackTarget] = useState('');
+  const [packTier, setPackTier] = useState<PackTier>(PackTier.Common);
+  const [packSize, setPackSize] = useState(5);
+  const [packCount, setPackCount] = useState(1);
+  const [packClassFilter, setPackClassFilter] = useState<string>('');
+  const [packArchetypeFilter, setPackArchetypeFilter] = useState<string>('');
 
   const playerIds = Object.keys(gameState.players);
   const allCreatures = [...gameState.board.playerCreatures, ...gameState.board.dmCreatures];
@@ -61,12 +69,26 @@ export default function DMPanel({ gameState }: DMPanelProps) {
       ).slice(0, 20)
     : [];
 
+  // Get unique archetypes for the selected class filter
+  const availableArchetypes = packClassFilter
+    ? [...new Set(allCards.filter(c => c.cardClass === packClassFilter).map(c => c.archetype))].filter(a => a !== 'Shared').sort()
+    : [];
+
+  const handleGrantPack = () => {
+    if (!packTarget) return;
+    const filter: PackFilter = {};
+    if (packClassFilter) filter.cardClass = packClassFilter as CardClass;
+    if (packArchetypeFilter) filter.archetype = packArchetypeFilter;
+    grantPack(packTarget, packTier, packSize, filter, packCount);
+  };
+
   const tabs = [
     { id: 'overview' as const, label: 'Overview' },
     { id: 'hp' as const, label: 'HP' },
     { id: 'creatures' as const, label: 'Creatures' },
     { id: 'cards' as const, label: 'Move Cards' },
     { id: 'give' as const, label: 'Give Card' },
+    { id: 'packs' as const, label: 'Packs' },
   ];
 
   return (
@@ -413,6 +435,136 @@ export default function DMPanel({ gameState }: DMPanelProps) {
               {searchTerm.length < 2 && (
                 <div style={{ color: '#555', fontSize: '10px', textAlign: 'center' }}>Type 2+ chars to search</div>
               )}
+            </div>
+          </div>
+        )}
+
+        {/* Packs Tab */}
+        {activeTab === 'packs' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div>
+              <label style={{ fontSize: '10px', color: '#a0a0a0' }}>Player</label>
+              <select
+                value={packTarget}
+                onChange={e => setPackTarget(e.target.value)}
+                style={{
+                  width: '100%', padding: '4px', marginTop: '4px',
+                  background: '#222', border: '1px solid #444', borderRadius: '4px',
+                  color: '#e0e0e0', fontSize: '11px',
+                }}
+              >
+                <option value="">Select player...</option>
+                {playerIds.map(pid => (
+                  <option key={pid} value={pid}>{gameState.players[pid].name}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label style={{ fontSize: '10px', color: '#a0a0a0' }}>Pack Tier</label>
+              <select
+                value={packTier}
+                onChange={e => setPackTier(e.target.value as PackTier)}
+                style={{
+                  width: '100%', padding: '4px', marginTop: '4px',
+                  background: '#222', border: '1px solid #444', borderRadius: '4px',
+                  color: '#e0e0e0', fontSize: '11px',
+                }}
+              >
+                <option value={PackTier.Common}>Common</option>
+                <option value={PackTier.Uncommon}>Uncommon</option>
+                <option value={PackTier.Rare}>Rare</option>
+                <option value={PackTier.Legendary}>Legendary</option>
+              </select>
+            </div>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <div style={{ flex: 1 }}>
+                <label style={{ fontSize: '10px', color: '#a0a0a0' }}>Cards/Pack</label>
+                <input
+                  type="number"
+                  value={packSize}
+                  min={3}
+                  max={10}
+                  onChange={e => setPackSize(Math.max(3, Math.min(10, parseInt(e.target.value) || 5)))}
+                  style={{
+                    width: '100%', padding: '4px', marginTop: '4px',
+                    background: '#222', border: '1px solid #444', borderRadius: '4px',
+                    color: '#e0e0e0', fontSize: '11px',
+                  }}
+                />
+              </div>
+              <div style={{ flex: 1 }}>
+                <label style={{ fontSize: '10px', color: '#a0a0a0' }}>Quantity</label>
+                <input
+                  type="number"
+                  value={packCount}
+                  min={1}
+                  max={10}
+                  onChange={e => setPackCount(Math.max(1, Math.min(10, parseInt(e.target.value) || 1)))}
+                  style={{
+                    width: '100%', padding: '4px', marginTop: '4px',
+                    background: '#222', border: '1px solid #444', borderRadius: '4px',
+                    color: '#e0e0e0', fontSize: '11px',
+                  }}
+                />
+              </div>
+            </div>
+            <div>
+              <label style={{ fontSize: '10px', color: '#a0a0a0' }}>Class Filter (optional)</label>
+              <select
+                value={packClassFilter}
+                onChange={e => { setPackClassFilter(e.target.value); setPackArchetypeFilter(''); }}
+                style={{
+                  width: '100%', padding: '4px', marginTop: '4px',
+                  background: '#222', border: '1px solid #444', borderRadius: '4px',
+                  color: '#e0e0e0', fontSize: '11px',
+                }}
+              >
+                <option value="">All Classes (Random)</option>
+                <option value={CardClass.Commander}>Commander</option>
+                <option value={CardClass.DPS}>DPS</option>
+                <option value={CardClass.Wizard}>Wizard</option>
+                <option value={CardClass.Sorcerer}>Sorcerer</option>
+                <option value={CardClass.Crafter}>Crafter</option>
+              </select>
+            </div>
+            {packClassFilter && availableArchetypes.length > 0 && (
+              <div>
+                <label style={{ fontSize: '10px', color: '#a0a0a0' }}>Archetype Filter (optional)</label>
+                <select
+                  value={packArchetypeFilter}
+                  onChange={e => setPackArchetypeFilter(e.target.value)}
+                  style={{
+                    width: '100%', padding: '4px', marginTop: '4px',
+                    background: '#222', border: '1px solid #444', borderRadius: '4px',
+                    color: '#e0e0e0', fontSize: '11px',
+                  }}
+                >
+                  <option value="">All Archetypes</option>
+                  {availableArchetypes.map(a => (
+                    <option key={a} value={a}>{a}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+            <button
+              onClick={handleGrantPack}
+              disabled={!packTarget}
+              style={{
+                padding: '8px', fontSize: '11px', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer',
+                background: packTarget ? '#0f3460' : '#333',
+                color: packTarget ? '#e0e0e0' : '#666',
+                marginTop: '4px',
+              }}
+            >
+              Grant {packCount > 1 ? `${packCount} Packs` : 'Pack'}
+            </button>
+            <div style={{
+              padding: '6px', borderRadius: '4px', background: 'rgba(255,255,255,0.03)',
+              fontSize: '9px', color: '#666', lineHeight: '1.4',
+            }}>
+              {packTier} tier: Guaranteed 1 {packTier.toLowerCase()} card.
+              {packClassFilter ? ` ${packClassFilter} cards` : ' All classes'}{packArchetypeFilter ? ` (${packArchetypeFilter})` : ''}.
+              {' '}{packSize} cards per pack{packCount > 1 ? ` x${packCount}` : ''}.
             </div>
           </div>
         )}

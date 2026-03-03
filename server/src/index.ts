@@ -12,7 +12,9 @@ import cardArtRouter from './routes/cardArt';
 import decksRouter from './routes/decks';
 import {
   SocketEvent, GameAction, DMAction, CardClass, CardDefinition, GameState,
+  PackTier, PackFilter, UnopenedPack,
 } from '@deck-and-dominion/shared';
+import { generatePack, generateBulkPacks, openPack } from './game/PackGenerator';
 
 const app = express();
 const server = createServer(app);
@@ -272,6 +274,44 @@ io.on('connection', (socket) => {
       // Broadcast to lobby
       io.to(lobbyId).emit(SocketEvent.ChatUpdate, chatMsg);
     }
+  });
+
+  // --- Pack System ---
+  socket.on(SocketEvent.GrantPack, (data: {
+    targetPlayerId: string;
+    tier: PackTier;
+    size: number;
+    filter: PackFilter;
+    count?: number;
+  }) => {
+    const lobbyId = playerToLobby.get(playerId);
+    if (!lobbyId) return;
+
+    const lobby = lobbyManager.getLobby(lobbyId);
+    if (!lobby || lobby.dmId !== playerId) {
+      socket.emit(SocketEvent.Error, { message: 'Only DM can grant packs' });
+      return;
+    }
+
+    const allCards = getAllCards();
+    const count = Math.min(data.count || 1, 10); // cap at 10
+    const packSize = Math.max(3, Math.min(data.size || 5, 10)); // 3-10 cards per pack
+
+    const packs = count === 1
+      ? [generatePack(allCards, data.tier, packSize, data.filter)]
+      : generateBulkPacks(allCards, data.tier, packSize, data.filter, count);
+
+    const targetSocket = io.sockets.sockets.get(data.targetPlayerId);
+    if (targetSocket) {
+      targetSocket.emit(SocketEvent.PackGranted, { packs });
+    } else {
+      socket.emit(SocketEvent.Error, { message: 'Target player not connected' });
+    }
+  });
+
+  socket.on(SocketEvent.OpenPack, (data: { pack: UnopenedPack }) => {
+    const cardIds = openPack(data.pack);
+    socket.emit(SocketEvent.PackOpened, { packId: data.pack.id, cardIds });
   });
 
   // Reconnect support
