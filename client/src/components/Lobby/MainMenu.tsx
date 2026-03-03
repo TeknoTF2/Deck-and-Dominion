@@ -1,9 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useGameStore } from '../../store/gameStore';
 
 export default function MainMenu() {
-  const { playerName, setPlayerName, createLobby, joinLobby, setView, connected } = useGameStore();
+  const { playerName, setPlayerName, createLobby, joinLobby, setView, connected, exportPlayerState, importPlayerState } = useGameStore();
   const [joinCode, setJoinCode] = useState('');
+  const importRef = useRef<HTMLInputElement>(null);
+
+  const handleExportState = () => {
+    const json = exportPlayerState();
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${playerName || 'player'}_state.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImportState = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const ok = importPlayerState(ev.target?.result as string);
+      alert(ok ? 'Player state imported!' : 'Invalid player state file');
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  };
 
   return (
     <div style={{
@@ -80,10 +104,28 @@ export default function MainMenu() {
           </button>
           <button
             onClick={() => setView('card-art-manager')}
-            style={{ width: '100%', background: '#0f3460' }}
+            style={{ width: '100%', background: '#0f3460', marginBottom: '8px' }}
           >
             Card Art Manager
           </button>
+        </div>
+
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '12px', marginTop: '4px' }}>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button
+              onClick={handleExportState}
+              style={{ flex: 1, background: '#333', fontSize: '12px' }}
+            >
+              Export Player State
+            </button>
+            <button
+              onClick={() => importRef.current?.click()}
+              style={{ flex: 1, background: '#333', fontSize: '12px' }}
+            >
+              Import Player State
+            </button>
+            <input ref={importRef} type="file" accept=".json" onChange={handleImportState} style={{ display: 'none' }} />
+          </div>
         </div>
       </div>
 

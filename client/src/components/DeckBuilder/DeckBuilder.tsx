@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useGameStore } from '../../store/gameStore';
 import CardView from '../Card/CardView';
 import CardDetailModal from '../Card/CardDetailModal';
@@ -13,15 +13,17 @@ const CLASS_ARCHETYPES: Record<string, string[]> = {
 };
 
 export default function DeckBuilder() {
-  const { allCards, setView, cardsLoaded, loadCards } = useGameStore();
+  const { allCards, setView, cardsLoaded, loadCards, isDMMode, setDMMode, collection, grantStarterCards, previousView } = useGameStore();
   const [selectedClass, setSelectedClass] = useState<CardClass>(CardClass.Commander);
   const [selectedArchetype, setSelectedArchetype] = useState<string>('Marshal');
   const [filterRarity, setFilterRarity] = useState<string>('all');
   const [filterType, setFilterType] = useState<string>('all');
+  const [filterArchetype, setFilterArchetype] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [deckCards, setDeckCards] = useState<string[]>([]);
   const [deckName, setDeckName] = useState('My Deck');
   const [detailCard, setDetailCard] = useState<CardDefinition | null>(null);
+  const importRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!cardsLoaded) loadCards();
@@ -31,9 +33,18 @@ export default function DeckBuilder() {
 
   const classCards = allCards.filter(c => c.cardClass === selectedClass || c.cardClass === CardClass.Neutral);
 
-  const filteredCards = classCards.filter(c => {
+  // Filter by collection unless in DM mode
+  const availableCards = isDMMode
+    ? classCards
+    : classCards.filter(c => (collection[c.id] || 0) > 0);
+
+  // Compute unique archetypes from available cards for the filter dropdown
+  const availableArchetypes = [...new Set(availableCards.map(c => c.archetype).filter(Boolean))].sort();
+
+  const filteredCards = availableCards.filter(c => {
     if (filterRarity !== 'all' && c.rarity !== filterRarity) return false;
     if (filterType !== 'all' && c.cardType !== filterType) return false;
+    if (filterArchetype !== 'all' && c.archetype !== filterArchetype) return false;
     if (searchQuery && !c.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
         !c.effectText.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     return true;
@@ -61,7 +72,8 @@ export default function DeckBuilder() {
   };
 
   const loadStarterDeck = () => {
-    // Starter deck = Shared staple cards + selected archetype's starter cards
+    // Grant starter cards to collection and load them into deck
+    grantStarterCards(selectedClass, selectedArchetype);
     const starterCards = allCards
       .filter(c =>
         c.rarity === Rarity.Starter &&
@@ -104,8 +116,59 @@ export default function DeckBuilder() {
   const handleClassChange = (cls: CardClass) => {
     setSelectedClass(cls);
     setSelectedArchetype(CLASS_ARCHETYPES[cls]?.[0] || '');
+    setFilterArchetype('all');
     setDeckCards([]);
   };
+
+  // --- Import/Export ---
+  const exportDeck = () => {
+    const exportData = {
+      name: deckName,
+      cardClass: selectedClass,
+      cardIds: deckCards,
+      exportedAt: new Date().toISOString(),
+    };
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${deckName.replace(/[^a-zA-Z0-9]/g, '_')}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const importDeck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const data = JSON.parse(ev.target?.result as string);
+        if (data.cardIds && Array.isArray(data.cardIds)) {
+          // Validate all card IDs exist
+          const validIds = data.cardIds.filter((id: string) => allCards.some(c => c.id === id));
+          setDeckCards(validIds);
+          if (data.name) setDeckName(data.name);
+          if (data.cardClass && Object.values(CardClass).includes(data.cardClass)) {
+            setSelectedClass(data.cardClass);
+          }
+          if (validIds.length < data.cardIds.length) {
+            alert(`Imported ${validIds.length}/${data.cardIds.length} cards (some IDs not found)`);
+          }
+        } else {
+          alert('Invalid deck file format');
+        }
+      } catch {
+        alert('Failed to parse deck file');
+      }
+    };
+    reader.readAsText(file);
+    // Reset input so the same file can be re-imported
+    e.target.value = '';
+  };
+
+  const backView = previousView || 'menu';
+  const collectionCount = Object.keys(collection).length;
 
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -126,12 +189,38 @@ export default function DeckBuilder() {
             onChange={(e) => setDeckName(e.target.value)}
             style={{ fontSize: '14px' }}
           />
+          {/* DM Mode Toggle */}
+          <button
+            onClick={() => setDMMode(!isDMMode)}
+            style={{
+              padding: '4px 10px',
+              fontSize: '11px',
+              background: isDMMode ? '#e94560' : 'rgba(255,255,255,0.05)',
+              color: isDMMode ? '#fff' : '#888',
+              border: isDMMode ? '1px solid #e94560' : '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '4px',
+            }}
+          >
+            {isDMMode ? 'DM Mode' : 'Player Mode'}
+          </button>
+          {!isDMMode && (
+            <span style={{ fontSize: '11px', color: '#888' }}>
+              {collectionCount} cards owned
+            </span>
+          )}
         </div>
         <div style={{ display: 'flex', gap: '8px' }}>
+          <button onClick={exportDeck} disabled={deckCards.length === 0} style={{ background: '#0f3460', fontSize: '12px' }}>
+            Export
+          </button>
+          <button onClick={() => importRef.current?.click()} style={{ background: '#0f3460', fontSize: '12px' }}>
+            Import
+          </button>
+          <input ref={importRef} type="file" accept=".json" onChange={importDeck} style={{ display: 'none' }} />
           <button onClick={saveDeck} disabled={deckCards.length < DECK_MIN_SIZE} style={{ background: '#66bb6a' }}>
             Save Deck ({deckCards.length}/{DECK_MIN_SIZE}-{DECK_MAX_SIZE})
           </button>
-          <button onClick={() => setView('menu')} style={{ background: '#333' }}>
+          <button onClick={() => setView(backView as any)} style={{ background: '#333' }}>
             Back
           </button>
         </div>
@@ -162,6 +251,12 @@ export default function DeckBuilder() {
               <option value="Enchantment">Enchantment</option>
               <option value="Consumable">Consumable</option>
               <option value="Trap">Trap</option>
+            </select>
+            <select value={filterArchetype} onChange={(e) => setFilterArchetype(e.target.value)}>
+              <option value="all">All Archetypes</option>
+              {availableArchetypes.map(arch => (
+                <option key={arch} value={arch}>{arch}</option>
+              ))}
             </select>
             <input
               type="text"
@@ -246,7 +341,9 @@ export default function DeckBuilder() {
             })}
             {filteredCards.length === 0 && (
               <div style={{ color: '#555', padding: '24px', width: '100%', textAlign: 'center' }}>
-                {cardsLoaded ? 'No cards match your filters' : 'Loading cards...'}
+                {!cardsLoaded ? 'Loading cards...' :
+                  !isDMMode && collectionCount === 0 ? 'No cards in collection. Load a Starter Deck to begin.' :
+                  'No cards match your filters'}
               </div>
             )}
           </div>

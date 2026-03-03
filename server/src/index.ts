@@ -169,9 +169,9 @@ io.on('connection', (socket) => {
       return;
     }
 
-    const started = lobbyManager.startGame(lobbyId);
-    if (!started) {
-      socket.emit(SocketEvent.Error, { message: 'Cannot start game. Ensure all players are ready with classes and decks.' });
+    const result = lobbyManager.startGame(lobbyId);
+    if (!result.lobby) {
+      socket.emit(SocketEvent.Error, { message: result.reason || 'Cannot start game' });
       return;
     }
 

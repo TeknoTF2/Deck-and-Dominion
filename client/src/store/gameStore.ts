@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { io, Socket } from 'socket.io-client';
 import {
   GameState, LobbyState, CardClass, ChatMessage,
-  SocketEvent, GameAction, DMAction, CardDefinition,
+  SocketEvent, GameAction, DMAction, CardDefinition, Rarity,
 } from '@deck-and-dominion/shared';
 
 interface GameStore {
@@ -29,8 +29,16 @@ interface GameStore {
   allCards: CardDefinition[];
   cardsLoaded: boolean;
 
+  // Collection (player-owned cards: cardId -> quantity)
+  collection: Record<string, number>;
+  isDMMode: boolean;
+
+  // Errors
+  serverError: string | null;
+
   // View
   currentView: 'menu' | 'lobby' | 'deck-builder' | 'game' | 'card-art-manager' | 'collection';
+  previousView: 'menu' | 'lobby' | null;
 
   // Actions
   setPlayerName: (name: string) => void;
@@ -52,6 +60,13 @@ interface GameStore {
   setView: (view: GameStore['currentView']) => void;
   loadCards: () => Promise<void>;
   clearGameOver: () => void;
+  setDMMode: (mode: boolean) => void;
+  addToCollection: (cardId: string, qty?: number) => void;
+  grantStarterCards: (cardClass: CardClass, archetype: string) => void;
+  grantClassStarters: (cardClass: CardClass) => void;
+  clearServerError: () => void;
+  exportPlayerState: () => string;
+  importPlayerState: (json: string) => boolean;
 }
 
 export const useGameStore = create<GameStore>((set, get) => ({
@@ -68,7 +83,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
   chatMessages: [],
   allCards: [],
   cardsLoaded: false,
+  collection: {},
+  isDMMode: false,
+  serverError: null,
   currentView: 'menu',
+  previousView: null,
 
   setPlayerName: (name) => set({ playerName: name }),
 
@@ -86,7 +105,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     socket.on(SocketEvent.LobbyUpdate, (lobby: LobbyState) => {
       const state = get();
       const player = lobby.players.find(p => p.id === state.playerId);
-      set({ lobby, isDM: player?.isDM || false });
+      set({ lobby, isDM: player?.isDM || false, isDMMode: player?.isDM || false });
     });
 
     socket.on(SocketEvent.GameStateUpdate, (gameState: GameState) => {
@@ -103,6 +122,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
     socket.on(SocketEvent.Error, ({ message }: { message: string }) => {
       console.error('Server error:', message);
+      set({ serverError: message });
     });
 
     set({ socket });
@@ -141,9 +161,19 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   selectClass: (cardClass) => {
-    const { socket } = get();
+    const { socket, allCards } = get();
     if (socket) {
       socket.emit(SocketEvent.SelectClass, { cardClass });
+      // Auto-grant all starter cards for this class to collection
+      const starterCards = allCards.filter(c =>
+        c.rarity === Rarity.Starter &&
+        (c.cardClass === cardClass || c.cardClass === CardClass.Neutral)
+      );
+      const newCollection: Record<string, number> = { ...get().collection };
+      for (const card of starterCards) {
+        newCollection[card.id] = Math.max(newCollection[card.id] || 0, 1);
+      }
+      set({ collection: newCollection });
     }
   },
 
@@ -198,8 +228,79 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   selectCard: (cardId) => set({ selectedCard: cardId }),
   selectTarget: (targetId) => set({ selectedTarget: targetId }),
-  setView: (view) => set({ currentView: view }),
+  setView: (view) => {
+    const { currentView } = get();
+    // Track where we came from when entering sub-views
+    if (view === 'deck-builder' || view === 'collection' || view === 'card-art-manager') {
+      if (currentView === 'menu' || currentView === 'lobby') {
+        set({ currentView: view, previousView: currentView });
+        return;
+      }
+    }
+    set({ currentView: view });
+  },
   clearGameOver: () => set({ gameOverResult: null, gameState: null, currentView: 'lobby' }),
+
+  setDMMode: (mode) => set({ isDMMode: mode }),
+
+  clearServerError: () => set({ serverError: null }),
+
+  addToCollection: (cardId, qty = 1) => {
+    set(state => ({
+      collection: {
+        ...state.collection,
+        [cardId]: (state.collection[cardId] || 0) + qty,
+      },
+    }));
+  },
+
+  grantStarterCards: (cardClass, archetype) => {
+    const { allCards } = get();
+    const starterCards = allCards.filter(c =>
+      c.rarity === Rarity.Starter &&
+      (c.cardClass === cardClass || c.cardClass === CardClass.Neutral) &&
+      (c.archetype === 'Shared' || c.archetype === archetype)
+    );
+    const newCollection: Record<string, number> = { ...get().collection };
+    for (const card of starterCards) {
+      newCollection[card.id] = Math.max(newCollection[card.id] || 0, 1);
+    }
+    set({ collection: newCollection });
+  },
+
+  grantClassStarters: (cardClass) => {
+    const { allCards } = get();
+    const starterCards = allCards.filter(c =>
+      c.rarity === Rarity.Starter &&
+      (c.cardClass === cardClass || c.cardClass === CardClass.Neutral)
+    );
+    const newCollection: Record<string, number> = { ...get().collection };
+    for (const card of starterCards) {
+      newCollection[card.id] = Math.max(newCollection[card.id] || 0, 1);
+    }
+    set({ collection: newCollection });
+  },
+
+  exportPlayerState: () => {
+    const { playerName, collection } = get();
+    return JSON.stringify({ playerName, collection }, null, 2);
+  },
+
+  importPlayerState: (json) => {
+    try {
+      const data = JSON.parse(json);
+      if (data.collection && typeof data.collection === 'object') {
+        set({
+          collection: data.collection,
+          playerName: data.playerName || get().playerName,
+        });
+        return true;
+      }
+      return false;
+    } catch {
+      return false;
+    }
+  },
 
   loadCards: async () => {
     try {

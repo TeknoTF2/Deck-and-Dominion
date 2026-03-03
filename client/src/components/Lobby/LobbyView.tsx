@@ -19,7 +19,7 @@ const CLASS_DESCRIPTIONS: Record<string, string> = {
 };
 
 export default function LobbyView() {
-  const { lobby, playerId, selectClass, selectDeck, setAsDM, toggleReady, startGame, leaveLobby, setView } = useGameStore();
+  const { lobby, playerId, selectClass, selectDeck, setAsDM, toggleReady, startGame, leaveLobby, setView, serverError, clearServerError } = useGameStore();
   const [dmHP, setDmHP] = useState(40);
   const [savedDecks, setSavedDecks] = useState<DeckDefinition[]>([]);
 
@@ -30,14 +30,33 @@ export default function LobbyView() {
       .catch(() => {});
   }, []);
 
+  // Clear error after 5 seconds
+  useEffect(() => {
+    if (serverError) {
+      const timer = setTimeout(clearServerError, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [serverError]);
+
   if (!lobby) {
     return <div style={{ padding: '24px', textAlign: 'center' }}>Loading lobby...</div>;
   }
 
   const currentPlayer = lobby.players.find(p => p.id === playerId);
   const isHost = lobby.host === playerId;
-  const canStart = lobby.players.length >= 2 && lobby.dmId &&
-    lobby.players.filter(p => !p.isDM).every(p => p.ready && p.cardClass);
+  const hasDM = !!lobby.dmId;
+  const nonDMPlayers = lobby.players.filter(p => !p.isDM);
+  const allPlayersReady = nonDMPlayers.length === 0 || nonDMPlayers.every(p => p.ready && p.cardClass && p.deckId);
+  const canStart = hasDM && allPlayersReady;
+
+  // Compute what's missing for start
+  const missingReqs: string[] = [];
+  if (!hasDM) missingReqs.push('Need a Dungeon Master');
+  for (const p of nonDMPlayers) {
+    if (!p.cardClass) missingReqs.push(`${p.name}: select a class`);
+    if (!p.deckId) missingReqs.push(`${p.name}: select a deck`);
+    if (!p.ready) missingReqs.push(`${p.name}: not ready`);
+  }
 
   return (
     <div style={{
@@ -47,6 +66,23 @@ export default function LobbyView() {
       padding: '24px',
       gap: '16px',
     }}>
+      {/* Error Banner */}
+      {serverError && (
+        <div
+          onClick={clearServerError}
+          style={{
+            padding: '12px 16px',
+            background: 'rgba(233,69,96,0.2)',
+            border: '1px solid #e94560',
+            borderRadius: '8px',
+            color: '#ff6b6b',
+            cursor: 'pointer',
+          }}
+        >
+          {serverError}
+        </div>
+      )}
+
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
@@ -105,6 +141,9 @@ export default function LobbyView() {
                     }}>
                       {p.cardClass}
                     </span>
+                  )}
+                  {p.deckId && !p.isDM && (
+                    <span style={{ color: '#4fc3f7', fontSize: '11px' }}>Deck</span>
                   )}
                   {p.ready && !p.isDM && (
                     <span style={{ color: '#66bb6a', fontWeight: 'bold' }}>Ready</span>
@@ -222,6 +261,11 @@ export default function LobbyView() {
               />
             </>
           )}
+          {isHost && missingReqs.length > 0 && (
+            <span style={{ color: '#e94560', fontSize: '11px', marginLeft: '12px' }}>
+              {missingReqs[0]}
+            </span>
+          )}
         </div>
         <div style={{ display: 'flex', gap: '8px' }}>
           {!currentPlayer?.isDM && (
@@ -240,7 +284,13 @@ export default function LobbyView() {
             <button
               onClick={() => startGame(dmHP)}
               disabled={!canStart}
-              style={{ padding: '12px 24px', fontWeight: 'bold', fontSize: '16px' }}
+              style={{
+                padding: '12px 24px',
+                fontWeight: 'bold',
+                fontSize: '16px',
+                opacity: canStart ? 1 : 0.5,
+              }}
+              title={canStart ? 'Start the game' : missingReqs.join(', ')}
             >
               Start Game
             </button>
