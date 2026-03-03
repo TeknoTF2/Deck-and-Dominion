@@ -2,7 +2,13 @@ import { Router } from 'express';
 import { v4 as uuid } from 'uuid';
 import { getDB } from '../database/setup';
 import { getCardById } from '../database/cards';
-import { DeckDefinition, DECK_MIN_SIZE, DECK_MAX_SIZE, MAX_CARD_COPIES, CardClass, Rarity, CardType } from '@deck-and-dominion/shared';
+import { getSettingValue } from './settings';
+import { DeckDefinition, DECK_MIN_SIZE, DECK_MAX_SIZE, CardClass, Rarity, CardType } from '@deck-and-dominion/shared';
+
+function getMaxCardCopies(): number {
+  const val = getSettingValue('max_card_copies');
+  return val ? parseInt(val, 10) : 2;
+}
 
 const router = Router();
 
@@ -70,8 +76,9 @@ router.post('/', (req, res) => {
     }
     // Enforce per-card copy limits (Starter rarity and Land type are exempt)
     cardCounts[cardId] = (cardCounts[cardId] || 0) + 1;
-    if (card.rarity !== Rarity.Starter && card.cardType !== CardType.Land && cardCounts[cardId] > MAX_CARD_COPIES) {
-      return res.status(400).json({ error: `Too many copies of ${card.name} (max ${MAX_CARD_COPIES})` });
+    const maxCopies = getMaxCardCopies();
+    if (card.rarity !== Rarity.Starter && card.cardType !== CardType.Land && cardCounts[cardId] > maxCopies) {
+      return res.status(400).json({ error: `Too many copies of ${card.name} (max ${maxCopies})` });
     }
   }
 

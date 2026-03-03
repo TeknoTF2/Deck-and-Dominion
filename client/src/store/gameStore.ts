@@ -34,6 +34,12 @@ interface GameStore {
   collection: Record<string, number>;
   isDMMode: boolean;
 
+  // Game settings (server-synced)
+  gameSettings: {
+    maxCardCopies: number;
+    starterDecks: Record<string, Record<string, string[]>>;
+  };
+
   // Packs
   unopenedPacks: UnopenedPack[];
   openingPack: UnopenedPack | null;
@@ -70,12 +76,17 @@ interface GameStore {
   addToCollection: (cardId: string, qty?: number) => void;
   grantStarterCards: (cardClass: CardClass, archetype: string) => void;
   grantClassStarters: (cardClass: CardClass) => void;
+  fetchStarterDeck: (cardClass: string, archetype: string) => Promise<string[]>;
   clearServerError: () => void;
   exportPlayerState: () => string;
   importPlayerState: (json: string) => boolean;
   grantPack: (targetPlayerId: string, tier: PackTier, size: number, filter: PackFilter, count?: number) => void;
   requestOpenPack: (pack: UnopenedPack) => void;
   closePackOpening: () => void;
+  loadSettings: () => Promise<void>;
+  updateCardLimit: (limit: number) => Promise<void>;
+  updateStarterDeck: (cardClass: string, archetype: string, cardIds: string[]) => Promise<void>;
+  resetStarterDeck: (cardClass: string, archetype: string) => Promise<void>;
 }
 
 export const useGameStore = create<GameStore>((set, get) => ({
@@ -94,6 +105,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   cardsLoaded: false,
   collection: {},
   isDMMode: false,
+  gameSettings: { maxCardCopies: 2, starterDecks: {} },
   unopenedPacks: [],
   openingPack: null,
   openedCardIds: null,
@@ -308,6 +320,119 @@ export const useGameStore = create<GameStore>((set, get) => ({
       newCollection[card.id] = Math.max(newCollection[card.id] || 0, 1);
     }
     set({ collection: newCollection });
+  },
+
+  fetchStarterDeck: async (cardClass, archetype) => {
+    try {
+      const res = await fetch(`/api/settings/starter-decks/${encodeURIComponent(cardClass)}/${encodeURIComponent(archetype)}`);
+      const data = await res.json();
+      const cardIds: string[] = data.cardIds || [];
+      // Grant the cards to collection with correct quantities
+      const newCollection = { ...get().collection };
+      const counts: Record<string, number> = {};
+      for (const id of cardIds) counts[id] = (counts[id] || 0) + 1;
+      for (const [id, qty] of Object.entries(counts)) {
+        newCollection[id] = Math.max(newCollection[id] || 0, qty);
+      }
+      set({ collection: newCollection });
+      return cardIds;
+    } catch {
+      // Fallback to local computation
+      const { allCards } = get();
+      const fallbackIds = allCards
+        .filter(c =>
+          c.rarity === Rarity.Starter &&
+          (c.cardClass === cardClass || c.cardClass === CardClass.Neutral) &&
+          (c.archetype === 'Shared' || c.archetype === archetype)
+        )
+        .map(c => c.id);
+      const newCollection = { ...get().collection };
+      for (const id of fallbackIds) {
+        newCollection[id] = Math.max(newCollection[id] || 0, 1);
+      }
+      set({ collection: newCollection });
+      return fallbackIds;
+    }
+  },
+
+  loadSettings: async () => {
+    try {
+      const res = await fetch('/api/settings');
+      const data = await res.json();
+      set({
+        gameSettings: {
+          maxCardCopies: data.maxCardCopies ?? 2,
+          starterDecks: data.starterDecks ?? {},
+        },
+      });
+    } catch {
+      // Keep defaults
+    }
+  },
+
+  updateCardLimit: async (limit) => {
+    try {
+      const res = await fetch('/api/settings/card-limit', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ value: limit }),
+      });
+      const data = await res.json();
+      if (data.maxCardCopies !== undefined) {
+        set(state => ({
+          gameSettings: { ...state.gameSettings, maxCardCopies: data.maxCardCopies },
+        }));
+      }
+    } catch {
+      // Ignore
+    }
+  },
+
+  updateStarterDeck: async (cardClass, archetype, cardIds) => {
+    try {
+      await fetch(`/api/settings/starter-decks/${encodeURIComponent(cardClass)}/${encodeURIComponent(archetype)}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cardIds }),
+      });
+      set(state => ({
+        gameSettings: {
+          ...state.gameSettings,
+          starterDecks: {
+            ...state.gameSettings.starterDecks,
+            [cardClass]: {
+              ...(state.gameSettings.starterDecks[cardClass] || {}),
+              [archetype]: cardIds,
+            },
+          },
+        },
+      }));
+    } catch {
+      // Ignore
+    }
+  },
+
+  resetStarterDeck: async (cardClass, archetype) => {
+    try {
+      const res = await fetch(`/api/settings/starter-decks/${encodeURIComponent(cardClass)}/${encodeURIComponent(archetype)}/reset`, {
+        method: 'POST',
+      });
+      const data = await res.json();
+      set(state => ({
+        gameSettings: {
+          ...state.gameSettings,
+          starterDecks: {
+            ...state.gameSettings.starterDecks,
+            [cardClass]: {
+              ...(state.gameSettings.starterDecks[cardClass] || {}),
+              [archetype]: data.cardIds || [],
+            },
+          },
+        },
+      }));
+    } catch {
+      // Ignore
+    }
   },
 
   exportPlayerState: () => {

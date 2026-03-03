@@ -9,11 +9,12 @@ import CollectionView from './components/DeckBuilder/CollectionView';
 import PackOpening from './components/Pack/PackOpening';
 
 export default function App() {
-  const { currentView, connect, loadCards, connected, openingPack } = useGameStore();
+  const { currentView, connect, loadCards, loadSettings, connected, openingPack } = useGameStore();
 
   useEffect(() => {
     connect();
     loadCards();
+    loadSettings();
   }, []);
 
   return (

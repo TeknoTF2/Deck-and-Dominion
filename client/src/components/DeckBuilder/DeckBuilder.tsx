@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useGameStore } from '../../store/gameStore';
 import CardView from '../Card/CardView';
 import CardDetailModal from '../Card/CardDetailModal';
-import { CardDefinition, CardClass, CardType, Rarity, DECK_MIN_SIZE, DECK_MAX_SIZE, MAX_CARD_COPIES } from '@deck-and-dominion/shared';
+import { CardDefinition, CardClass, CardType, Rarity, DECK_MIN_SIZE, DECK_MAX_SIZE } from '@deck-and-dominion/shared';
 
 const CLASS_ARCHETYPES: Record<string, string[]> = {
   Commander: ['Marshal', 'Tactician', 'Warden'],
@@ -13,7 +13,11 @@ const CLASS_ARCHETYPES: Record<string, string[]> = {
 };
 
 export default function DeckBuilder() {
-  const { allCards, setView, cardsLoaded, loadCards, isDMMode, setDMMode, collection, grantStarterCards, previousView } = useGameStore();
+  const {
+    allCards, setView, cardsLoaded, loadCards,
+    isDMMode, setDMMode, collection, fetchStarterDeck,
+    previousView, gameSettings,
+  } = useGameStore();
   const [selectedClass, setSelectedClass] = useState<CardClass>(CardClass.Commander);
   const [selectedArchetype, setSelectedArchetype] = useState<string>('Marshal');
   const [filterRarity, setFilterRarity] = useState<string>('all');
@@ -29,6 +33,7 @@ export default function DeckBuilder() {
     if (!cardsLoaded) loadCards();
   }, []);
 
+  const maxCardCopies = gameSettings.maxCardCopies;
   const archetypes = CLASS_ARCHETYPES[selectedClass] || [];
 
   const classCards = allCards.filter(c => c.cardClass === selectedClass || c.cardClass === CardClass.Neutral);
@@ -55,9 +60,16 @@ export default function DeckBuilder() {
   const canAddToDeck = (cardId: string): boolean => {
     if (deckCards.length >= DECK_MAX_SIZE) return false;
     const card = allCards.find(c => c.id === cardId);
-    if (card && card.rarity !== Rarity.Starter && card.cardType !== CardType.Land) {
-      const currentCopies = deckCards.filter(id => id === cardId).length;
-      if (currentCopies >= MAX_CARD_COPIES) return false;
+    if (!card) return false;
+    const currentCopies = deckCards.filter(id => id === cardId).length;
+    // Enforce copy limit for non-Starter, non-Land cards
+    if (card.rarity !== Rarity.Starter && card.cardType !== CardType.Land) {
+      if (currentCopies >= maxCardCopies) return false;
+    }
+    // In player mode, also enforce collection quantity
+    if (!isDMMode) {
+      const owned = collection[cardId] || 0;
+      if (currentCopies >= owned) return false;
     }
     return true;
   };
@@ -71,17 +83,9 @@ export default function DeckBuilder() {
     setDeckCards(deckCards.filter((_, i) => i !== index));
   };
 
-  const loadStarterDeck = () => {
-    // Grant starter cards to collection and load them into deck
-    grantStarterCards(selectedClass, selectedArchetype);
-    const starterCards = allCards
-      .filter(c =>
-        c.rarity === Rarity.Starter &&
-        (c.cardClass === selectedClass || c.cardClass === CardClass.Neutral) &&
-        (c.archetype === 'Shared' || c.archetype === selectedArchetype)
-      )
-      .map(c => c.id);
-    setDeckCards(starterCards);
+  const loadStarterDeck = async () => {
+    const cardIds = await fetchStarterDeck(selectedClass, selectedArchetype);
+    setDeckCards(cardIds);
     setDeckName(`${selectedClass} ${selectedArchetype} Starter`);
   };
 
@@ -145,7 +149,6 @@ export default function DeckBuilder() {
       try {
         const data = JSON.parse(ev.target?.result as string);
         if (data.cardIds && Array.isArray(data.cardIds)) {
-          // Validate all card IDs exist
           const validIds = data.cardIds.filter((id: string) => allCards.some(c => c.id === id));
           setDeckCards(validIds);
           if (data.name) setDeckName(data.name);
@@ -163,7 +166,6 @@ export default function DeckBuilder() {
       }
     };
     reader.readAsText(file);
-    // Reset input so the same file can be re-imported
     e.target.value = '';
   };
 
@@ -206,6 +208,11 @@ export default function DeckBuilder() {
           {!isDMMode && (
             <span style={{ fontSize: '11px', color: '#888' }}>
               {collectionCount} cards owned
+            </span>
+          )}
+          {!isDMMode && (
+            <span style={{ fontSize: '11px', color: '#888' }}>
+              | Limit: {maxCardCopies}x per card
             </span>
           )}
         </div>
@@ -279,6 +286,7 @@ export default function DeckBuilder() {
           }}>
             {filteredCards.map(card => {
               const copies = copyCount(card.id);
+              const owned = isDMMode ? null : (collection[card.id] || 0);
               const canAdd = canAddToDeck(card.id);
               return (
                 <div key={card.id} style={{ position: 'relative' }}>
@@ -313,7 +321,32 @@ export default function DeckBuilder() {
                   >
                     +
                   </button>
-                  {/* Copy count badge */}
+                  {/* Owned count badge (player mode) */}
+                  {owned !== null && (
+                    <div style={{
+                      position: 'absolute',
+                      top: '-4px',
+                      right: '-4px',
+                      minWidth: '20px',
+                      height: '20px',
+                      borderRadius: '10px',
+                      background: '#0f3460',
+                      color: '#4fc3f7',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 'bold',
+                      fontSize: '10px',
+                      border: '2px solid #1a1a2e',
+                      zIndex: 2,
+                      padding: '0 4px',
+                    }}
+                      title={`You own ${owned} of this card`}
+                    >
+                      x{owned}
+                    </div>
+                  )}
+                  {/* In-deck count badge */}
                   {copies > 0 && (
                     <div style={{
                       position: 'absolute',

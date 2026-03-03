@@ -62,12 +62,20 @@ function initTables(db: Database.Database): void {
       created_at INTEGER NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS game_settings (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL
+    );
+
     CREATE INDEX IF NOT EXISTS idx_cards_class ON cards(card_class);
     CREATE INDEX IF NOT EXISTS idx_cards_rarity ON cards(rarity);
     CREATE INDEX IF NOT EXISTS idx_cards_type ON cards(card_type);
     CREATE INDEX IF NOT EXISTS idx_collections_player ON collections(player_id);
     CREATE INDEX IF NOT EXISTS idx_decks_player ON decks(player_id);
   `);
+
+  // Initialize default settings
+  db.prepare(`INSERT OR IGNORE INTO game_settings (key, value) VALUES ('max_card_copies', '2')`).run();
 }
 
 export function closeDB(): void {

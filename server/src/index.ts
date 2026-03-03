@@ -10,6 +10,7 @@ import { LobbyManager } from './lobby/LobbyManager';
 import cardsRouter from './routes/cards';
 import cardArtRouter from './routes/cardArt';
 import decksRouter from './routes/decks';
+import settingsRouter from './routes/settings';
 import {
   SocketEvent, GameAction, DMAction, CardClass, CardDefinition, GameState,
   PackTier, PackFilter, UnopenedPack,
@@ -42,6 +43,7 @@ app.use(express.static(clientBuild));
 app.use('/api/cards', cardsRouter);
 app.use('/api/card-art', cardArtRouter);
 app.use('/api/decks', decksRouter);
+app.use('/api/settings', settingsRouter);
 
 // Health check
 app.get('/api/health', (_req, res) => {
